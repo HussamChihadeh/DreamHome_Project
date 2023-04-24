@@ -1,0 +1,355 @@
+@keyframes appear {
+    0% {
+
+        opacity: 0;
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+    }
+}
+
+@keyframes disappear {
+    0% {
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+    }
+}
+
+@keyframes alert {
+    0% {
+        scale: 1.05;
+    }
+
+    100% {
+        scale: 1.1;
+    }
+}
+
+@keyframes move_left {
+    0% {
+        margin-left: 0%;
+    }
+
+    100% {
+        margin-left: -90%;
+    }
+}
+
+@keyframes move_right {
+    0% {
+
+        opacity: 0;
+    }
+
+
+    100% {
+
+        opacity: 1;
+        margin-left: 100%;
+    }
+}
+
+@keyframes message_show {
+    0% {
+        width: 50;
+        left: 50%;
+        right: 50%;
+    }
+
+    40% {
+        left: 50%;
+        right: 50%;
+        top: 12%;
+        width: 50;
+        ;
+    }
+
+    60% {
+        top: 12%;
+        left: 35%;
+        right: 35%;
+        width: 30%;
+        height: 50;
+
+    }
+
+    65% {
+        top: 12%;
+        left: 34%;
+        right: 34%;
+        width: 32%;
+        height: 60;
+
+    }
+
+    100% {
+        top: 12%;
+        left: 35%;
+        right: 35%;
+        width: 30%;
+        height: 60;
+
+    }
+}
+
+@keyframes message_hide {
+    0% {
+        top: 12%;
+        left: 35%;
+        right: 35%;
+        width: 30%;
+        height: 60;
+
+    }
+
+    50% {
+        top: 12%;
+        left: 35%;
+        right: 35%;
+        width: 30%;
+        height: 50;
+        z-index: 2;
+    }
+
+    75% {
+        left: 50%;
+        right: 50%;
+        top: 12%;
+        height: 50;
+        width: 50;
+        ;
+    }
+
+    100% {
+        top: 0%;
+        width: 50;
+        left: 50%;
+        height: 50;
+        right: 50%;
+
+    }
+
+
+
+}
+
+@keyframes Slide_In {
+    0% {
+        margin-right: 0%;
+        margin-left: 100%;
+    }
+
+    100% {
+        margin-right: 5%;
+        margin-left: 3%;
+    }
+
+}
+
+@keyframes Slide_Out {
+
+    0% {
+        margin-right: 5%;
+        margin-left: 3%;
+    }
+
+    100% {
+
+        margin-left: -100%;
+    }
+
+}
+
+@keyframes Slide_In_Right {
+    0% {
+        margin-right: 0%;
+        margin-left: -100%;
+    }
+
+    100% {
+        left: 50%;
+
+    transform: translate(-50%, 0%);
+        margin-left: 0%;
+    }
+
+}
+
+@keyframes Slide_Out_Right {
+
+    0% {
+        margin-right: 5%;
+        margin-left: 3%;
+    }
+
+    100% {
+
+        margin-left: 100%;
+    }
+
+}
+
+@keyframes Filter_In {
+    0% {
+        right: -400px;
+
+    }
+
+    100% {
+        right: 0%;
+    }
+
+}
+
+@keyframes Filter_Out {
+
+    0% {
+        right: 0%;
+    }
+
+    100% {
+        right: -500px;
+
+    }
+
+}
+
+@keyframes Animate_Grid_In {
+    0% {
+     
+        height: 300px;
+        border: 10px solid #dad8d800;
+    }
+
+    25% {
+        
+        height: 0px;
+        border: 5px solid #dad8d800;
+        width: 90%;
+        display: grid;
+        margin-top: 10%;
+
+    }
+
+    50% {
+        margin-top: 10%;
+        width: 40%;
+        height: 0px;
+
+    }
+
+    75% {
+        margin-top: 10%;
+        width: 90%;
+        height: 0px;
+
+    }
+
+    100% {
+        border: 10px solid #dad8d800;
+   
+        width: 90%;
+        height: 70%;
+       
+
+    }
+
+}
+/* 
+@keyframes Animate_Grid_In_Slightly_Up {
+    0% {
+     
+        height: 300px;
+        border: 10px solid #dad8d800;
+    }
+
+    25% {
+        
+        height: 0px;
+        border: 5px solid #dad8d800;
+        width: 90%;
+        display: grid;
+
+    }
+
+    50% {
+        margin-top: 10%;
+        width: 40%;
+        height: 0px;
+
+    }
+
+    75% {
+        margin-top: 10%;
+        width: 90%;
+        height: 0px;
+
+    }
+
+    100% {
+        border: 10px solid #dad8d800;
+        width: 90%;
+        height: 70%;
+       
+
+    }
+
+}
+ */
+
+
+
+@keyframes Animate_Grid_Out {
+    0% {
+        border: 10px solid #dad8d800;
+   
+        width: 90%;
+        height: 70%;
+       
+
+    }
+    25% {
+        margin-top: 10%;
+        width: 90%;
+        height: 0px;
+
+    }
+    50% {
+        margin-top: 10%;
+        width: 40%;
+        height: 0px;
+
+    }
+
+   
+
+    75% {
+        
+        height: 0px;
+        border: 5px solid #dad8d800;
+        width: 90%;
+        display: grid;
+
+    }
+    100% {
+     
+        height: 70%;
+        border: 10px solid #dad8d800;
+    }
+
+  
+
+  
+   
+}

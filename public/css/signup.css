@@ -1,0 +1,43 @@
+body{
+    background-color: #e9e9e9 !important;
+}
+.login{
+    margin-top: 200px !important;
+    background-color: white;
+    width: 70% !important;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.welcoming{
+    text-align: center;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.features{
+    list-style: none;
+    font-weight: 500;
+    /* justify-content: center; */
+    margin-left: 65px;
+    color: #800020;
+    text-indent: -25px;
+}
+
+.features .gold{
+    text-transform:capitalize;
+font-size:40px;
+font-weight:500;
+    background: -webkit-linear-gradient(var(--gold2), var(--gold1));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+margin-right: 2px;
+}
+
+.error-message{
+    color: red;
+    font-size: small;
+}

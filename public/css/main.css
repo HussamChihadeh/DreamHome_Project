@@ -1,0 +1,173 @@
+.social_media {
+    float: right;
+    right: 0px;
+    height: 35px;
+    width: 35px;
+    position: fixed;
+    bottom: 2%;
+
+    z-index: 100;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    text-align: center;
+    padding: 0 0 0 0;
+}
+
+.image {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+
+}
+
+.social_media {
+    float: right;
+    right: 0px;
+    height: 130px;
+    width: 35px;
+    position: fixed;
+    bottom: 40%;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    z-index: 1031;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    text-align: center;
+    padding: 0 0 0 0;
+
+}
+
+.social_media_apps {
+    margin: 10 5 0 5;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.social_media_apps:hover {
+    scale: 1.05;
+}
+
+.fun_fact_outside {
+    float: right;
+    right: 0px;
+    height: 170px;
+    width: 35px;
+    position: fixed;
+    bottom: 10%;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    z-index: 1031;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    text-align: center;
+    font-size: 12px!important;
+    padding: 3 3 0 3;
+    cursor: pointer;
+}
+
+@keyframes slide_in {
+    0% {
+        right: -10%;
+    }
+
+    100% {
+        right: 0%;
+    }
+}
+
+@keyframes slide_out {
+    
+    0% {
+        right: 0%;
+    }
+    100% {
+        right: -10%;
+    }
+
+}
+
+@keyframes increase_size {
+    0% {
+        width: 35px;
+        height: 170px;
+
+    }
+
+    50% {
+        width: 35px;
+        height: 400px;
+    }
+
+    100% {
+        height: 400;
+        width: 250px;
+    }
+
+}
+
+@keyframes decrease_size {
+    0% {
+        width: 250px;
+        height: 400;
+    }
+
+    50% {
+        width: 35px;
+        height: 400px;
+    }
+
+    100% {
+        width: 35px;
+        height: 170px;
+    }
+}
+
+#preloader {
+    background: white url(gold-loader.gif) no-repeat center center;
+    background-size: 15%;
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 1000000000;
+
+
+
+}
+
+#on_load {
+    background: white url(animation.gif) no-repeat center center;
+    background-size: 35%;
+    margin-top: -5%;
+    height: 110%;
+    width: 110%;
+    margin-left: -5%;
+    position: fixed;
+    z-index: 100;
+    animation-play-state: paused;
+
+
+}
+#loading_gif {
+    background: white url(gold-loader.gif) no-repeat center center;
+    background-size: 35%;
+    margin-top: -5%;
+    height: 110%;
+    width: 110%;
+    margin-left: -5%;
+    position: fixed;
+    z-index: 100;
+    animation-play-state: paused;
+
+
+}
+
+.Background {
+    float: left;
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    background-color: #7b797963;
+
+}

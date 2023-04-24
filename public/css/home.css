@@ -1,0 +1,79 @@
+:root{
+    --gold1:#AE8625;
+    --gold2:#F9F295;
+}
+
+.main-title::after{
+    content: "";
+    width: 120px;
+    height: 2px;
+    background-color:var(--gold2);
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* start features */
+.features .icon-holder{
+    height: 200px;
+}
+
+.features .icon-holder svg{
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.features .icon-holder .number{
+    font-size: 12rem;
+    color: #eff7fa;
+}
+
+.features .icon-holder .icon{
+    /* color: rgb(238, 206, 25); */
+    color: var(--gold2);
+}
+
+.features .feat h4{
+    /* color: aqua; */
+}
+
+.stuff{
+    background-color: #eff7fa;
+}
+
+.stuff .description{
+    max-width: 500px;
+}
+
+.subscribe{
+    background-color: var(--gold1);
+
+}
+
+.subscribe input[type="email"]{
+    border: none;
+    border-bottom: 1px solid white;
+}
+
+.subscribe input[type="email"]:focus{
+    outline: none;
+}
+
+.subscribe input[type="email"]::placeholder{
+    color: white;
+}
+
+.subscribe input[type="submit"]{
+    background-color: black;
+    color: var(--gold2);
+}
+
+.facts hr{
+    /* height: 100px; */
+    width: 20%;
+}
+
+.facts .number{
+    color: var(--gold1);
+}

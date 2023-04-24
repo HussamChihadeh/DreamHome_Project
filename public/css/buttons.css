@@ -1,0 +1,600 @@
+.Request_a_Tour_button {
+    width: fit-content;
+    height: 32px;
+    padding: 5 7 7 7;
+    margin: 25 -15 5 0;
+    float: right;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: 'Poppins';
+    cursor: pointer;
+}
+
+
+.details_button {
+    width: fit-content;
+    height: 33px;
+    padding: 7 7 7 7;
+    margin: 25 10 5 0;
+    float: right;
+    background-color: white;
+    color: rgb(4, 4, 4);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 0px solid black;
+    font-family: 'Poppins';
+    cursor: pointer;
+
+}
+
+.Contact_Designer_button_Profile_Page,
+.details_button_Profile_Page,
+.Text,
+.Remove {
+    width: 100%;
+    height: fit-content;
+    padding: 15 7 15 7;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: 'Poppins';
+    cursor: pointer;
+    border: 1px solid black;
+
+}
+
+.details_button_Profile_Page {
+    border: 1px solid white;
+    background-color: white;
+    color: rgb(4, 4, 4);
+}
+
+.Text {
+    width: 90%;
+    margin-left: 5%;
+
+}
+
+.Remove {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 10;
+    border: 0px;
+    background-color: rgb(154, 66, 66);
+}
+
+.Reset_button {
+    width: fit-content;
+    height: 32px;
+    padding: 7 10 7 10;
+    margin: 55 10 5 50;
+    float: right;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 0px solid black;
+    font-family: 'Poppins';
+    cursor: pointer;
+
+}
+
+.filter_button {
+    width: fit-content;
+    height: 32px;
+    padding: 5 10 7 10;
+    margin: 55 10 5 0;
+    float: right;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: 'Poppins';
+    cursor: pointer;
+
+}
+
+.details_button:hover,
+.Request_a_Tour_button:hover,
+.filter_button:hover,
+.Reset_button:hover,
+.back_button:hover,
+.Request_a_Tour_button_details:hover,
+.Contact_Designer_button_Profile_Page:hover,
+.details_button_Profile_Page:hover,
+.Text:hover,.Request_View_Details:hover {
+    scale: 1.025;
+
+
+}
+
+.back_button {
+    width: 40;
+    height: 40;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+
+
+.Request_a_Tour_button_details {
+    width: fit-content;
+    height: 32px;
+    padding: 5 7 7 7;
+    margin: 60 10 0 0;
+    float: right;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    font-family: 'Poppins';
+    cursor: pointer;
+}
+
+.time_button {
+    background-color: black;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 8px;
+    width: 90px;
+    height: 40;
+    padding: 5 7 5 7;
+    font-family: 'Poppins';
+    cursor: pointer;
+    float: left;
+    margin-left: 20px;
+    margin-top: 10;
+    margin-bottom: 10;
+}
+
+
+.time_button_active {
+
+    color: black;
+    background-color: white;
+    border: 0px solid black;
+
+}
+
+.line-1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 0.9px;
+    background: rgba(0, 0, 0, 0.456);
+}
+
+.line-2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 0.9px;
+    background: rgba(0, 0, 0, 0.138);
+}
+
+.Register_Tour {
+    height: fit-content;
+    padding: 20 10 20 10;
+    font-size: 1vw;
+    width: 40%;
+    margin: 10 30% 30 30%;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 0px solid black;
+    font-family: 'Poppins';
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+.Register_button_active {
+    color: white;
+    background-color: black;
+
+}
+
+.time_button:hover,
+.Register_Tour:hover,
+.No_button:hover,
+.Yes_button:hover,
+.okay_cart_button:hover {
+    scale: 1.05;
+}
+
+.Filter_Furniture_button:hover:enabled,
+.Contact_Designer_button:hover:enabled,
+.Favorites_Furniture_button:hover:enabled,
+.Cart_Furniture_button:hover:enabled,
+.Button_In_Filter:hover,
+.View_Designer:hover,
+.View_Furniture:hover,
+.Add_to_Favorites:hover,
+.Order_Furniture:hover {
+    scale: 1.05;
+
+    color: var(--gold1);
+
+
+}
+
+
+
+.Yes_button {
+    width: fit-content;
+
+    height: fit-content;
+    padding: 7 20 7 20;
+    /* margin: 5 10 0 10; */
+    margin-left: 10px;
+    margin-top: 20;
+    margin-bottom: 20;
+
+    border: 0px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: 'Poppins';
+    cursor: pointer;
+
+}
+
+.No_button {
+    width: fit-content;
+    height: fit-content;
+    padding: 7 22.5 7 22.5;
+    margin: 10 0 0 0;
+    margin-top: 20;
+    margin-bottom: 20;
+    margin-right: 10px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: 'Poppins';
+    cursor: pointer;
+    border: 0px;
+
+}
+
+.okay_cart_button {
+    padding: 10 10 10 10;
+    margin: 0 40% 20 40%;
+    width: 20%;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 0px solid black;
+    font-family: 'Poppins';
+    cursor: pointer;
+
+}
+
+.Filter_Furniture_button {
+    width: 100;
+    height: fit-content;
+    padding: 7 15 5.2 12;
+    text-align: center;
+    margin: 0% 0 0 0%;
+    z-index: 10;
+    float: left;
+    background-color: black;
+    color: white;
+    border-radius: 13px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: 'Poppins';
+    cursor: pointer;
+
+}
+
+.Cart_Furniture_button {
+    width: 115px;
+    height: fit-content;
+    padding: 7 8 5.2 5;
+    text-align: center;
+    float: left;
+    margin: 0% 0 0 2%;
+    z-index: 10;
+    background-color: black;
+    color: white;
+    border-radius: 13px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: 'Poppins';
+    cursor: pointer;
+
+}
+
+.Favorites_Furniture_button {
+    width: 130px;
+    height: fit-content;
+    padding: 7 9 5 3;
+    text-align: center;
+    float: left;
+    margin: 0% 0 0 2%;
+    z-index: 10;
+    background-color: black;
+    color: white;
+    border-radius: 13px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: 'Poppins';
+    cursor: pointer;
+}
+
+.Contact_Designer_button {
+    width: 170px;
+    height: fit-content;
+    padding: 6 8 6 5;
+    text-align: center;
+    float: left;
+    margin: 0% 0 0 2%;
+    z-index: 10;
+    background-color: black;
+    color: white;
+    border-radius: 13px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: 'Poppins';
+    cursor: pointer;
+}
+
+.active {
+    color: var(--gold1);
+}
+
+.View_Designer {
+    width: 100%;
+    height: fit-content;
+    padding: 8 9 6 3;
+    text-align: center;
+    float: left;
+    z-index: 10;
+    background-color: black;
+    color: white;
+    border-radius: 13px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: 'Poppins';
+    cursor: pointer;
+    border: 1px solid black;
+    font-size: auto;
+
+
+}
+
+.Button_In_Filter {
+    width: 120px;
+    height: fit-content;
+    padding: 6 8 6 8;
+    z-index: 10;
+    background-color: black;
+    color: white;
+    border-radius: 13px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-family: 'Poppins';
+    cursor: pointer;
+    margin: 0 150 10 150;
+    font-size: large;
+}
+
+.Filter_Furniture_button,
+.Favorites_Furniture_button,
+.Contact_Designer_button,
+.Cart_Furniture_button {
+    white-space: nowrap;
+    text-align: center;
+    font-size: small;
+
+}
+
+.Add_to_Favorites {
+    width: 80%;
+    margin-left: 20%;
+    height: fit-content;
+    padding: 13 15 13 15;
+    z-index: 10;
+    background-color: white;
+    border: 1.5px solid rgb(0, 0, 0);
+    color: black;
+    border-radius: 4px;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-size: auto;
+    font-weight: 600;
+
+
+}
+
+.Order_Furniture {
+    /* margin-top: 20; */
+    width: 80%;
+    margin-left: 0%;
+    height: fit-content;
+    padding: 13 15 13 15;
+    z-index: 10;
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-size: auto;
+    font-weight: 600;
+    border-radius: 4px;
+
+
+}
+
+.View_Furniture {
+    width: fit-content;
+    height: fit-content;
+    padding: 7 12 7 12;
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+    border-radius: 18px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+    font-size: auto;
+    display: block;
+    margin: 30 auto;
+}
+
+.Check_out {
+    width: 80%;
+    height: fit-content;
+    padding: 10 12 10 12;
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+    font-size: auto;
+    display: block;
+    margin: 15 auto;
+}
+
+/* .Save_No_Button,
+.Save_Yes_Button {
+    width: 100%;
+    padding: 5 10 5 10;
+    border: 0;
+    box-shadow: rgba(0, 0, 0, 0.052) 0px 3px 8px;
+    border-radius: 8px;
+    color: white;
+    
+
+}
+.Save_No_Button{
+    background-color: rgb(172, 74, 74);
+}
+.Save_Yes_Button{
+    background-color: black;
+} */
+.Request_View_Details{
+width: fit-content;
+padding: 6 10;
+background-color: rgb(62, 62, 119);
+border: 0;
+box-shadow: rgba(0, 0, 0, 0.052) 0px 3px 8px;
+border-radius: 8px;
+color: white;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------------------------------------------- */
+
+@media (max-width:1100px) {
+
+    .time_button {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .time_button_active {
+        margin-top: 10px;
+    }
+
+
+}
+
+
+@media (max-width:1322px) {
+    .Yes_button {
+        margin-left: 30px;
+    }
+
+    .No_button {
+        margin-right: 30px;
+    }
+
+}
+
+@media(max-width:991.5px) {
+    .Yes_button {
+        margin-left: 0px;
+        margin-bottom: 10;
+
+    }
+
+    .No_button {
+        margin-bottom: 0;
+        margin-right: 0px;
+    }
+}
+
+
+
+
+@media(max-width:991.5px) {
+    .Register_Tour {
+        font-size: 1.9vw;
+
+    }
+
+    .Filter_Furniture_button,
+    .Favorites_Furniture_button,
+    .Contact_Designer_button,
+    .Cart_Furniture_button {
+        font-size: small;
+    }
+
+    .Add_to_Favorites,
+    .Order_Furniture {
+        font-size: 1.4vw;
+    }
+}
+
+@media (max-width:767.5px) {
+
+
+    .Filter_Furniture_button,
+    .Favorites_Furniture_button,
+    .Contact_Designer_button,
+    .Cart_Furniture_button {
+        width: fit-content;
+        font-size: smaller;
+        padding: 5 10 5 10;
+        white-space: nowrap;
+        text-align: center;
+        height: 36.75;
+
+
+    }
+
+    .Add_to_Favorites,
+    .Order_Furniture {
+        font-size: 2vw;
+    }
+
+
+}
+
+@media (max-width:450px) {
+
+
+    .Filter_Furniture_button,
+    .Favorites_Furniture_button,
+    .Contact_Designer_button,
+    .Cart_Furniture_button {
+
+        font-size: 2vw;
+
+
+
+    }
+
+}
+
+@media (max-width:300px) {
+
+
+    .Filter_Furniture_button,
+    .Favorites_Furniture_button,
+    .Contact_Designer_button,
+    .Cart_Furniture_button {
+        padding: 2 5 5 5;
+        height: 26.75;
+
+    }
+}

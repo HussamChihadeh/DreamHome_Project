@@ -1,0 +1,21 @@
+:root{
+    --gold1:#AE8625;
+    --gold2:#F9F295;
+}
+.footer{
+    /* margin-top: 200px ; */
+    background-color: black;
+}
+.footer .copyright > span{
+    color: var(--gold2);
+}
+
+.footer .copyright div span{
+    color: var(--gold2);
+}
+
+.footer svg{
+    width: 20px;
+    height: 20px;
+    color: var(--gold2);
+}
