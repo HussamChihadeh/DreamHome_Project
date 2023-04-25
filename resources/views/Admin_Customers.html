@@ -1,0 +1,180 @@
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers</title>
+
+    <link rel="stylesheet" href="..\CSS\Navbar.css">
+    <link rel="stylesheet" href="..\CSS\Admin_Tables.css">
+    <link rel="stylesheet" href="..\CSS\Buttons.css">
+    <link rel="stylesheet" href="..\CSS\Animation.css">
+    <link rel="stylesheet" href="..\CSS\Main.css">
+    <link rel="stylesheet" href="../CSS/Footer.css">
+    <link rel="stylesheet" href="..\bootstrap_css\all.min.css">
+    <link rel="stylesheet" href="..\bootstrap_css\bootstrap.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@600&family=Signika:wght@500;600&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="IMAGES\image_logo.png">
+</head>
+
+<body>
+    <!-- Nav BAR -->
+    <!--RESPONSIVE NAV-->
+    <nav class="navbar navbar-expand-lg fixed-top ">
+        <div class="container">
+            <a class="navbar-brand me-4" href="#">
+                <img src="IMAGES/image_logo.png" alt="" height="40" width="30">
+            </a>
+            <a href="" class="logo me-4 d-none d-md-block">Dream Home</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main"
+                aria-controls="main" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="main">
+                <ul class="navbar-nav ms-auto mb-2 mt-1 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link p-lg-3 active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link p-lg-3" href="#">Rent</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link p-lg-3" href="#">Buy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link p-lg-3" href="#">Furniture</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link p-lg-3" href="#">Our Agents</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link p-lg-3" href="#">Sign In</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <div style="height: 10%;"></div>
+  
+
+    <div class="row" style="height: 100%;">
+
+        <div class="col-1">
+
+        </div>
+
+        <div class="col-xl-10 col-10 p-2">
+            <Header>
+                Customers
+            </Header>
+
+            <div class="row">
+                <div class="col-sm-3 col-6 p-2">
+                    <div class="Top_Container">
+                        <h2>300</h2>
+                        <h6>Total Customers</h6>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-6 p-2">
+                    <div class="Top_Container">
+                        <h2>200</h2>
+                        <h6>Currently Available Properties</h6>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-12 p-2">
+                    <div class="Top_Container Information">
+                        <h4>Information</h4>
+                        <p>-This page shows this Website's Customers.
+                            <br>
+                            -Hover over the Properties and Designers to view More details.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="Table_Container">
+                <div class="table-responsive">
+                    <table class="table" style="font-size: 0.9vw; text-align: center;" id="Requests_Table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Location</th>
+                                <th>Properties</th>
+                                <th>Designers</th>
+
+
+
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-1">
+
+        </div>
+
+
+        <script>
+
+            window.onload = LoadData();
+            const label = document.querySelector('.select-label');
+            var ID_input = document.querySelectorAll(".ID_input");
+            var Input;
+            var View_Details_Button;
+        
+
+            //Load Data 
+            function LoadData() {
+
+                const Requests_Table = document.getElementById('Requests_Table');
+                const tbody = document.createElement('tbody');
+
+                for (var i = 0; i < 9; i++) {
+                    tbody.innerHTML += "<tr>" +
+                        "<td>1</td>" +
+                        "<td>John Smith</td>" +
+                        "<td>JohnSmith@hotail.com</td>" +
+                        "<td>76038762</td>" +
+                        "<td>Beirut, Lebanon</td>" +
+
+                        "<td><div class='dropdown'>" +
+                        "<button class='dropbtn'>House A</button>" +
+                        "<div class='dropdown-content'>" +
+                        "<a href='#'>House A</a>" +
+                        "<a href='#'>House B</a>" +
+                        "<a href='#'>House C</a>" +
+                        "</div></td >"+
+                        "<td><div class='dropdown'>" +
+                        "<button class='dropbtn'>Eny lee</button>" +
+                        "<div class='dropdown-content'>" +
+                        "<a href='#'>Designer 1</a>" +
+                        "<a href='#'>Designer 2</a>" +
+                        "<a href='#'>Designer 3</a>" +
+                        "</div></td >"
+                   
+                    ;
+                }
+                Requests_Table.appendChild(tbody);
+
+            }
+
+          
+
+          
+
+        </script>
+</body>
