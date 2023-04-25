@@ -208,7 +208,7 @@
 .Favorites_Furniture_button:hover:enabled,
 .Cart_Furniture_button:hover:enabled,
 .Button_In_Filter:hover,
-.View_Designer:hover,
+.Designer_View_Details:hover,
 .View_Furniture:hover,
 .Add_to_Favorites:hover,
 .Order_Furniture:hover {
@@ -343,7 +343,7 @@
     color: var(--gold1);
 }
 
-.View_Designer {
+.Designer_View_Details {
     width: 100%;
     height: fit-content;
     padding: 8 9 6 3;

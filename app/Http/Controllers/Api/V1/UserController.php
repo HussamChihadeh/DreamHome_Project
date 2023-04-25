@@ -69,13 +69,18 @@ class UserController extends Controller
 
     public function authenticate(Request $request)
     {
-        $credetials = [
+        $credentials = [
             'email' => $request->email,
             'password' => $request->password,
         ];
  
-        if (Auth::attempt($credetials)) {
-            return redirect('/')->with('success', 'Login Success');
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if ($user->email === 'admin@dreamhome.org') {
+                return redirect('/admin_assign')->with('success', 'Login Success');
+            } else {
+                return redirect('/')->with('success', 'Login Success');
+            }
         }
  
         return back()->with('error', 'Error Email or Password');

@@ -10,7 +10,6 @@
         opacity: 1;
 
     }
-    
 }
 
 @keyframes disappear {
@@ -181,7 +180,7 @@
     100% {
         left: 50%;
 
-    transform: translate(-50%, 0%);
+        transform: translate(-50%, 0%);
         margin-left: 0%;
     }
 
@@ -228,13 +227,13 @@
 
 @keyframes Animate_Grid_In {
     0% {
-     
+
         height: 300px;
         border: 10px solid #dad8d800;
     }
 
     25% {
-        
+
         height: 0px;
         border: 5px solid #dad8d800;
         width: 90%;
@@ -259,73 +258,35 @@
 
     100% {
         border: 10px solid #dad8d800;
-   
+
         width: 90%;
         height: 70%;
-       
+
 
     }
 
 }
-/* 
-@keyframes Animate_Grid_In_Slightly_Up {
-    0% {
-     
-        height: 300px;
-        border: 10px solid #dad8d800;
-    }
 
-    25% {
-        
-        height: 0px;
-        border: 5px solid #dad8d800;
-        width: 90%;
-        display: grid;
-
-    }
-
-    50% {
-        margin-top: 10%;
-        width: 40%;
-        height: 0px;
-
-    }
-
-    75% {
-        margin-top: 10%;
-        width: 90%;
-        height: 0px;
-
-    }
-
-    100% {
-        border: 10px solid #dad8d800;
-        width: 90%;
-        height: 70%;
-       
-
-    }
-
-}
- */
 
 
 
 @keyframes Animate_Grid_Out {
     0% {
         border: 10px solid #dad8d800;
-   
+
         width: 90%;
         height: 70%;
-       
+
 
     }
+
     25% {
         margin-top: 10%;
         width: 90%;
         height: 0px;
 
     }
+
     50% {
         margin-top: 10%;
         width: 40%;
@@ -333,24 +294,46 @@
 
     }
 
-   
+
 
     75% {
-        
+
         height: 0px;
         border: 5px solid #dad8d800;
         width: 90%;
         display: grid;
 
     }
+
     100% {
-     
+
         height: 70%;
         border: 10px solid #dad8d800;
     }
 
-  
 
-  
-   
+
+}
+
+@keyframes Designer_Details {
+    0% {
+        height: 290;
+    }
+
+    100% {
+        height: 620;
+    }
+
+}
+
+@keyframes Designer_Container {
+
+    0% {
+        height: 610;
+    }
+
+    100% {
+        height: 290;
+    }
+
 }

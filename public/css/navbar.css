@@ -80,8 +80,19 @@
    width: 10px !important;
    }
 
-.dropdown-menu li a, .dropdown-menu li hr{
+.dropdown-menu li a, .dropdown-menu li hr, .logout_nav_button{
   color: white;
+}
+
+.logout_nav_button{
+  color: white;
+  background-color: black;
+  border: none;
+  padding: 0;
+}
+
+.logout_nav_button:hover{
+  color: var(--gold1) !important;
 }
 
 .dropdown-menu li a:hover{

@@ -50,13 +50,19 @@ use App\Http\Controllers\HomeController;
     });
 
     Route::get("/contact_designer", function(){
-        return view("contact_designer");
+        return view("designers");
     })->name('contact_designer');
 
     
     Route::get("/signin", function(){
         return view("logIn");
     });
+
+    Route::get("/admin_assign", function(){
+        return view("Admin_Assign");
+    });
+
+    
 
     Route::group(['middleware' => 'guest'], function () {
         Route::get('/login', [UserController::class, 'login'])->name('login');
@@ -76,4 +82,20 @@ use App\Http\Controllers\HomeController;
         // Route::get('/property/request_tour', function () {
         //     return view('request_tour');
         // });
+    });
+
+    Route::group(['middleware' => ['auth', 'admin']], function () {
+        // routes that only the admin should access
+        Route::get("/admin_customers", function(){
+            return view("Admin_Customers");
+        })->name("customers");
+    
+        Route::get("/admin_requests", function(){
+            return view("Admin_Requests");
+        })->name("requests");
+    
+    
+        Route::get("/admin_assign", function(){
+            return view("Admin_Assign");
+        })->name("assign");
     });

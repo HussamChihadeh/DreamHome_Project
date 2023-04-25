@@ -1,64 +1,9 @@
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Requests</title>
+@extends("admin_layout")
+@section("head")
+<link rel="stylesheet" href="{{asset('css/Admin_Tables.css')}}">
 
-    <link rel="stylesheet" href="..\CSS\Navbar.css">
-    <link rel="stylesheet" href="..\CSS\Admin_Tables.css">
-    <link rel="stylesheet" href="..\CSS\Buttons.css">
-    <link rel="stylesheet" href="..\CSS\Animation.css">
-    <link rel="stylesheet" href="..\CSS\Main.css">
-    <link rel="stylesheet" href="../CSS/Footer.css">
-    <link rel="stylesheet" href="..\bootstrap_css\all.min.css">
-    <link rel="stylesheet" href="..\bootstrap_css\bootstrap.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet'>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@600&family=Signika:wght@500;600&display=swap"
-        rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="IMAGES\image_logo.png">
-</head>
-
-<body>
-    <!-- Nav BAR -->
-    <!--RESPONSIVE NAV-->
-    <nav class="navbar navbar-expand-lg fixed-top ">
-        <div class="container">
-            <a class="navbar-brand me-4" href="#">
-                <img src="IMAGES/image_logo.png" alt="" height="40" width="30">
-            </a>
-            <a href="" class="logo me-4 d-none d-md-block">Dream Home</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main"
-                aria-controls="main" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="main">
-                <ul class="navbar-nav ms-auto mb-2 mt-1 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link p-lg-3 active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link p-lg-3" href="#">Rent</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link p-lg-3" href="#">Buy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link p-lg-3" href="#">Furniture</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link p-lg-3" href="#">Our Agents</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link p-lg-3" href="#">Sign In</a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
+@endsection
+@section("content")
     <div style="height: 10%;"></div>
 
 
@@ -197,4 +142,4 @@
 
 
         </script>
-</body>
+@endsection
