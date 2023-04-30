@@ -38,7 +38,13 @@
                 </div>
             </div>
 
-            <div class="Table_Container">
+            <div class="Table_Container ">
+                <div class="Group_container " id="Group_container">
+                    <div class="pagination d-flex justify-content-between">
+                        <button class="prev">&lt;</button>
+                        <button class="next">&gt;</button>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table" style="font-size: 0.9vw; text-align: center;" id="Requests_Table">
                         <thead>
@@ -67,79 +73,106 @@
         <div class="col-1">
 
         </div>
-       
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <script>
           
-
-            window.onload = LoadData();
-            const label = document.querySelector('.select-label');
-            var Accept_Decline = document.querySelectorAll(".Accept_Decline");
-            
-            function LoadData() {
+            var currentPage=1;
+            var properties1;
+            var formData="status[eq]=pending"; 
+            // window.onload = LoadData(currentPage);
+            const tbody = document.createElement('tbody');
+            function LoadData(page) {
 
                 const Requests_Table = document.getElementById('Requests_Table');
-                const tbody = document.createElement('tbody');
+                
 
-                for (var i = 0; i < 9; i++) {
-                    tbody.innerHTML += "<tr>" +
-                        "<td>House A</td>" +
-                        "<td>Rent</td>" +
-                        "<td>Apartment</td>" +
-                        "<td>Beirut, Lebanon</td>" +
-                        "<td>200 mxm</td>" +
-                        "<td>2010</td>" +
-                        "<td>3</td>" +
-                        "<td>3</td>" +
-                        "<td>2</td>" +
-                        "<td>2,000$</td>" +
-                        "<td> <button class='Request_View_Details' id='View_Details_" + i + "'>Details</button></td>" +
-                        "<td>" +
-                        "<label class='select-label'>" +
-                        "<select name='accept-decline' class='p-sm-1 p-md-1 p-lg-2 p-1 Accept_Decline' id='accept-decline_" + i + "'>" +
-                        "<option value='Pending'>Pending</option>" +
-                        "<option value='accept'>Accept</option>" +
-                        "<option value='decline'>Decline</option>" +
-                        "</select>" +
-                        "</label>" +
-                        "</td>" +
-                        "</tr>";
-                }
-                Requests_Table.appendChild(tbody);
+                $.ajax({
+                    url: "/api/v1/properties?page="+page,
+                    type: "GET",
+                    data: formData,
+                    success: function(properties) {
+                        console.log(formData);
+                        console.log(properties);
+                        tbody.innerHTML = '';
+                        $.each(properties.data, function(index, property) {
+                            tbody.innerHTML += "<tr>" +
+                                                "<td>"+property.name+"</td>" +
+                                                "<td>"+property.buy_or_rent+"</td>" +
+                                                "<td>"+property.type+"</td>" +
+                                                "<td>"+property.province+"</td>" +
+                                                "<td>"+property.area+" mxm</td>" +
+                                                "<td>"+property.built_in+"</td>" +
+                                                "<td>"+property.bedrooms+"</td>" +
+                                                "<td>"+property.bathrooms+"</td>" +
+                                                "<td>"+property.parking+"</td>" +
+                                                "<td>"+property.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'})+"</td>" +
+                                                "<td> <button class='Request_View_Details' id='View_Details_" + property.id + "'>Details</button></td>" +
+                                                "<td>" +
+                                                "<label class='select-label'>" +
+                                                "<select name='accept-decline' class='p-sm-1 p-md-1 p-lg-2 p-1 Accept_Decline' id='accept-decline_" + property.id + "'>" +
+                                                "<option value='Pending'>Pending</option>" +
+                                                "<option value='accept'>Accept</option>" +
+                                                "<option value='decline'>Decline</option>" +
+                                                "</select>" +
+                                                "</label>" +
+                                                "</td>" +
+                                                "</tr>";
+                                                Requests_Table.appendChild(tbody);
+                                                $(".pagination .prev").prop('disabled', page == 1);
+                                                $(".pagination .next").prop('disabled', page == properties.last_page);
+                                                $(".pagination .prev").off();
+                                                $(".pagination .next").off();
+
+                                                // Bind event handlers
+                                                $(".pagination .prev").click(function () {
+                                                    if (currentPage > 1) {
+                                                        currentPage--;
+                                                        LoadData(currentPage);
+                                                    }
+                                                });
+
+                                                $(".pagination .next").click(function () {
+                                                    if (currentPage < properties.last_page) {
+                                                        currentPage++;
+                                                        LoadData(currentPage);
+                                                    }
+                                                });
+                                                $(document).ready(function() {
+                                                    
+
+                                                //coloring the choice
+                                                var statusSelect = document.getElementById("accept-decline_" + property.id);
+                                                statusSelect.onchange = function () {
+                                                    var selectedStatus = statusSelect.value;
+                                                    if (selectedStatus == "decline") {
+                                                            statusSelect.style.color = "red";
+                                                        }
+                                                        if (selectedStatus == "accept") {
+                                                            statusSelect.style.color = "Green";
+                                                        }
+                                                        if (selectedStatus == "Pending") {
+                                                            statusSelect.style.color = "Black";
+                                                        }
+                                                }
+
+                                                View_Details_Button = document.getElementById("View_Details_" + property.id);
+                                                    View_Details_Button.onclick = function () {
+                                                        url1 = "/rent/Property_details?id=" + property.id;
+                                                        window.location.href = url1;
+                                                }
+                                            });
+                                                
+                        });
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
 
             }
-
-
-            var statusSelect;
-            var View_Details_Button;
-            for (var i = 0; i < Accept_Decline.length; i++) {
-                (function (i) {
-                    Accept_Decline[i].onchange = function () {
-                        // To work with the Accept and Decline 
-                        statusSelect = document.getElementById("accept-decline_" + i);
-                        var selectedStatus = statusSelect.value;
-
-                        if (selectedStatus == "decline") {
-                            statusSelect.style.color = "red";
-                        }
-                        if (selectedStatus == "accept") {
-                            statusSelect.style.color = "Green";
-                        }
-                        if (selectedStatus == "Pending") {
-                            statusSelect.style.color = "Black";
-                        }
-                    }
-                    // To work with the View Details Button
-                    View_Details_Button = document.getElementById("View_Details_" + i);
-                    View_Details_Button.onclick = function () {
-                        alert("Button id: " + this.id + " has been Cliked ");
-                    }
-                })(i);
-            }
-
-
-
-
-
+            LoadData(currentPage);
+           
 
         </script>
 @endsection

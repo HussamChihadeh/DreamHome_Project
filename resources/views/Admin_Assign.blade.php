@@ -48,6 +48,12 @@
             </div>
 
             <div class="Table_Container">
+            <div class="Group_container " id="Group_container">
+                    <div class="pagination d-flex justify-content-between">
+                        <button class="prev">&lt;</button>
+                        <button class="next">&gt;</button>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table" style="font-size: 0.9vw; text-align: center;" id="Requests_Table">
                         <thead>
@@ -78,10 +84,14 @@
 
         </div>
 
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
         <script>
 
-            window.onload = LoadData();
+            var currentPage=1;
+            var properties1;
+            var formData="status[eq]=listed"; 
+            window.onload = LoadData(currentPage);
             const label = document.querySelector('.select-label');
             var ID_input = document.querySelectorAll(".ID_input");
             var Input;
@@ -89,106 +99,142 @@
             var message = document.getElementById("message");
             var message_text = document.getElementById("message_text");
 
+            var currentPage=1;
+            var properties1;
+            var formData="status[eq]=listed"; 
+            const tbody = document.createElement('tbody');
+
             //Load Data 
-            function LoadData() {
+            function LoadData(page) {
 
                 const Requests_Table = document.getElementById('Requests_Table');
-                const tbody = document.createElement('tbody');
 
-                for (var i = 0; i < 9; i++) {
-                    tbody.innerHTML += "<tr>" +
-                        "<td>House A</td>" +
-                        "<td>Rent</td>" +
-                        "<td>Apartment</td>" +
-                        "<td>Beirut, Lebanon</td>" +
-                        "<td>200 mxm</td>" +
-                        "<td>2010</td>" +
-                        "<td>3</td>" +
-                        "<td>3</td>" +
-                        "<td>2</td>" +
-                        "<td>2,000$</td>" +
-                        "<td> <button class='Request_View_Details' id='View_Details_" + i + "'>Details</button></td>" +
-                        "<td>" +
-                        "<input class='p-1 ID_input' type='Number'  id='input_" + i + "'></input>" +
-                        "</td>" +
-                        "</tr>";
-                }
-                Requests_Table.appendChild(tbody);
+                $.ajax({
+                    url: "/api/v1/properties?page="+page,
+                    type: "GET",
+                    data: formData,
+                    success: function(properties) {
+                        console.log(formData);
+                        console.log(properties);
+                        tbody.innerHTML = '';
+                        $.each(properties.data, function(index, property) {
+                            tbody.innerHTML += "<tr>" +
+                                                "<td>"+property.name+"</td>" +
+                                                "<td>"+property.buy_or_rent+"</td>" +
+                                                "<td>"+property.type+"</td>" +
+                                                "<td>"+property.province+"</td>" +
+                                                "<td>"+property.area+" mxm</td>" +
+                                                "<td>"+property.built_in+"</td>" +
+                                                "<td>"+property.bedrooms+"</td>" +
+                                                "<td>"+property.bathrooms+"</td>" +
+                                                "<td>"+property.parking+"</td>" +
+                                                "<td>"+property.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'})+"</td>" +
+                                                "<td> <button class='Request_View_Details' id='View_Details_" + property.id + "'>Details</button></td>" +
+                                                "<td>" +
+                                                "<input class='p-1 ID_input' type='Number'  id='input_" + property.id  + "'></input>" +
+                                                "</td>" +
+                                                "</tr>";
+                                                Requests_Table.appendChild(tbody);
+                                                $(".pagination .prev").prop('disabled', page == 1);
+                                                $(".pagination .next").prop('disabled', page == properties.last_page);
+                                                $(".pagination .prev").off();
+                                                $(".pagination .next").off();
 
+                                                // Bind event handlers
+                                                $(".pagination .prev").click(function () {
+                                                    if (currentPage > 1) {
+                                                        currentPage--;
+                                                        LoadData(currentPage);
+                                                    }
+                                                });
+
+                                                $(".pagination .next").click(function () {
+                                                    if (currentPage < properties.last_page) {
+                                                        currentPage++;
+                                                        LoadData(currentPage);
+                                                    }
+                                                });
+                        });
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+                
             }
 
             //Deals with Detail Buttons and Inputs
-            for (var i = 0; i < ID_input.length; i++) {
-                (function (i) {
+            // for (var i = 0; i < ID_input.length; i++) {
+            //     (function (i) {
 
-                    // To work with the View Details Button
-                    View_Details_Button = document.getElementById("View_Details_" + i);
-                    View_Details_Button.onclick = function () {
-                        alert("Button id: " + this.id + " has been Cliked ");
-                    }
-
-
-                    ID_input[i].addEventListener('keydown', function (event) {
-                        if (event.key === 'Enter') {
-                            Assign(ID_input[i].value);
-                        }
-                    });
-
-                    function Assign(Input) {
-                        //IF NOT FOUND IN DB
-                        if(Input!="")
-                        Show_Message(Input);
-                    }
-
-                })(i);
-            }
-
-            //To Show the Message when ID is not found in DB
-            function Show_Message(Input) {
+            //         // To work with the View Details Button
+            //         View_Details_Button = document.getElementById("View_Details_" + i);
+            //         View_Details_Button.onclick = function () {
+            //             alert("Button id: " + this.id + " has been Cliked ");
+            //         }
 
 
+            //         ID_input[i].addEventListener('keydown', function (event) {
+            //             if (event.key === 'Enter') {
+            //                 Assign(ID_input[i].value);
+            //             }
+            //         });
 
-                message_text.innerHTML = Input + " is not Found in Our Customers List";
-                message.style.animation = "message_show 1.5s linear ";
-                for (var i = 0; i < ID_input.length; i++) {
-                        (function (i) {
-                            ID_input[i].disabled = true;
-                        })(i);
-                    }
-                setTimeout(function () {
+            //         function Assign(Input) {
+            //             //IF NOT FOUND IN DB
+            //             if(Input!="")
+            //             Show_Message(Input);
+            //         }
 
-                    message.style = " top:12%;left: 35%;right: 35%; width: 30%;height:60;z-index:2;";
+            //     })(i);
+            // }
 
-                }, 1450);
+            // //To Show the Message when ID is not found in DB
+            // function Show_Message(Input) {
 
-                setTimeout(function () {
-                    message_text.hidden = false;
-                    message_text.style.opacity = 1;
 
-                }, 1500);
 
-                setTimeout(function () {
-                    message_text.hidden = true;
+            //     message_text.innerHTML = Input + " is not Found in Our Customers List";
+            //     message.style.animation = "message_show 1.5s linear ";
+            //     for (var i = 0; i < ID_input.length; i++) {
+            //             (function (i) {
+            //                 ID_input[i].disabled = true;
+            //             })(i);
+            //         }
+            //     setTimeout(function () {
 
-                    setTimeout(function () {
-                        message.style.animation = "message_hide 1.1s linear";
+            //         message.style = " top:12%;left: 35%;right: 35%; width: 30%;height:60;z-index:2;";
 
-                    }, 500);
-                    setTimeout(function () {
-                        message.style = "top:0%;width: 50;left: 50%; height: 50;right: 50%;";
+            //     }, 1450);
 
-                    }, 1480);
-                }, 2400);
+            //     setTimeout(function () {
+            //         message_text.hidden = false;
+            //         message_text.style.opacity = 1;
 
-                setTimeout(function () {
-                    for (var i = 0; i < ID_input.length; i++) {
-                        (function (i) {
-                            ID_input[i].disabled = false;
-                        })(i);
-                    }
-                }, 3200);
+            //     }, 1500);
 
-            }
+            //     setTimeout(function () {
+            //         message_text.hidden = true;
+
+            //         setTimeout(function () {
+            //             message.style.animation = "message_hide 1.1s linear";
+
+            //         }, 500);
+            //         setTimeout(function () {
+            //             message.style = "top:0%;width: 50;left: 50%; height: 50;right: 50%;";
+
+            //         }, 1480);
+            //     }, 2400);
+
+            //     setTimeout(function () {
+            //         for (var i = 0; i < ID_input.length; i++) {
+            //             (function (i) {
+            //                 ID_input[i].disabled = false;
+            //             })(i);
+            //         }
+            //     }, 3200);
+
+            // }
 
 
         </script>

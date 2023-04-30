@@ -235,15 +235,8 @@
   });
 
   $('.Request_a_Tour_button_details').click(function() {
-    var url1;
-    if ({{ Auth::check() ? 'true' : 'false' }}) {
       url1 = "/rent/request_tour?id=" + propertyId;
       window.location.href = url1;
-    }
-    else{
-      url1 = "/login";
-      window.location.href = url1;
-    }
   });
 });
 

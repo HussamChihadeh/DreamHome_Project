@@ -283,8 +283,8 @@
       /////////////////////////////////////////////////////////
     }
 
-
-    Favorites_button.onclick = function () {
+      var wishlist;
+      function favorites(wishlist){
 
       setTimeout(function () { Furniture_Grid.style.animation = ''; }, 1500);
 
@@ -295,18 +295,21 @@
 
 
       Filter_Button.innerHTML = "Our Shop";
+      console.log(wishlist);
+      var itemDivs = document.querySelectorAll('.item');
+      console.log(itemDivs);
+      itemDivs.forEach(function(itemDiv) {
+        itemDiv.style.display = 'none';
+        console.log(itemDiv);
+      });
 
-
-
-
-
-      //Just to show the favorites, to be removed/edited later.
-      setTimeout(function () {
-        for (var i = 0; i < heart.length; i++) {
-          heart[i].src = "{{asset('images/heart_filled.png')}}";
+      wishlist.forEach(function(itemId) {
+        var item = document.querySelector('.item-' + itemId);
+        if (item) {
+          item.style.display = 'block';
         }
-      }, 1200);
-      /////////////////////////////////////////////////////////
+      });
+
       Active_Button_Editor(Favorites_button);
 
     }
@@ -328,11 +331,12 @@
         }, 100);
 
         //Just to show the favorites, to be removed/edited later.
-        setTimeout(function () {
-          for (var i = 0; i < heart.length; i++) {
-            heart[i].src = "{{asset('images/heart_unfilled.png')}}";
-          }
-        }, 1200);
+        var itemDivs = document.querySelectorAll('.item');
+        console.log(itemDivs);
+        itemDivs.forEach(function(itemDiv) {
+          itemDiv.style.display = 'block';
+          console.log(itemDiv);
+        });
         /////////////////////////////////////////////////////////
       }
       else {
@@ -435,8 +439,10 @@
                 $.each(furniture.data, function(index, furniture) {
                     console.log(furniture);
 
-                    Furniture_Grid.innerHTML += "<div class='furniture_container'>" +
-                            "<img src='{{asset('images/heart_unfilled.png')}}' class='heart'>" +
+                    Furniture_Grid.innerHTML += "<div class='furniture_container item item-" +furniture.id+"'>" +
+                    "<img src='{{asset('images/heart_unfilled.png')}}' class='heart heart-" + furniture.id + "' id='" +
+                      furniture.id + "'>" +
+
 
                             "<img src='/images/furniture/1.png' height='100%' width='100%'" +
                             "class='image' id=" +
@@ -446,12 +452,49 @@
                             furniture.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'})
                             "</div>";
                 });
-                
+                var userId = {!! auth()->check() ? auth()->user()->id : 'null' !!};
+                if (userId!==null) {
+                  updateWishlist(userId);
+                }
+                                
             },
             error: function(error) {
                 console.log(error);
             }
         });
+    }
+
+    function updateWishlist(userId){
+      
+      $.ajax({
+          url: '/api/v1/get-wishlist/' + userId,
+          type: 'GET',
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function(response) {
+            console.log(response);
+            wishlist = response;
+            
+            // Loop through the wishlist and update the heart image for each item
+            wishlist.forEach(function(item) {
+              console.log(item);
+              // console.log(item.id);
+              var heartImg = document.querySelector('.heart-' + item);
+              // console.log(heartImg);
+              if (heartImg) {
+                heartImg.src = "{{asset('images/heart_filled.png')}}";
+              }
+            });
+            Favorites_button.onclick = function() {
+                favorites(wishlist);
+            };
+          },
+          error: function(response) {
+            // Handle the error response
+            console.log(response);
+          }
+        }); 
     }
 
     window.onload = function() {
@@ -468,25 +511,62 @@
         }
 
         var heart = document.querySelectorAll(".heart");
-        for (var i = 0; i < heart.length; i++) {
-      heart[i].onclick = function () {
-        setTimeout(this.style.animation = '', 1000);
-        let getAttr = this.getAttribute('src');
-        if (message_text.hidden == true) {
-          Show_Message();
+for (var i = 0; i < heart.length; i++) {
+    heart[i].onclick = function () {
+      var userId = {!! auth()->check() ? auth()->user()->id : 'null' !!};
+        var itemId = this.id;
+        var heartImg = this;
+        if (userId!==null) {
+          var index = wishlist.indexOf(itemId);
+          if (index !== -1) {
+            // Item already exists, remove it
+            wishlist.splice(index, 1);
+          } else {
+            // Item doesn't exist, add it
+            wishlist.push(itemId);
+          }
+          $.ajax({
+            url: '/api/v1/add-to-wishlist/' + userId,
+            type: 'POST',
+            data: {
+                item: itemId
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                // Handle the success response
+                setTimeout(heartImg.style.animation = '', 1000);
+                let getAttr = heartImg.getAttribute('src');
+                if (message_text.hidden == true) {
+                    Show_Message();
+                }
+                if (getAttr == "{{asset('images/heart_filled.png')}}") {
+                    heartImg.src = "{{asset('images/heart_unfilled.png')}}";
+                    message_text.innerHTML = "Removed From My Favorites";
+                }
+                else {
+                    heartImg.style.animation = " zoom_in .5s linear";
+                    heartImg.src = "{{asset('images/heart_filled.png')}}";
+                    message_text.innerHTML = "Added to My Favorites";
+                }
+            },
+            error: function(response) {
+                // Handle the error response
+                console.log(response);
+            }
+        });
         }
-        if (getAttr == "{{asset('images/heart_filled.png')}}") {
+        
 
-          this.src = "{{asset('images/heart_unfilled.png')}}";
-          message_text.innerHTML = "Removed From My Favorites";
-        }
-        else {
-          this.style.animation = " zoom_in .5s linear";
-          this.src = "{{asset('images/heart_filled.png')}}";
-          message_text.innerHTML = "Added to My Favorites";
-        }
-      }
+        // Store a reference to 'this'
+        
+
+        // Send a POST request to the addToWishlist route using AJAX
+        
     }
+}
+
     };
 
   </script>

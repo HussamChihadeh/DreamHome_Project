@@ -23,7 +23,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(["prefix" => "v1", "namespace"=>"App\Http\Controllers\Api\V1"], function(){
-    // Route::post('users/authenticate', 'UserController@authenticate');
+    Route::post('/add-to-wishlist/{id}', 'UserController@addToWishlist');
+    Route::get('/get-wishlist/{id}', 'UserController@getWishlist');
+    Route::post('users', 'UserController@store');
     // Route::apiResource("users", UserController::class);
     Route::get('properties/getLocation', 'PropertyController@getLocation');
     Route::get('property/updateSlots', 'TourController@updateSlots');

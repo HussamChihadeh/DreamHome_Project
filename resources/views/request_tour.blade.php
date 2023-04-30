@@ -1,73 +1,18 @@
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Request a Tour</title>
-
-  <link rel="stylesheet" href="..\CSS\Navbar.css">
-  <link rel="stylesheet" href="..\CSS\Request_tour.css">
-  <link rel="stylesheet" href="..\CSS\Buttons.css">
+@extends("layout")
+@section("title", "request tour")
+@section("head")
   <link rel="stylesheet" href="{{asset('css/request_tour.css')}}">
-  <link rel="stylesheet" href="..\CSS\Animation.css">
-  <link rel="stylesheet" href="..\CSS\Main.css">
-  <link rel="stylesheet" href="../CSS/Footer.css">
-  <link rel="stylesheet" href="..\bootstrap_css\all.min.css">
-  <link rel="stylesheet" href="..\bootstrap_css\bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet" />
-  <link href='https://fonts.googleapis.com/css?family=Luckiest Guy' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet'>
-
+  <link rel="stylesheet" href="{{asset('css/buttons.css')}}">
   <style>
     .disabled-time {
-  opacity: 0.5; /* set the opacity as per your preference */
-  cursor: not-allowed;
-  pointer-events: none;
-}
+      opacity: 0.5; /* set the opacity as per your preference */
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  </style>
+@endsection
 
-    </style>
-
-</head>
-
-<body>
-
-  <!--RESPONSIVE NAV-->
-  <nav class="navbar navbar-expand-lg fixed-top ">
-    <div class="container">
-      <a class="navbar-brand me-4" href="#">
-        <img src="IMAGES/image_logo.png" alt="" height="40" width="30">
-      </a>
-      <a href="" class="logo me-4 d-none d-md-block">Dream Home</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main" aria-controls="main"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="main">
-        <ul class="navbar-nav ms-auto mb-2 mt-1 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link p-lg-3 active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link p-lg-3" href="#">Rent</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link p-lg-3" href="#">Buy</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link p-lg-3" href="#">Furniture</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link p-lg-3" href="#">Our Agents</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link p-lg-3" href="#">Sign In</a>
-          </li>
-        </ul>
-
-      </div>
-    </div>
-  </nav>
-
+@section("content")
   <!-- Are You Sure Message! -->
   <div hidden id="Message" style="opacity: 0;">
   <div  class="Confirmation_Message">
@@ -138,85 +83,13 @@
   </div>
 
   <!--RESPONSIVE FOOTER-->
-  <div class="footer pt-5 pb-5 text-white-50 text-center text-md-start">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-lg-4">
-          <div class="info mb-5">
-            <img src="IMAGES/image_logo.png" alt="" class="mb-4 img-fluid" height="40" width="30">
-            <p class="mb-5">hsagdashdgash ahsgdhgadh ashgdhasgd ashdgjdja ashdjhagdj ashdg</p>
-            <div class="copyright">
-              Created By <span>XXXX</span>
-              <div>&copy; 2023 - <span>Capstone Project</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-2">
-          <div class="links">
-            <h5 class="text-light">Links</h5>
-            <ul class="list-unstyled lh-lg">
-              <li>Home</li>
-              <li>Rent</li>
-              <li>Buy</li>
-              <li>Furniture</li>
-              <li>Our Agents</li>
-              <li>Sign In</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-2">
-          <div class="links">
-            <h5 class="text-light">Links</h5>
-            <ul class="list-unstyled lh-lg">
-              <li>Home</li>
-              <li>Rent</li>
-              <li>Buy</li>
-              <li>Furniture</li>
-              <li>Our Agents</li>
-              <li>Sign In</li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="contactUs">
-            <h5 class="text-light">Contact Us</h5>
-            <p class="lh-lg mt-3 mb-5">Get in touch adasdasd</p>
-            <a href="mailto:dreamhome@gmail.com" class="btn rounded-pill w-100 text-light">dreamhome@gmail.com</a>
-            <ul class="d-flex mt-5 list-unstyled gap-3">
-              <li>
-                <a href="https://www.facebook.com" class="d-block text-light">
-                  <i class="fa-brands fa-facebook fa-lg facebook p-2"></i>
-                </a>
-              </li>
-              <li>
-                <a href="https://www.facebook.com" class="d-block text-light">
-                  <i class="fa-brands fa-instagram fa-lg instagram rounded-circle p-2"></i>
-                </a>
-              </li>
-              <li>
-                <a href="https://www.facebook.com" class="d-block text-light">
-                  <i class="fa-brands fa-twitter fa-lg twitter rounded-circle p-2"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script src="../js/bootstrap.bundle.min.js"></script>
-  <script src="../js/all.min.js"></script>
+  
+@endsection
+
+@section("script")
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-</body>
-
-
-
-<script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../js/all.min.js"></script>
-
-<!-- <div id="on_load">
-  </div> -->
 
 <script>
 
@@ -290,6 +163,7 @@
     // Send an AJAX request to the updateSlots method and disable the booked time slots
     $('#date_input').on('change', function() {
       var selectedDate = $(this).val();
+      $('.disabled-time').prop('disabled', false).removeClass('disabled-time');
       $.ajax({
         type: 'GET',
         url: '/api/v1/property/updateSlots',
@@ -314,3 +188,5 @@
   });
 
 </script>
+
+@endsection

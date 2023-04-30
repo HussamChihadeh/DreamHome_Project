@@ -3,6 +3,14 @@
 
 @section("head")
 <link rel="stylesheet" href="{{asset('css/logIn.css')}}">
+<style>
+    
+    .alert{
+        color: red;
+        padding: 0;
+        margin: 0;
+    }
+</style>
 @endsection
 
 @section("content")
@@ -33,12 +41,19 @@
                     @csrf
                     <div class="mb-3 form-outline w-75">
                         <label class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email">
+                        <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
                     </div>
                     <div class="mb-3 form-outline w-75">
                         <label class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password">
                     </div>
+                    @if ($errors->any())
+                    <div class="alert">
+                            @foreach ($errors->all() as $error)
+                                <p>{{ $error }}</p>
+                            @endforeach
+                    </div>
+                @endif
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <p class="text-black-50">Don't have an account? <a href="{{ route('signup') }}">Sign up</a></p>
 

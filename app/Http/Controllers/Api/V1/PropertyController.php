@@ -20,11 +20,11 @@ class PropertyController extends Controller
         $filter = new PropertyQuery();
         $queryItems = $filter->transform($request);
         if(count($queryItems)==0){
-            $properties = Property::select('id', 'name', 'description', 'city', 'bedrooms', 'bathrooms', 'price', 'type','province', 'status')->paginate(15);
+            $properties = Property::select('id', 'name', 'description', 'city', 'bedrooms', 'bathrooms', 'price', 'type','province', 'status', 'area', 'parking' , 'built_in', 'buy_or_rent')->paginate(15);
             return response()->json($properties);
         }
         else{
-            $properties = Property::where($queryItems)->paginate(15);
+            $properties = Property::select('id', 'name', 'description', 'city', 'bedrooms', 'bathrooms', 'price', 'type','province', 'status', 'area', 'parking' , 'built_in', 'buy_or_rent')->where($queryItems)->paginate(15);
             return response()->json($properties->appends($request->query()));
         }
         

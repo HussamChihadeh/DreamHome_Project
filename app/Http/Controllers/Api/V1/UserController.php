@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\URL;
 
 class UserController extends Controller
 {
@@ -79,11 +80,14 @@ class UserController extends Controller
             if ($user->email === 'admin@dreamhome.org') {
                 return redirect('/admin_assign')->with('success', 'Login Success');
             } else {
-                return redirect('/')->with('success', 'Login Success');
+                    // return redirect('/')->with('success', 'Login Success');
+                    return redirect()->intended('/')->with('success', 'Login Success');
             }
         }
  
-        return back()->with('error', 'Error Email or Password');
+        return back()->withInput($request->only('email'))->withErrors([
+            'email' => 'Invalid email or password',
+        ]);
     } 
 
     public function logout(Request $request)
@@ -95,18 +99,7 @@ class UserController extends Controller
             ->withSuccess('You have logged out successfully!');;
     }   
 
-    // public function dashboard()
-    // {
-    //     if(Auth::check())
-    //     {
-    //         return view('auth.dashboard');
-    //     }
-        
-    //     return redirect()->route('login')
-    //         ->withErrors([
-    //         'email' => 'Please login to access the dashboard.',
-    //     ])->onlyInput('email');
-    // } 
+   
     public function showProfile()
     {
         $user = Auth::user();
@@ -115,6 +108,27 @@ class UserController extends Controller
         return view('profile', compact('ownedProperties', 'boughtProperties'));
         // return view('profile', compact('properties'));
     }
+
+    public function getWishlist(Request $request) {
+        $user = User::find($request->id);
+        $wishlist = json_decode($user->wishlist, true) ?? [];
+        return response()->json($wishlist);
+    }
+    
+
+    public function addToWishlist(Request $request){
+        $user = User::find($request->id);
+        $wishlistData = json_decode($user->wishlist, true) ?? [];
+        $itemIndex = array_search($request->item, $wishlistData);
+        if ($itemIndex !== false) {
+            unset($wishlistData[$itemIndex]);
+        } else {
+            $wishlistData[] = $request->item;
+        }
+        $user->wishlist = json_encode(array_values($wishlistData));
+        $user->save();
+    }
+    
 
     /**
      * Display the specified resource.

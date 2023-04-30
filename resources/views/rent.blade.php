@@ -146,9 +146,7 @@
 
 @section("script")
 
-<script src="../js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="../js/all.min.js"></script>
 
 
 <script>
@@ -197,17 +195,6 @@
       var price = $('<div class="price">').text(property.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'}));
       var tour_button = $('<button type="submit" class="Request_a_Tour_button">').attr('id', property.id).text("Request a tour");
 
-    //   if ({{ Auth::check() ? 'true' : 'false' }}) {
-    // // If the user is logged in, redirect to the tour request page
-    //     tour_button.on('click', function() {
-    //               window.location.href = '/property/request_tour';
-    //       });
-    //   } else {
-    //       // If the user is not logged in, redirect to the login page
-    //       tour_button.on('click', function() {
-    //           window.location.href = '/login';
-    //       });
-    //   }
       var details_button = $('<button type="submit" class="details_button">').attr('id', property.id).text("View Details");
 
       item_container_part2.append(title);
@@ -303,14 +290,9 @@
 });
 
 $(document).on('click', '.Request_a_Tour_button', function() {
-  if ({{ Auth::check() ? 'true' : 'false' }}) {
     var propertyId = $(this).attr('id');  
     var url1 = "/rent/request_tour?id=" + propertyId;
     window.location.href = url1;
-  }
-  else{
-    window.location.href = "/login";
-  }
 });
 </script>
 @endsection

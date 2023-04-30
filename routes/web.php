@@ -45,9 +45,7 @@ use App\Http\Controllers\HomeController;
         return view('Property_details');
     });
     
-    Route::get('/rent/request_tour', function () {
-        return view('request_tour');
-    });
+    
 
     Route::get("/contact_designer", function(){
         return view("designers");
@@ -77,11 +75,17 @@ use App\Http\Controllers\HomeController;
     Route::group(['middleware' => 'auth'], function () {
         Route::delete('/logout', [UserController::class, 'logout'])->name('logout');
         Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
+        Route::get('/sell', function () {
+            return view('sell');
+        })->name("sell");
         Route::post('/sell', [PropertyController::class, 'sell'])->name('sell');
         Route::post('/request_tour', [TourController::class, 'requestTour'])->name('request_tour1');
         // Route::get('/property/request_tour', function () {
         //     return view('request_tour');
         // });
+        Route::get('/rent/request_tour', function () {
+            return view('request_tour');
+        });
     });
 
     Route::group(['middleware' => ['auth', 'admin']], function () {

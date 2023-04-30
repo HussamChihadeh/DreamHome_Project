@@ -83,23 +83,23 @@
             },
             error: function(xhr, status, error) {
         // Handle the error response from the API
-        var errors = xhr.responseJSON || {};
-        if (typeof errors === 'string') {
-            errors = JSON.parse(errors);
-        }
-        console.log(errors);
-        $.each(errors.errors, function(field, messages) {
-            console.log(field);
-          var input = $('#' + field);
-          console.log(input);
-          var container = input.parent();
-          console.log(container);
-          input.addClass('is-invalid');
-          $.each(messages, function(index, message) {
-            $('<span>').addClass('error-message').html(message + "<br>").appendTo(container);
-          });
-        });
-    }      
+                var errors = xhr.responseJSON || {};
+                if (typeof errors === 'string') {
+                    errors = JSON.parse(errors);
+                }
+                console.log(errors);
+                $.each(errors.errors, function(field, messages) {
+                    console.log(field);
+                var input = $('#' + field);
+                console.log(input);
+                var container = input.parent();
+                console.log(container);
+                input.addClass('is-invalid');
+                $.each(messages, function(index, message) {
+                    $('<span>').addClass('error-message').html(message + "<br>").appendTo(container);
+                });
+                });
+            }      
         });
     });
 </script>

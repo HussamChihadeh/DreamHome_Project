@@ -223,47 +223,62 @@
 
     <!-- initialize the map -->
     <script>
-        var map = L.map('map').setView([33.892371, 35.478235], 15);
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+                createMap(latitude, longitude);
+                showPosition(latitude, longitude);
+                console.log("Latitude: " + latitude + ", Longitude: " + longitude);
+                
+            });
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+            createMap(33.892371, 35.478235);
+        }
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-        }).addTo(map);
+        function createMap(latitude, longitude){
+            var map = L.map('map').setView([latitude, longitude], 15);
 
-        var marker = L.marker([33.892371, 35.478235], {
-            draggable: true
-        })
-        marker.bindTooltip("Home location", { permanent: true, className: "my-label", offset: [0, 0] });
-        marker.addTo(map);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+            }).addTo(map);
 
-        marker.on('dragend', function (event) {
-            var latLng = event.target.getLatLng();
-            // console.log(latLng.lat, latLng.lng);
-            showPosition(latLng.lat, latLng.lng);
-        });
+            var marker = L.marker([latitude, longitude], {
+                draggable: true
+            })
+            marker.bindTooltip("Home location", { permanent: true, className: "my-label", offset: [0, 0] });
+            marker.addTo(map);
 
-        var searchControl = new L.esri.Controls.Geosearch().addTo(map);
-
-        var results = new L.LayerGroup().addTo(map);
-
-        searchControl.on('results', function (data) {
-            results.clearLayers();
-            for (var i = data.results.length - 1; i >= 0; i--) {
-                //   results.addLayer(L.marker(data.results[i].latlng));
-                // console.log(data.results[i].latlng.lat, data.results[i].latlng.lng);
-                showPosition(data.results[i].latlng.lat, data.results[i].latlng.lng);
+            marker.on('dragend', function (event) {
+                var latLng = event.target.getLatLng();
                 // console.log(latLng.lat, latLng.lng);
-                marker.setLatLng(data.results[i].latlng);
-                //   marker.draggable = true;
-            }
+                showPosition(latLng.lat, latLng.lng);
+            });
+
+            var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+
+            var results = new L.LayerGroup().addTo(map);
+
+            searchControl.on('results', function (data) {
+                results.clearLayers();
+                for (var i = data.results.length - 1; i >= 0; i--) {
+                    //   results.addLayer(L.marker(data.results[i].latlng));
+                    // console.log(data.results[i].latlng.lat, data.results[i].latlng.lng);
+                    showPosition(data.results[i].latlng.lat, data.results[i].latlng.lng);
+                    // console.log(latLng.lat, latLng.lng);
+                    marker.setLatLng(data.results[i].latlng);
+                    //   marker.draggable = true;
+                }
 
 
-        });
-        marker.on('moveend', function (e) {
-            var latlng = e.target.getLatLng();
-            // console.log(latlng.lat + ', ' + latlng.lng);
-            e.target.dragging.enable();
-        });
-
+            });
+            marker.on('moveend', function (e) {
+                var latlng = e.target.getLatLng();
+                // console.log(latlng.lat + ', ' + latlng.lng);
+                e.target.dragging.enable();
+            });
+        }
         function showPosition(x,y) {
             document.getElementById("latitude").value = x;
             document.getElementById("longitude").value = y;
