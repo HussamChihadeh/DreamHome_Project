@@ -20,12 +20,12 @@ class FurnitureController extends Controller
         $filter = new FurnitureQuery();
         $queryItems = $filter->transform($request);
         if(count($queryItems)==0){
-            $furniture = Furniture::select('id', 'name','price')->paginate(15);
+            $furniture = Furniture::select('id', 'name','price', 'style', 'material', 'designer_id', 'date', 'place', 'quantity')->paginate(15);
             return response()->json($furniture);
         }
         else{
             $furniture = Furniture::where($queryItems)->paginate(15);
-            return response()->json($furniture);
+            return response()->json($furniture->appends($request->query()));
         }
     }
 

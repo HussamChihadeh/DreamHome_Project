@@ -18,7 +18,7 @@
 
 @section("content")
     <div class="pt-5 pb-5 container">
-        <form action="{{ route('sell') }}" method="POST">
+        <form action="{{ route('sell') }}" method="POST" enctype="multipart/form-data">
         @csrf
             <div class="row mt-5 mb-5">
                 <div class="col-lg-1"></div>
@@ -173,7 +173,7 @@
                 <div class="image-container d-flex justify-content-center">
 
                     <i class="fa-solid fa-arrow-up-from-bracket uploadI"></i>
-                    <input class="uploadInput" type="file" id="image-input" multiple onchange="displayMultipleImages()">
+                    <input class="uploadInput" type="file" name="propertyImages[]" id="image-input" multiple onchange="displayMultipleImages()">
 
                 </div>
                 <span class="hint text-black-50 fw-bold">Hint: <span class="fw-normal">You can upload all images at

@@ -444,7 +444,7 @@
                       furniture.id + "'>" +
 
 
-                            "<img src='/images/furniture/1.png' height='100%' width='100%'" +
+                            "<img src='/images/furniture/Sofas/Sofa1/sofa5.png' height='100%' width='100%'" +
                             "class='image' id=" +
                             furniture.id + ">" +
                             furniture.name +

@@ -102,4 +102,8 @@ use App\Http\Controllers\HomeController;
         Route::get("/admin_assign", function(){
             return view("Admin_Assign");
         })->name("assign");
+
+        Route::get("/admin_furniture", function(){
+            return view("Admin_Furniture");
+        })->name("admin_furniture");
     });

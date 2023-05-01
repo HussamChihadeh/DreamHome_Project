@@ -50,6 +50,9 @@
             <a class="nav-link p-lg-3" href="{{ route('assign') }}">Assign</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link p-lg-3" href="{{ route('admin_furniture') }}">Furniture</a>
+          </li>
+          <li class="nav-item">
             <form class="nav-link p-lg-3" action="{{ route('logout') }}" method="POST">
                 @csrf
                 @method('DELETE')

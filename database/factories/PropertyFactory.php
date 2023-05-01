@@ -17,7 +17,7 @@ class PropertyFactory extends Factory
     public function definition(): array
     {   
 
-        $status = $this->faker->randomElement(["pending", "listed", "sold"]);
+        $status = $this->faker->randomElement(["pending", "listed"]);
         $requested_date = $this->faker->dateTimeThisDecade();
         return [
             "user_id" =>User::factory(),

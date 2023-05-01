@@ -24,7 +24,7 @@ class PropertyController extends Controller
             return response()->json($properties);
         }
         else{
-            $properties = Property::select('id', 'name', 'description', 'city', 'bedrooms', 'bathrooms', 'price', 'type','province', 'status', 'area', 'parking' , 'built_in', 'buy_or_rent')->where($queryItems)->paginate(15);
+            $properties = Property::select('id', 'name', 'description', 'city', 'bedrooms', 'bathrooms', 'price', 'type','province', 'status', 'area', 'parking' , 'built_in', 'buy_or_rent', 'user_id')->where($queryItems)->paginate(15);
             return response()->json($properties->appends($request->query()));
         }
         
@@ -86,7 +86,19 @@ class PropertyController extends Controller
 
         // Step 5: Save the model
         $property->save();
-
+        if ($request->hasFile('propertyImages')) {
+            $images = $request->file('propertyImages');
+            $propertyFolderPath = public_path('images/properties/' . $property->id);
+            if (!file_exists($propertyFolderPath)) {
+                mkdir($propertyFolderPath, 0777, true);
+            }
+            $i = 1;
+            foreach ($images as $image) {
+                $fileName = $i . '.' . $image->getClientOriginalExtension();
+                $image->move($propertyFolderPath, $fileName);
+                $i++;
+            }
+        }
         // return a response or redirect to a success page
         return view("rent");
     } catch (QueryException $e) {
@@ -109,6 +121,20 @@ class PropertyController extends Controller
     /**
      * Update the specified resource in storage.
      */
+    public function updatePropertyStatus(Request $request, $id)
+    {
+        $property = Property::find($id);
+        
+        // Get the selected option
+        $status = $request->input('accept-decline');
+        
+        // Update the status of the property
+        $property->status = $status;
+        $property->save();
+        
+        // Return a response
+        return response()->json(['message' => 'Property status updated successfully.']);
+    }
     public function update(UpdatePropertyRequest $request, Property $property)
     {
         //

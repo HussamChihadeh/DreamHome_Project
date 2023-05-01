@@ -15,17 +15,8 @@ class DesignerSeeder extends Seeder
     {
         //
         Designer::factory()
-            ->count(10)
-            ->hasFurniture(10)
-            ->create();
-
-        Designer::factory()
-            ->count(10)
-            ->hasFurniture(1)
-            ->create();
-
-        Designer::factory()
-            ->count(2)
+            ->count(5)
+            ->hasFurniture(5)
             ->create();
     }
 }

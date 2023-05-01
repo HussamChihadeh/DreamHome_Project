@@ -39,42 +39,42 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 text-center">
                     <div class="slider">
-                        <div class="slides">
+                        <div class="slides" id="slides">
                           <!--radio buttons start-->
-                          <input type="radio" name="radio-btn" id="radio1">
+                          <!-- <input type="radio" name="radio-btn" id="radio1">
                           <input type="radio" name="radio-btn" id="radio2">
                           <input type="radio" name="radio-btn" id="radio3">
-                          <input type="radio" name="radio-btn" id="radio4">
+                          <input type="radio" name="radio-btn" id="radio4"> -->
                           <!--radio buttons end-->
                           <!--slide images start-->
-                          <div class="slide first">
-                            <img src="..\images\properties\building.jpg" alt="">
-                          </div>
-                          <div class="slide">
-                            <img src="..\images\properties\1.jpg" alt="">
-                          </div>
-                          <div class="slide">
-                            <img src="..\images\properties\building.jpg" alt="">
-                          </div>
-                          <div class="slide ">
-                            <img src="..\images\properties\1.jpg" alt="">
-                          </div>
+                            <div class="slide first">
+                              <img>
+                            </div>
+                            <div class="slide">
+                              <img>
+                            </div>
+                            <div class="slide">
+                              <img>
+                            </div>
+                            <!-- <div class="slide ">
+                              <img src="..\images\properties\building.jpg" alt="">
+                            </div> -->
                           <!--slide images end-->
                           <!--automatic navigation start-->
-                          <div class="navigation-auto">
-                            <div class="auto-btn1"></div>
+                          <div class="navigation-auto" id="navigation-auto">
+                            <!-- <div class="auto-btn1"></div>
                             <div class="auto-btn2"></div>
                             <div class="auto-btn3"></div>
-                            <div class="auto-btn4"></div>
+                            <div class="auto-btn4"></div> -->
                           </div>
                           <!--automatic navigation end-->
                         </div>
                         <!--manual navigation start-->
-                        <div class="navigation-manual">
-                          <label for="radio1" class="manual-btn"></label>
+                        <div class="navigation-manual" id="navigation-manual">
+                          <!-- <label for="radio1" class="manual-btn"></label>
                           <label for="radio2" class="manual-btn"></label>
                           <label for="radio3" class="manual-btn"></label>
-                          <label for="radio4" class="manual-btn"></label>
+                          <label for="radio4" class="manual-btn"></label> -->
                         </div>
                         <!--manual navigation end-->
                         <!--image slider end-->
@@ -148,7 +148,7 @@
       </div>
 
       <!-- Apartment Map -->
-      <div class="mt-5 mb-5 text-center">
+      <div class="mt-5 mb-5 text-center" id="mapp">
         <div class="main-title mt-5 mb-5 position-relative text-center">
             <img src="" alt="">
             <h2>Apartment Map</h2>
@@ -161,16 +161,7 @@
 
     @section("script")
     
-    <script type="text/javascript">
-        var counter = 1;
-        setInterval(function () {
-            document.getElementById('radio' + counter).checked = true;
-            counter++;
-            if (counter > 4) {
-                counter = 1;
-            }
-        }, 5000);
-    </script>
+   
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -186,13 +177,40 @@
     url: "/api/v1/properties/" + propertyId,
     type: "GET",
     success: function(property) {
+     
+      const imgElements = document.querySelectorAll('.slide img');
+      const navAuto = document.getElementById('navigation-auto');
+      const navMan = document.getElementById('navigation-manual');
+      const myDiv = document.getElementById('slides');
+      // <input type="radio" name="radio-btn" id="radio1">
+      console.log(imgElements);
+      for (let index = 0; index < imgElements.length; index++) {
+        imgElements[index].src = "/images/properties/" + property.id + "/"+(index+1)+".jpg";
+
+        const radioBtn = document.createElement('input');
+        radioBtn.type = 'radio';
+        radioBtn.name = 'radio-btn';
+        radioBtn.id = 'radio'+(index+1);
+        myDiv.insertBefore(radioBtn, myDiv.firstChild);
+
+        const label = document.createElement('label');
+        label.setAttribute('for', 'radio'+(index+1));
+        label.classList.add('manual-btn');
+        navMan.append(label);
+
+        const div = document.createElement('label');
+        div.classList.add('auto-btn'+(index+1));
+        navAuto.append(div);
+      }
+    
+    
         console.log(property);
         var house_name = $('.house_name');
         house_name.append(property.name);
         var description_details = $('.description_details');
         description_details.append(property.description);
         var city = $('.city');
-        city.append(property.city);
+        city.append(property.province + ", " +property.city);
         var bedroom_num = $('.bedroom_num');
         bedroom_num.append(property.bedrooms);
         var bathroom_num = $('.bathroom_num');
@@ -244,5 +262,16 @@
 
 
 </script>
+
+<script type="text/javascript">
+        var counter = 1;
+        setInterval(function () {
+            document.getElementById('radio' + counter).checked = true;
+            counter++;
+            if (counter > 4) {
+                counter = 1;
+            }
+        }, 5000);
+    </script>
 
 @endsection

@@ -59,6 +59,7 @@
                                 <th>Bathroom</th>
                                 <th>Parking Lot</th>
                                 <th>Price</th>
+                                <th>User ID</th>
                                 <th>Save</th>
                                 <th>Request</th>
 
@@ -101,12 +102,13 @@
                                                 "<td>"+property.buy_or_rent+"</td>" +
                                                 "<td>"+property.type+"</td>" +
                                                 "<td>"+property.province+"</td>" +
-                                                "<td>"+property.area+" mxm</td>" +
+                                                "<td>"+property.area+" m&#178;</td>" +
                                                 "<td>"+property.built_in+"</td>" +
                                                 "<td>"+property.bedrooms+"</td>" +
                                                 "<td>"+property.bathrooms+"</td>" +
                                                 "<td>"+property.parking+"</td>" +
                                                 "<td>"+property.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'})+"</td>" +
+                                                "<td>"+property.user_id+"</td>" +
                                                 "<td> <button class='Request_View_Details' id='View_Details_" + property.id + "'>Details</button></td>" +
                                                 "<td>" +
                                                 "<label class='select-label'>" +
@@ -145,15 +147,21 @@
                                                 var statusSelect = document.getElementById("accept-decline_" + property.id);
                                                 statusSelect.onchange = function () {
                                                     var selectedStatus = statusSelect.value;
+                                                    var databaseStatus;
                                                     if (selectedStatus == "decline") {
                                                             statusSelect.style.color = "red";
+                                                            databaseStatus= "rejected";
                                                         }
                                                         if (selectedStatus == "accept") {
                                                             statusSelect.style.color = "Green";
+                                                            databaseStatus= "listed";
                                                         }
                                                         if (selectedStatus == "Pending") {
                                                             statusSelect.style.color = "Black";
+                                                            databaseStatus= "pending";
                                                         }
+
+                                                        updateStatus(property.id, databaseStatus);
                                                 }
 
                                                 View_Details_Button = document.getElementById("View_Details_" + property.id);
@@ -173,6 +181,22 @@
             }
             LoadData(currentPage);
            
-
+            function updateStatus(propertyId, status){
+                $.ajax({
+                    url: '/api/v1/properties/' + propertyId,
+                    type: 'PUT',
+                    data: {
+                    'accept-decline': status,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                    // console.log(response);
+                        console.log("succ");
+                    },
+                    error: function(response) {
+                        console.log(response);
+                    }
+                });
+            }
         </script>
 @endsection

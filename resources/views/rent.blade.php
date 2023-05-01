@@ -153,7 +153,7 @@
 
   var currentPage=1;
   var properties1;
-  var formData; 
+  var formData="status[eq]=listed"; 
 
   var propertyList = $('#Group_container');   
   function fetchProperties(page){
@@ -174,13 +174,12 @@
       var item_container_part2 = $('<div class="item_container_part2">');
       var house_row = $('<div class="house_row">');
       var house_image = document.createElement("img");
-      // house_image.src = "/images/properties/" + property.id + ".jpg";
-      house_image.src = "/images/properties/1.jpg";
+      house_image.src = "/images/properties/" + property.id + "/1.jpg";
+      // house_image.src = "/images/properties/1.jpg";
       house_image.classList.add("house_image");
       var title = $('<h3 class="title">').text(property.name)
       var desc = $('<h5 class="description">').text(property.description);
       var city = $('<h5 class="city">').text(property.province + ", " + property.city);
-      // <img src="IMAGES\bedroom.png" class="bedroom_image">
       var bedroom_image = document.createElement("img");
       bedroom_image.src = "/images/bedroom.png";
       bedroom_image.classList.add("bedroom_image");
@@ -253,7 +252,7 @@
 
       // Serialize the form data to send as a query parameter
       formData = $('#filterForm').serialize();
-      // formData+="&status[eq]=listed";
+      formData+="&status[eq]=listed";
       fetchProperties(currentPage);
       console.log(formData);
   });
