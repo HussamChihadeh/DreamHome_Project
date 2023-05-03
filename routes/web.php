@@ -1,10 +1,44 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\PropertyController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\TourController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+//Added by Chatify
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
+///////////////////
+
+require __DIR__.'/auth.php';
+////////////////////////
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +61,6 @@ use App\Http\Controllers\HomeController;
 
     Route::get("/", function(){
         return view("home");
-    })->name('home');
-    Route::get("/Home", function(){
-        return view("Home_1");
     })->name('home');
     Route::get("/rent", function(){
         return view("rent");
@@ -63,9 +94,6 @@ use App\Http\Controllers\HomeController;
         return view("Admin_Assign");
     });
 
-    Route::get("/Chat", function(){
-        return view("Chat");
-    });
     
 
     Route::group(['middleware' => 'guest'], function () {
