@@ -28,6 +28,9 @@ use App\Http\Controllers\HomeController;
     Route::get("/", function(){
         return view("home");
     })->name('home');
+    Route::get("/Home", function(){
+        return view("Home_1");
+    })->name('home');
     Route::get("/rent", function(){
         return view("rent");
     })->name('rent');
@@ -60,6 +63,9 @@ use App\Http\Controllers\HomeController;
         return view("Admin_Assign");
     });
 
+    Route::get("/Chat", function(){
+        return view("Chat");
+    });
     
 
     Route::group(['middleware' => 'guest'], function () {

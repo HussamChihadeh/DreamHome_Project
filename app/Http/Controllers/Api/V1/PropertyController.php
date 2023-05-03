@@ -31,7 +31,7 @@ class PropertyController extends Controller
     }
 
     public function getLocation(){
-        $properties = Property::select('id', 'longitude', 'latitude', 'buy_or_rent')->get();
+        $properties = Property::select('id', 'longitude', 'latitude', 'buy_or_rent','city','name','description','province')->get();
         return response()->json($properties);
     }
 

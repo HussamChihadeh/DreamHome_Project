@@ -337,3 +337,30 @@
     }
 
 }
+
+@keyframes Details_In {
+    0% {
+        right: -70%;
+
+    }
+
+    100% {
+        opacity: 1;
+        right: 0%;
+    }
+
+}
+
+@keyframes Details_Out {
+
+    0% {
+        right: 0%;
+    }
+
+    100% {
+        opacity: 0;
+        right: -70%;
+
+    }
+
+}

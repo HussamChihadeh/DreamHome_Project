@@ -1,0 +1,257 @@
+:root {
+    --gold1: #AE8625;
+    --gold2: #e0d97c;
+    --purple: rgb(62, 62, 119);
+    --transparent_purple: rgba(62, 62, 119, 0.867);
+}
+
+
+body {
+
+    font-family: "poppins" !important;
+    background-color: #e9e9e98e !important;
+    overscroll-behavior: none;
+    overflow-x: hidden;
+    padding: 0 0 0 0;
+    font-size: 0.8vw !important;
+}
+
+Header {
+    font-weight: 600;
+    font-size: 30px;
+    margin-top: 10;
+    margin-bottom: 30;
+    margin-left: -3;
+}
+
+Header_1 {
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 20;
+
+}
+
+
+.List_Container {
+    background-color: #fff;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    float: left;
+    padding: 20;
+    height: 605;
+    width: 100%;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); */
+    margin-top: 20;
+}
+
+.Chat_Container {
+
+    background-color: #EFF3F8;
+    width: 100%;
+    margin-top: 20;
+    float: left;
+    padding: 0;
+    height: 605;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    border-radius: 15px;
+
+}
+
+.Chat_Header {
+    background-color: #F8FAFB;
+    border-bottom: 2px solid #e9e9e98e;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    padding: 17 10 10 15;
+
+
+}
+
+.Row_Contact_Container {
+
+    width: 98% !important;
+    padding: 7 20 !important;
+    margin-left: -1% !important;
+    height: fit-content;
+    cursor: pointer;
+    margin-top: 10px !important;
+    border-bottom: 1.4px solid #e9e9e98e;
+
+
+}
+
+.Row_Contact_Container:Hover,
+.activee {
+    background-color: #e9e9e98e;
+    border-radius: 15px;
+}
+
+
+
+.Info_in_row {
+
+    width: 95%;
+    margin: 10px 2.5% 1.2vw 0vw;
+    height: fit-content;
+
+}
+
+.Message_Recv {
+    margin-left: 20;
+    margin-bottom: 20;
+    width: 40%;
+    height: fit-content;
+    font-size: 12px !important;
+    border: 0;
+    border-radius: 15px;
+    padding: 13;
+    background-color: white;
+    box-shadow: 0 0 10px 2px rgba(103, 102, 102, 0.041);
+    border-top-left-radius: 3px;
+
+
+}
+
+.Message_Send {
+    margin-bottom: 20;
+    width: 40%;
+    height: fit-content;
+    margin-left: calc(60% - 20px);
+    font-size: 12px !important;
+    border: 0;
+    border-radius: 15px;
+    padding: 13;
+    background-color: var(--transparent_purple);
+    color: white;
+    box-shadow: 0 0 10px 2px rgba(103, 102, 102, 0.041);
+    border-top-right-radius: 3px;
+
+}
+
+.Chat {
+    overflow-y: scroll;
+    height: 490px;
+    padding-top: 20;
+    margin-right: 5px;
+    background-color: #EFF3F8;
+}
+
+.Message_Input {
+    position: sticky;
+    top: 100%;
+    width: calc(100%-40px);
+    margin-left: 20;
+    margin-right: 20;
+    height: 40px;
+    margin-bottom: 30px !important;
+    border-radius: 15px;
+    box-shadow: 0 0 10px 2px rgba(123, 123, 123, 0.227);
+}
+
+
+input {
+    width: 100%;
+    height: 100%;
+    font-size: 16px !important;
+    border: 0;
+    border-radius: 15px;
+    padding: 0 10;
+
+}
+
+.Contact_Info_Container {
+    /* border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px; */
+    float: left;
+    padding: 10 20;
+    height: 605;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); */
+    margin-bottom: 20px;
+    width: 100%;
+    margin-top: 20;
+
+
+}
+
+.General_Info {
+
+    background-color: #f2f7fab3;
+    width: 100%;
+    margin-top: 20;
+    float: left;
+    padding: 0;
+    height: 205;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    border-radius: 15px;
+}
+
+.Radius {
+    border-radius: 15px !important;
+    background-color: #F2F7FA !important;
+    margin-top: 0px !important;
+}
+
+.Radius_right {
+    border-top-left-radius: 15px !important;
+}
+
+.Edits {
+    background-color: white !important;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px !important;
+
+}
+
+/* EXTRASSS */
+/* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+input:focus {
+    outline: none;
+}
+
+.Chat::-webkit-scrollbar {
+    z-index: 0;
+    width: 9px;
+
+}
+
+.Chat::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.Chat::-webkit-scrollbar-thumb {
+    background-image: -webkit-linear-gradient(var(--gold1), var(--gold2));
+    border-radius: 20px;
+    border: 0.1px solid black;
+    z-index: 0;
+
+}
+
+h7 {
+    font-weight: 800;
+    font-size: 15px;
+}
+
+.Circular_Image {
+    width: 50;
+    height: 50;
+    border-radius: 50px;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-left: -10;
+}
+
+.Circular_Image_1 {
+    float: left;
+    width: 35;
+    height: 35;
+    border-radius: 50px;
+    margin-top: -8;
+    margin-bottom: 0;
+    margin-right: 10;
+    margin-left: -5;
+
+}
