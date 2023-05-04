@@ -68,7 +68,8 @@ h7 {
 }
 
 .Buy_Container,
-.Rent_Container {
+.Rent_Container,
+.Furniture_Container {
 
     background-color: white;
     color: black;
@@ -95,7 +96,6 @@ h7 {
     scale: 1.05;
     color: #AE8625;
 }
-
 
 .Rent_Container::after {
     content: "";
@@ -189,20 +189,50 @@ h7 {
     cursor: pointer;
 }
 
-.Furniture_Image{
+.Furniture_Image {
+    position: relative;
     width: 100%;
-    /* border: 1px solid black; */
-    /* border-bottom-left-radius: 150px; */
-
 }
 
-.Map_background{
+.Furniture_Title {
+    position: absolute;
+    margin-top: 10%;
+    right: 13%;
+    z-index: 10;
+    color: black;
+    text-align: center;
+    width: 30%;
+    /* border: 1px solid black; */
+}
+
+.Furniture_Container {
+    left: 60%;
+    transform: translateX(-55%);
+    background-color: transparent;
+    border: 1.5px solid black;
+}
+.Furniture_Container:hover{
+    background-color: #e9e9e9;
+    scale: 1.02;
+    color: #AE8625;
+}
+
+.Map_background {
     background-color: #f8f8f8;
     width: 100%;
     height: fit-content;
     padding: 1vw 1vw 2vw 0vw;
-    
+
 }
+
+.About_Us_background{
+    background-color: #f8f8f8;
+    width: 100%;
+    height:600px;
+    padding: 1vw 1vw 2vw 0vw;
+  
+}
+
 @media (max-width:575px) {
     Header_2 {
         font-size: 3vw;

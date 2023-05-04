@@ -35,6 +35,21 @@
 
 </div>
 
+<div class="About_Us_background"></div>
+
+<div class="row">
+  <div class="col-12">
+    <div>
+      <img src="images\furniture\Sofas\Homepage_Sofa_2.png" class="Furniture_Image" style="float: right;" id="Sofa_Image">
+      <div class="Furniture_Title">
+        <Header>
+      Furnish Your Life with Style</Header>
+      <div class="Furniture_Container Clicked">View Furniture</div>
+
+</div>
+    </div>
+  </div>
+</div>
 
 <div class="Map_background">
   <Header_2>
@@ -60,14 +75,7 @@
     </div>
   </div>
 </div>
-<div class="row">
-  <div class="col-4"></div>
-  <div class="col-12">
-    <div>
-      <img src="images\furniture\Sofas\Homepage_Sofa_2.png" class="Furniture_Image" id="Sofa_Image">
-    </div>
-  </div>
-</div>
+
 
 
 <!-- <div class="mb-5" style="height: 500px;"></div> -->
@@ -233,8 +241,8 @@
         Logo.style.color = 'transparent';
         Logo.style.webkitTextFillColor = 'transparent';
         Navbar.style.borderBottomLeftRadius = "15px";
-    Navbar.style.borderBottomRightRadius = "15px";
-        
+        Navbar.style.borderBottomRightRadius = "15px";
+
       }
     });
   }, options);
@@ -252,7 +260,7 @@
   const observer_1 = new IntersectionObserver(function(entries, observer) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        Nav_Editor("transparent","0");
+        Nav_Editor("transparent", "0");
       }
     });
   }, options_1);
@@ -271,14 +279,14 @@
   const observer_2 = new IntersectionObserver(function(entries, observer) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        Nav_Editor("#f8f8f8","0");
+        Nav_Editor("#f8f8f8", "0");
       }
     });
   }, options_2);
 
   observer_2.observe(Sofa_Image);
 
-  function Nav_Editor(backgroundColor,borderBottom) {
+  function Nav_Editor(backgroundColor, borderBottom) {
     var Nav_Buttons = document.querySelectorAll(".nav-link");
     for (var i = 0; i < Nav_Buttons.length; i++) {
       Nav_Buttons[i].style.color = "black";
@@ -298,8 +306,8 @@
     Logo.style.fontSize = "25";
     Logo.style.marginTop = "10";
     var Navbar = document.querySelector("nav");
-    Navbar.style.borderBottomLeftRadius = borderBottom+"";
-    Navbar.style.borderBottomRightRadius = borderBottom+"";
+    Navbar.style.borderBottomLeftRadius = borderBottom + "";
+    Navbar.style.borderBottomRightRadius = borderBottom + "";
   }
 </script>
 @endsection
