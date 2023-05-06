@@ -3,6 +3,7 @@
 
 @section("head")
 <link rel="stylesheet" href="{{asset('css/signup.css')}}">
+<link rel="stylesheet" href="{{asset('css/buttons.css')}}">
 @endsection
 
 @section("content")
@@ -52,7 +53,7 @@
                         <input type="tel" class="form-control" id="phone_number" name="phone_number">
                     </div>
                     <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-                    <input type="submit" class="btn btn-primary" value="Register">
+                    <input type="submit" class="Sign_Up_Button" value="Register">
                 </form>
             </div>
         </div>
