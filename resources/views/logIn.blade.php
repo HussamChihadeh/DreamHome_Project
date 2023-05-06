@@ -22,7 +22,7 @@
 
             <div class="d-none p-0 d-lg-block col-lg-7">
         
-            <img src="images\properties\Login_Property.png" style="margin-top:0" width="95%">
+            <img src="images\properties\Login_Property.png" style="margin-top:0" width="100%">
               
             </div>
             <div class="col-lg-5">
