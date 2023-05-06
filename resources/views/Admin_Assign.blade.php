@@ -42,6 +42,8 @@
                             concerned customer to each Property.
                             <br>
                             -Input is an Integer
+                            <br>
+                            -Click on the property's row to see its details
                         </p>
                     </div>
                 </div>
@@ -55,6 +57,7 @@
                     </div>
                 </div>
                 <div class="table-responsive">
+                <button id="add-item-btn">add item</button>
                     <table class="table" style="font-size: 0.9vw; text-align: center;" id="Requests_Table">
                         <thead>
                             <tr>
@@ -68,7 +71,7 @@
                                 <th>Bathroom</th>
                                 <th>Parking Lot</th>
                                 <th>Price</th>
-                                <th>Save</th>
+                                <th>Seller ID</th>
                                 <th>Customer ID</th>
 
 
@@ -114,11 +117,11 @@
                     type: "GET",
                     data: formData,
                     success: function(properties) {
-                        console.log(formData);
-                        console.log(properties);
+                        
                         tbody.innerHTML = '';
                         $.each(properties.data, function(index, property) {
-                            tbody.innerHTML += "<tr>" +
+                            var seller = property.user_id == "1000" ? "Dream Home" : property.user_id;
+                            tbody.innerHTML += "<tr id='"+ property.id +"'>" +
                                                 "<td>"+property.name+"</td>" +
                                                 "<td>"+property.buy_or_rent+"</td>" +
                                                 "<td>"+property.type+"</td>" +
@@ -129,11 +132,12 @@
                                                 "<td>"+property.bathrooms+"</td>" +
                                                 "<td>"+property.parking+"</td>" +
                                                 "<td>"+property.price.toLocaleString('en-US', {style: 'currency', currency: 'USD'})+"</td>" +
-                                                "<td> <button class='Request_View_Details' id='View_Details_" + property.id + "'>Details</button></td>" +
+                                                "<td>"+seller+"</td>" +
                                                 "<td>" +
                                                 "<input class='p-1 ID_input' type='Number'  id='input_" + property.id  + "'></input>" +
                                                 "</td>" +
                                                 "</tr>";
+                        
                                                 Requests_Table.appendChild(tbody);
                                                 $(".pagination .prev").prop('disabled', page == 1);
                                                 $(".pagination .next").prop('disabled', page == properties.last_page);
@@ -154,6 +158,19 @@
                                                         LoadData(currentPage);
                                                     }
                                                 });
+                        });
+                        const trs = document.querySelectorAll('tbody tr');
+                        trs.forEach(tr => {
+                        tr.addEventListener('click', () => {
+                            // Extract the id from the clicked tr
+                            if (event.target.tagName.toLowerCase() === 'input') {
+                                return; // Do nothing and return from the function
+                            }
+
+                            const id = tr.getAttribute('id');
+                            console.log(id); // Log the id to the console
+                            window.location.href = "rent/Property_details?id=" + id;
+                        });
                         });
                     },
                     error: function(error) {
@@ -236,6 +253,13 @@
 
             // }
 
+            const addItemBtn = document.getElementById('add-item-btn');
+
+            addItemBtn.addEventListener('click', () => {
+                window.location.href = "/sell";
+            });
+
+            
 
         </script>
 @endsection

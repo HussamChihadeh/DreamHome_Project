@@ -26,7 +26,13 @@
                     <h3>Basic information</h3>
                     <hr>
                     <input name="user_id" value="{{ auth()->user()->id }}" hidden>
-                    <input name="status" value="pending" hidden>
+                    @if(auth()->check() && auth()->user()->email == 'admin@dreamhome.org')
+                        <!-- Your admin content here -->
+                        <input name="status" value="listed" hidden>
+                    @else
+                        <input name="status" value="pending" hidden>
+                    @endif
+                    
                     <div class="mb-3 form-outline w-75">
                         <label class="form-label ">Title</label>
                         <input type="text" class="form-control" name="name">
@@ -154,7 +160,7 @@
                 </div> -->
                 </div>
                 <div class="col-lg-5 ">
-                    <h4>Set featured image</h4>
+                    <h4>Set property map</h4>
                     <hr class="hr">
 
                     <div

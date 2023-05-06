@@ -54,12 +54,14 @@
                         <button class="next">&gt;</button>
                     </div>
                 </div>
+                <button id="add-item-btn">add item</button>
                 <div class="table-responsive">
                     <table class="table" style="font-size: 0.9vw; text-align: center;" id="Requests_Table">
                         <thead>
                             <tr>
-                                <th>Furniture Name</th>
+                                <th>Name</th>
                                 <th>Style</th>
+                                <th>Description</th>
                                 <th>Material</th>
                                 <th>Made in</th>
                                 <th>Date</th>
@@ -88,7 +90,6 @@
             window.onload = LoadData(currentPage);
             var currentPage=1;
             var properties1;
-            // var formData="status[eq]=listed"; 
             const tbody = document.createElement('tbody');
 
             //Load Data 
@@ -109,6 +110,7 @@
                             tbody.innerHTML += "<tr>" +
                                                 "<td>"+property.name+"</td>" +
                                                 "<td>"+property.style+"</td>" +
+                                                "<td>"+property.description+"</td>" +
                                                 "<td>"+property.material+"</td>" +
                                                 "<td>"+property.place+"</td>" +
                                                 "<td>"+date.getFullYear()+"</td>" +
@@ -156,5 +158,177 @@
 
                   
 
+        </script>
+            
+        <script>
+            const table = document.getElementById('Requests_Table');
+            
+            const addItemBtn = document.getElementById('add-item-btn');
+            console.log(table);
+            // console.log(tbodyy);
+            
+
+            // Add an event listener to the button
+            addItemBtn.addEventListener('click', () => {
+                // Create a new row element
+                const tbodyy = table.getElementsByTagName('tbody')[0];
+                const newRow = document.createElement('tr');
+
+                // Create three new cell elements with input fields
+                const nameCell = document.createElement('td');
+                nameCell.innerHTML = '<input type="text" name="name" id="name">';
+
+                const styleCell = document.createElement('td');
+                styleCell.innerHTML = '<input type="text" name="style" id="style">';
+
+                const descCell = document.createElement('td');
+                descCell.innerHTML = '<input type="text" name="description" id="description">';
+
+                const materialCell = document.createElement('td');
+                materialCell.innerHTML = '<input type="text" name="material" id="material">';
+
+                const placeCell = document.createElement('td');
+                placeCell.innerHTML = '<input type="text" name="place" id="place">';
+
+                const yearCell = document.createElement('td');
+                yearCell.innerHTML = '<input type="number" name="date" id="date">';
+
+                const priceCell = document.createElement('td');
+                priceCell.innerHTML = '<input type="number" name="price" id="price">';
+
+                const designerCell = document.createElement('td');
+                designerCell.innerHTML = '<input type="number" name="designer_id" id="designer_id">';
+
+                const quantityCell = document.createElement('td');
+                quantityCell.innerHTML = '<input type="number" name="quantity" id="quantity">';
+
+                const imageCell = document.createElement('td');
+                imageCell.innerHTML = `
+                    <button class="choose-file-btn">Choose File(s)</button>
+                    <input type="file" name="images[]" multiple style="display:none;">
+                `;
+
+                const chooseFileBtn = imageCell.querySelector('.choose-file-btn');
+                const fileInput = imageCell.querySelector('input[type="file"]');
+                chooseFileBtn.addEventListener('click', () => {
+                    fileInput.click();
+                });
+
+
+                // Create a new cell element with a "Save" button
+                const saveCell = document.createElement('td');
+                saveCell.innerHTML = '<button class="save-btn">Save</button>';
+
+                // Add the new cell elements to the new row
+                newRow.appendChild(nameCell);
+                newRow.appendChild(styleCell);
+                newRow.appendChild(descCell);
+                newRow.appendChild(materialCell);
+                newRow.appendChild(placeCell);
+                newRow.appendChild(yearCell);
+                newRow.appendChild(priceCell);
+                newRow.appendChild(designerCell);
+                newRow.appendChild(quantityCell);
+                newRow.appendChild(imageCell);
+                newRow.appendChild(saveCell);
+
+                fileInput.addEventListener('change', () => {
+                    const fileNames = Array.from(fileInput.files).map(file => file.name).join(', ');
+                    chooseFileBtn.innerHTML = fileNames || 'Choose File(s)';
+                });
+
+                // Add the new row to the table
+                console.log(newRow);
+                tbodyy.insertBefore(newRow, tbody.firstChild);
+
+                // Add an event listener to the "Save" button
+                const saveBtn = newRow.querySelector('.save-btn');
+                saveBtn.addEventListener('click', () => {
+                    const name = newRow.querySelector('input[name="name"]').value;
+                    const style = newRow.querySelector('input[name="style"]').value;
+                    const description = newRow.querySelector('input[name="description"]').value;
+                    const price = newRow.querySelector('input[name="price"]').value;
+                    const material = newRow.querySelector('input[name="material"]').value;
+                    const place = newRow.querySelector('input[name="place"]').value;
+                    const date = newRow.querySelector('input[name="date"]').value;
+                    const designer_id = newRow.querySelector('input[name="designer_id"]').value;
+                    const quantity = newRow.querySelector('input[name="quantity"]').value;
+                    const formData = new FormData();
+                    formData.append('name', name);
+                    formData.append('style', style);
+                    formData.append('description', description);
+                    formData.append('price', price);
+                    formData.append('material', material);
+                    formData.append('place', place);
+                    formData.append('date', date);
+                    formData.append('designer_id', designer_id);
+                    formData.append('quantity', quantity);
+                    console.log(fileInput);
+                    Array.from(fileInput.files).forEach(file => {
+                        formData.append('images[]', file);
+                    });
+                    $.ajax({
+                        url: '/api/v1/furniture/storeItem',
+                        method: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(response) {
+                            // Handle the success response here
+                            console.log(response);
+                            const newRow = document.createElement('tr');
+    
+    // Set the inner HTML of the new row to the entered data
+                            newRow.innerHTML = `
+                                <td>${name}</td>
+                                <td>${style}</td>
+                                <td>${description}</td>
+                                <td>${price}</td>
+                                <td>${material}</td>
+                                <td>${place}</td>
+                                <td>${date}</td>
+                                <td>${designer_id}</td>
+                                <td>${quantity}</td>
+                            `;
+                            
+                            // Replace the row of inputs with the new row
+                            newRow.id = 'row-' + response.id;
+                            newRow.classList.add('furniture-row');
+                            saveBtn.parentElement.parentElement.replaceWith(newRow);
+                        },
+                        error: function(xhr) {
+                            $('.error-message').remove();
+                            $('.is-invalid').removeClass('is-invalid');
+                            // Handle the error response here
+                            console.log(xhr.responseText);
+
+                            var errors = xhr.responseJSON || {};
+                            if (typeof errors === 'string') {
+                                errors = JSON.parse(errors);
+                            }
+                            console.log(errors);
+                            $.each(errors.errors, function(field, messages) {
+                                console.log(field);
+                                
+                            var input = $('#' + field);
+                            console.log(input);
+                            var container = input.parent();
+                            console.log(container);
+                            input.addClass('is-invalid');
+                            if (typeof errors.errors === 'object' && Object.keys(errors.errors).length > 0 && Array.isArray(messages) && messages.length > 0) {
+                                $.each(messages, function(index, message) {
+                                    $('<span>').addClass('error-message').html(message + "<br>").appendTo(container);
+                                });
+                            }else{
+                                console.log(messages);
+                                $('<span>').addClass('error-message').html(messages + "<br>").appendTo(container);
+                                // alert(message);
+                            }
+                            });
+                            
+                        }
+                    });
+                });
+            });
         </script>
 @endsection

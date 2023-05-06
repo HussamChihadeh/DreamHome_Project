@@ -10,7 +10,17 @@ class Furniture extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['designer_id', 'name'];
+    protected $fillable = [
+        'name',
+        'style',
+        'description',
+        'material',
+        'place',
+        'date',
+        'price',
+        'designer_id',
+        'quantity',
+    ];
     public function designers(){
         return $this->belongsTo(Designer::class, 'designer_id');
     }

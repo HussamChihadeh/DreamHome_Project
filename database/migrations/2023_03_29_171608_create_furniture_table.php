@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string("material");
             $table->string("place");
             $table->string("quantity");
-            $table->string("description");
+            $table->string("description")->nullable();
             $table->timestamps();
         });
     }

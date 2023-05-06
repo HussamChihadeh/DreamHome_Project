@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Api\V1;
-
+use App\Models\Designer;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use App\Models\Furniture;
 use App\Http\Requests\StoreFurnitureRequest;
 use App\Http\Requests\UpdateFurnitureRequest;
@@ -20,7 +23,7 @@ class FurnitureController extends Controller
         $filter = new FurnitureQuery();
         $queryItems = $filter->transform($request);
         if(count($queryItems)==0){
-            $furniture = Furniture::select('id', 'name','price', 'style', 'material', 'designer_id', 'date', 'place', 'quantity')->paginate(15);
+            $furniture = Furniture::select('id', 'name','price', 'style', 'material', 'designer_id', 'date', 'place', 'quantity', 'description')->paginate(15);
             return response()->json($furniture);
         }
         else{
@@ -40,9 +43,57 @@ class FurnitureController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreFurnitureRequest $request)
+    public function storeItem(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:250',
+            'style' => 'required|string',
+            'description' => 'required|string',
+            'material' => 'required|string',
+            'place' => 'required|string',
+            'date' => 'required',
+            'price' => 'required',
+            'designer_id' => 'required', Rule::exists('designers', 'id'),
+            'quantity' => 'required',
+        ]);
+        $designer = Designer::find($validatedData['designer_id']);
+        if (!$designer) {
+            return response()->json(['errors' => ['designer_id' => 'The selected designer id is invalid']], 422);
+        }
+        try {
+            $designer = Designer::findOrFail($validatedData['designer_id']);
+            $furniture = Furniture::create([
+                'name' => $validatedData['name'],
+                'style' => $validatedData['style'],
+                'description' => $validatedData['description'],
+                'material' => $validatedData['material'],
+                'place' => $validatedData['place'] ,
+                'date' => $validatedData['date'],
+                'price' => $validatedData['price'],
+                'designer_id' => $validatedData['designer_id'],
+                'quantity' => $validatedData['quantity'],
+            ]);
+            if ($request->hasFile('images')) {
+                $images = $request->file('images');
+                $furnitureItemFolderPath = public_path('images/furniture/' . $furniture->id);
+                if (!file_exists($furnitureItemFolderPath)) {
+                    mkdir($furnitureItemFolderPath, 0777, true);
+                }
+                $i = 1;
+                foreach ($images as $image) {
+                    $fileName = $i . '.' . $image->getClientOriginalExtension();
+                    $image->move($furnitureItemFolderPath, $fileName);
+                    $i++;
+                }
+            }
+        } catch (ValidationException $e) {
+            $errors = $e->validator->errors();
+            $errors->add('designer_id', 'The selected designer id is invalid');
+            return response()->json(['errors' => $errors], 422);
+        }
+        // Return a success response
+        return response()->json(['message' => 'Item saved successfully']);
     }
 
     /**
