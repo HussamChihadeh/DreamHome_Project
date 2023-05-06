@@ -1,0 +1,418 @@
+:root {
+    --gold1: #AE8625;
+    --gold2: #e0d97c;
+}
+
+
+body {
+
+    font-family: "poppins" !important;
+    background-color: white !important;
+    overscroll-behavior: none;
+    overflow-x: hidden;
+    padding: 0 0 0 0;
+    font-family: 'Lobster', cursive;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'Signika', sans-serif;
+    font-size: 0.8vw !important;
+}
+
+body::-webkit-scrollbar {
+    z-index: 0;
+    width: 10px;
+    background-color:#f8f8f8;
+
+}
+
+body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-image: -webkit-linear-gradient(var(--gold1), var(--gold2));
+    border-radius: 20px;
+    border: 3px solid #f8f8f8;
+    z-index: 0;
+
+}
+
+Header {
+    font-weight: 600;
+    font-size: 40px;
+    margin-top: 40;
+    border-bottom: .5px solid var(--gold1);
+    margin-bottom: -100%;
+    
+}
+
+
+.Order_Summary {
+
+    background-color: white;
+    border: .5px solid var(--gold1);
+    height: fit-content;
+    width: 24%;
+    margin-left: 3.5%;
+    border-radius: 4px;
+    padding: 20 20 1 20;
+    position: fixed;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+}
+
+.Orders {
+    color: gray;
+    font-size: 0.8vw;
+    height: 13vw;
+    overflow-x: hidden;
+    border-bottom: .5px solid var(--gold1);
+    overflow-y: auto;
+
+}
+
+.Orders::-webkit-scrollbar {
+    width: 0;
+}
+
+.Name {
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    height: fit-content;
+
+}
+
+.Delivery,
+.Amount {
+    color: gray;
+    font-size: 0.8vw;
+    overflow-y: auto;
+    height: fit-content;
+    overflow-x: hidden;
+    border-bottom: .5px solid var(--gold1);
+    padding-top: 10;
+    padding-bottom: 10;
+
+}
+
+.Amount {
+    color: black;
+    font-weight: 600;
+    font-size: 0.95vw;
+
+}
+
+.vertical-line {
+    border-left: .5px solid var(--gold1);
+    height: 650;
+    margin-top: -220;
+    float: left;
+    margin-left: 50%;
+}
+
+
+.Delivery::-webkit-scrollbar {
+    width: 0;
+}
+
+.logos {
+    width: 30px;
+    height: 20;
+}
+
+.logos_1 {
+    margin-top: 5;
+    width: 100%;
+
+    border: 1px solid red;
+
+}
+
+.left {
+    float: right;
+    margin-right: -40%;
+
+}
+
+.Price {
+    font-size: 1.4vw;
+    font-weight: 600;
+}
+
+.middle {
+    float: left;
+    margin-left: 40%;
+
+}
+
+.Furniture_Image {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+/* .number-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: 25px;
+    border: 2px solid gray;
+    border-radius: 60px;
+    overflow: hidden;
+
+} */
+
+/* input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    width: 1px;
+    padding: 0 0;
+} */
+
+/* 
+.number-input button {
+    display: inline-block;
+    width: fit-content;
+    height: 10px;
+    background-color: transparent;
+    color: gray;
+    font-weight: 600;
+    border: none;
+    font-size: 0.8vw;
+    line-height: 0.8;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 60px;
+    padding: 0 2px;
+    border: 1px solid black;
+} */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input {
+    width: 100%;
+    background-color: rgb(230, 229, 229);
+    border: none;
+    text-align: center;
+    border: 1px solid black;
+
+}
+
+.plus_btn,
+.minus_btn,
+.input {
+    font-size: 14px;
+    height: auto;
+    padding: 3px;
+    width: 80%;
+    border: 0;
+}
+.plus_btn:hover,
+.minus_btn:hover{
+    scale: 1.05;
+}
+
+/* ///////////////////////////////////////////////////////////////////////// */
+.container_1 {
+    border-bottom: .5px solid var(--gold1);
+    height: fit-content;
+    padding-bottom: 20px;
+}
+
+.price1 {
+    margin-left: 0px;
+}
+
+.Delete {
+    color: red;
+    cursor: pointer;
+    font-size: 1vw;
+
+}
+.Delete:hover{
+    scale: 1.02;
+}
+
+
+
+@media (max-width:1110px) {
+
+
+    .Order_Summary {
+        width: 26%;
+        margin-left: 2.5%;
+        padding: 10 10 1 10;
+    }
+}
+
+@media (max-width:900px) {
+
+
+    .Order_Summary {
+        width: 28%;
+        margin-left: 1.5%;
+        padding: 10 7 1 7;
+    }
+}
+
+
+/* For screens with a max width of 767px */
+/* @media (max-width: 992px) {
+    .number-input {
+        height: 20px;
+        width: 200%;
+        margin-left: -50%;
+        border-radius: 30px;
+    }
+
+    .number-input button {
+        height: 16px;
+        font-size: 0.6vw;
+        line-height: 0.5;
+    }
+
+    .number-input input[type="number"] {
+        width: 50%;
+        font-size: 10px;
+    }
+
+    .price1 {
+        margin-left: 0;
+    }
+} */
+
+@media (max-width:750px) {
+
+
+    .Order_Summary {
+        width: 30%;
+        margin-left: 0%;
+        padding: 10 2 1 2;
+
+    }
+
+    .Orders,
+    .Delivery {
+        font-size: 0.9vw;
+    }
+
+    .Amount {
+        font-size: 1.05vw;
+    }
+}
+
+@media (max-width:700px) {
+
+
+    .Order_Summary {
+
+        padding: 10 0 1 0;
+
+    }
+}
+
+@media (max-width:650px) {
+
+
+    .Order_Summary {
+        width: 30%;
+        margin-left: 0%;
+        padding: 10 5 1 5;
+
+    }
+
+    .Orders,
+    .Delivery {
+        font-size: 0.7vw;
+    }
+
+    .Amount {
+        font-size: .85vw;
+    }
+
+    .price1 {
+        margin-left: -2;
+    }
+}
+
+@media (max-width:630px) {
+    .price1 {
+        margin-left: -2;
+    }
+}
+
+
+@media (max-width:616px) {
+    .price1 {
+        margin-left: -3;
+    }
+}
+
+@media (max-width:604px) {
+    .price1 {
+        margin-left: -4;
+    }
+}
+
+@media (max-width:591px) {
+    .price1 {
+        margin-left: -6;
+    }
+}
+
+@media (max-width:575.5px) {
+    .Order_Summary {
+        position: relative;
+        width: 50%;
+        margin-left: 25%;
+
+
+    }
+
+    .Header1 {
+        font-size: 1.8vw !important;
+    }
+
+    .Header2 {
+        font-size: 1.6vw !important;
+    }
+
+    .Orders,
+    .Delivery {
+        font-size: 1.3vw;
+    }
+
+    .Amount {
+        font-size: 1.5vw;
+    }
+
+    .Delete,
+    .price {
+        font-size: 1.6vw;
+    }
+
+}
+
+
+
+.Header1 {
+    font-size: 1.3vw;
+    font-weight: 500;
+    margin-top: 20px !important;
+    font-family: 'Sentic Display', sans-serif;
+
+}
+
+.Header2 {
+    font-size: 0.95vw;
+    color: gray;
+    margin-bottom: 10px;
+    font-family: 'Sentic Display', sans-serif;
+
+}

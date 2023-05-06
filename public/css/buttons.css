@@ -105,7 +105,8 @@
 .Request_a_Tour_button_details:hover,
 .Contact_Designer_button_Profile_Page:hover,
 .details_button_Profile_Page:hover,
-.Text:hover,.Request_View_Details:hover {
+.Text:hover,
+.Request_View_Details:hover {
     scale: 1.025;
 
 
@@ -211,7 +212,7 @@
 .Designer_View_Details:hover,
 .View_Furniture:hover,
 .Add_to_Favorites:hover,
-.Order_Furniture:hover {
+.Order_Furniture:hover,.Log_Out_button:hover,.Sign_In_button:hover {
     scale: 1.05;
 
     color: var(--gold1);
@@ -471,14 +472,53 @@
 .Save_Yes_Button{
     background-color: black;
 } */
-.Request_View_Details{
-width: fit-content;
-padding: 6 10;
-background-color: rgb(62, 62, 119);
-border: 0;
-box-shadow: rgba(0, 0, 0, 0.052) 0px 3px 8px;
-border-radius: 8px;
-color: white;
+.Request_View_Details {
+    width: fit-content;
+    padding: 6 10;
+    background-color: rgb(62, 62, 119);
+    border: 0;
+    box-shadow: rgba(0, 0, 0, 0.052) 0px 3px 8px;
+    border-radius: 8px;
+    color: white;
+}
+
+.Log_Out_button {
+
+    margin-left: 0%;
+    height: fit-content;
+    padding: 13 15 13 15;
+    z-index: 10;
+    background-color: white;
+    border: 1.5px solid rgb(0, 0, 0);
+    color: black;
+    border-radius: 8px;
+    border: 0px;
+    font-family: 'Poppins';
+    cursor: pointer;
+    font-size: auto;
+    font-weight: 600;
+    box-shadow: rgba(0, 0, 0, 0.03) 0px 3px 8px;
+
+
+}
+.Sign_In_button{
+    width: fit-content;
+    height: fit-content;
+    padding: 12 35 ;
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+    font-size: auto;
+    display: block;
+    margin: 15 auto; 
+}
+.Sign_In_button:hover,.Sign_In_button:focus,.Sign_In_button:active{
+    background-color: black!important;
+    border: 1px solid black!important;
+
 }
 
 /* --------------------------------------------------------------------------------------------------------------------------------------------- */

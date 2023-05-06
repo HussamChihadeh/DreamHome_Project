@@ -34,7 +34,13 @@ class PropertyController extends Controller
         $properties = Property::select('id', 'longitude', 'latitude', 'buy_or_rent','city','name','description','province')->get();
         return response()->json($properties);
     }
-
+    public function getLatestProperties(){
+        $properties = Property::select('id','name','description')
+                               ->latest()
+                               ->limit(4)
+                               ->get();
+        return response()->json($properties);
+    }
     /**
      * Show the form for creating a new resource.
      */

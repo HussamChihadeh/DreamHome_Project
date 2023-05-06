@@ -20,6 +20,8 @@
 
 @section("content")
 <div style="height: 13.4%;"></div>
+<div id="on_load"></div>
+
 <div class="row">
   <div style="width: 40%;">
     <Header>
@@ -35,18 +37,72 @@
 
 </div>
 
-<div class="About_Us_background"></div>
+
+<div class="What_We_Do_background" id="What_We_Do_Container">
+  <!-- <img src="images\Office_Image.jpg" width="100%" > -->
+
+  <div class="row">
+    <div class="col-4 p-4">
+      <h6>WHY CHOOSE US?</h6>
+      <What_We_Do_Header>We turn a house <br>into a home</What_We_Do_Header>
+    </div>
+    <div class="col-6 offset-1 p-4">
+
+      <h77>At our real estate agency, we don't just help you find the perfect home,
+        but we also offer interior design services. Our experienced designers can create
+        a space that perfectly reflects your style, and you can easily connect with them through our chat feature.
+        Whether you're buying or renting, let us help turn your dream home into a reality.</h77>
+    </div>
+    <!-- <button class="About_Us_container">View</button> -->
+  </div>
+  <div class="row" style="margin-left: 10%; width:80%;margin-top:30">
+
+    <div class="col-md-3 col-6">
+      <div class="Property_Container">
+        <img class="Property_Image">
+      </div>
+      <h5 class="Property_Name"></h5>
+      <h77 class="Property_Description" style="margin-top: 0;"></h77>
+
+
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="Property_Container">
+        <img class="Property_Image">
+      </div>
+      <h5 class="Property_Name"></h5>
+      <h77 class="Property_Description" style="margin-top: 0;"></h77>
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="Property_Container">
+        <img class="Property_Image">
+      </div>
+      <h5 class="Property_Name"></h5>
+      <h77 class="Property_Description" style="margin-top: 0;"></h77>
+
+    </div>
+    <div class="col-md-3 col-6">
+      <div class="Property_Container">
+        <img class="Property_Image">
+      </div>
+      <h5 class="Property_Name"></h5>
+      <h77 class="Property_Description" style="margin-top: 0;"></h77>
+
+    </div>
+
+  </div>
+</div>
 
 <div class="row">
   <div class="col-12">
     <div>
-      <img src="images\furniture\Sofas\Homepage_Sofa_2.png" class="Furniture_Image" style="float: right;" id="Sofa_Image">
+      <img src="images\furniture\Sofas\Homepage_Sofa_2.png" loading="eager" class="Furniture_Image" style="float: right;" id="Sofa_Image">
       <div class="Furniture_Title">
         <Header>
-      Furnish Your Life with Style</Header>
-      <div class="Furniture_Container Clicked">View Furniture</div>
+          Furnish Your Life with Style</Header>
+        <div class="Furniture_Container Clicked" onclick="OpenFurniture();">View Furniture</div>
 
-</div>
+      </div>
     </div>
   </div>
 </div>
@@ -65,7 +121,7 @@
 
   <div class="row">
     <div class="col-md-6 d-none d-md-block">
-      <img src="images\properties\1\1.jpg" class="House_Image_1">
+      <img src="" class="House_Image_1">
     </div>
     <div class="col-md-6 col-12 p-5">
       <div class="Properties_Information" id="Properties_Information" style="box-shadow: none;">
@@ -77,7 +133,6 @@
 </div>
 
 
-
 <!-- <div class="mb-5" style="height: 500px;"></div> -->
 @endsection
 
@@ -86,6 +141,16 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var on_load = document.getElementById("on_load");
+    var body = document.querySelector('body');
+    body.style.overflow = 'hidden';
+    setTimeout(function() {
+      on_load.style.display = "none";
+      body.style.overflowY = 'auto';
+    }, 3500);
+  });
+
   var Properties_Information = document.getElementById('Properties_Information');
 
   var map = L.map('map').setView([33.901701, 35.478835], 12);
@@ -161,6 +226,11 @@
 
 
   }
+
+  function OpenFurniture() {
+    const url1 = "/furniture";
+    window.location.href = url1;
+  }
   $.ajax({
     url: '/api/v1/properties/getLocation',
     type: 'GET',
@@ -184,7 +254,6 @@
           };
 
 
-
           var house_name = $('.title');
           house_name.html("");
           house_name.append(property.name);
@@ -194,6 +263,8 @@
           var city = $('.city');
           city.html("");
           city.append(property.province + ", " + property.city);
+          var Img = $('.House_Image_1');
+          Img.attr('src', 'images/properties/' + property.id + '/1.jpg');
 
         });
       });
@@ -223,49 +294,42 @@
     threshold: 0.3
   };
 
-  const observer = new IntersectionObserver(function(entries, observer) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        var Nav_Buttons = document.querySelectorAll(".nav-link");
-        for (var i = 0; i < Nav_Buttons.length; i++) {
-          Nav_Buttons[i].style.color = "white";
-        }
-        var Navbar = document.getElementsByClassName("navbar")[0];
-        Navbar.style.backgroundColor = "black";
-        var Navbar_brand = document.querySelector(".navbar-brand img");
-        Navbar_brand.setAttribute("src", "IMAGES\\image_logo.png");
-        var Logo = document.getElementsByClassName("logo")[0];
-        Logo.style.backgroundImage = " -webkit - linear - gradient(var(--gold1), var(--gold2));";
-        Logo.style.backgroundClip = 'text';
-        Logo.style.webkitBackgroundClip = 'transparent';
-        Logo.style.color = 'transparent';
-        Logo.style.webkitTextFillColor = 'transparent';
-        Navbar.style.borderBottomLeftRadius = "15px";
-        Navbar.style.borderBottomRightRadius = "15px";
-
-      }
-    });
-  }, options);
-
-  observer.observe(box);
 
   ///////////////////////////////////////////////////////////////////////////
   const Main_Image = document.getElementById("Main_Image");
   const options_1 = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.7
+    threshold: 1
   };
 
   const observer_1 = new IntersectionObserver(function(entries, observer) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        Nav_Editor("transparent", "0");
+        Nav_Editor("transparent");
       }
     });
   }, options_1);
 
   observer_1.observe(Main_Image);
+
+  const What_We_Do_Container = document.getElementById("What_We_Do_Container");
+
+  const options_3 = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.2
+  };
+
+  const observer_3 = new IntersectionObserver(function(entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        Nav_Editor("#f8f8f8");
+      }
+    });
+  }, options_3);
+  observer_3.observe(What_We_Do_Container);
+
 
 
   ///////////////////////////////////////////////////////////////////////
@@ -279,14 +343,14 @@
   const observer_2 = new IntersectionObserver(function(entries, observer) {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        Nav_Editor("#f8f8f8", "0");
+        Nav_Editor("#f8f8f8");
       }
     });
   }, options_2);
 
   observer_2.observe(Sofa_Image);
 
-  function Nav_Editor(backgroundColor, borderBottom) {
+  function Nav_Editor(backgroundColor) {
     var Nav_Buttons = document.querySelectorAll(".nav-link");
     for (var i = 0; i < Nav_Buttons.length; i++) {
       Nav_Buttons[i].style.color = "black";
@@ -306,8 +370,53 @@
     Logo.style.fontSize = "25";
     Logo.style.marginTop = "10";
     var Navbar = document.querySelector("nav");
-    Navbar.style.borderBottomLeftRadius = borderBottom + "";
-    Navbar.style.borderBottomRightRadius = borderBottom + "";
+    Navbar.style.boxShadow="none";
+    
   }
+
+
+
+
+
+
+
+
+
+  var Property_Image = document.querySelectorAll(".Property_Image");
+  var Property_Name = document.querySelectorAll(".Property_Name");
+  var Property_Description = document.querySelectorAll(".Property_Description");
+  var i = 0;
+
+
+  $.ajax({
+    url: '/api/v1/properties/getLatestProperties',
+    type: 'GET',
+    // dataType: 'json',
+    success: function(properties) {
+      // Handle the successful response here
+      console.log(properties);
+      $.each(properties, function(index, property) {
+        Property_Image[i].src = "images\\properties\\" + property.id + "\\1.jpg";
+        Property_Name[i].append(property.name);
+        Property_Description[i].append(property.description);
+        // Property_Image[i].on('click', function() {
+
+
+        //   const url1 = "rent/Property_details?id=" + property.id;
+        //   window.location.href = url1;
+
+
+
+        // });
+        Property_Image[i].onclick = function() {
+          const url1 = "rent/Property_details?id=" + property.id;
+          window.location.href = url1;
+        }
+        i++;
+
+
+      });
+    }
+  });
 </script>
 @endsection

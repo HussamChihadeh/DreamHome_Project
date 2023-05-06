@@ -41,7 +41,7 @@
                 <form class="nav-item" action="{{ route('logout') }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <button class="" type="submit">Logout</button>
+                    <button class="Log_Out_button" type="submit">Logout</button>
                 </form>
             </div>
             <!-- Main Info Column -->

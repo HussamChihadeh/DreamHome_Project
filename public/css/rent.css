@@ -14,12 +14,12 @@
 
 .filter_container {
     width: fit-content;
-    height: 75%;
+    height: fit-content;
     background-color: white;
     z-index: 1;
     margin: 100px 25px 80px 215px;
     border-radius: 15px;
-    padding: 20 20 20 20;
+    padding: 20 20 0 20;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     line-height: 1.5px;
     float: left;
@@ -113,9 +113,9 @@ h5 {
     width: 600;
     height: fit-content;
     z-index: 1;
-    margin: -41.4% 25px 0px 500px;
+    margin: -45.2% 25px 0px 500px;
     border-radius: 15px;
-    padding: 40px 0px 20 0;
+    padding: 0px 0px 20 0;
     line-height: 1.5px;
     float: left;
 
@@ -148,7 +148,7 @@ h3 {
 }
 
 .house_image {
-    height: 273;
+    height: 275;
     width: 100%;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;

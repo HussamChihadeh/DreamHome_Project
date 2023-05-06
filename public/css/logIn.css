@@ -1,19 +1,54 @@
-body{
+body {
     background-color: #e9e9e9 !important;
+    overflow-x: hidden;
+    overscroll-behavior: none;
+    font-family: "Poppins" !important;
 }
-.login{
+
+.login {
     margin-top: 200px !important;
     background-color: white;
     width: 70% !important;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-.welcoming{
+
+.welcoming {
     text-align: center;
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+input[type="password"],
+input[type="email"] {
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    color: #333333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px #f0f0f0 inset !important;
+    background-color: #f0f0f0 !important;
+}
+
+input[type="password"]:focus,
+input[type="email"]:focus {
+
+    outline: none;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.Sign_Up{
+    background: -webkit-linear-gradient(var(--gold1), var(--gold2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 0.1px black; 
+    text-decoration: none;
 }

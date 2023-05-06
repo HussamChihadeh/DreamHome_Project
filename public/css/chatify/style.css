@@ -5,6 +5,7 @@ body {
   font-family: 'Poppins' !important;
   overscroll-behavior: none;
   overflow-x: hidden;
+  background-color: white!important;
 }
 
 
@@ -68,6 +69,24 @@ body {
   border-left-color: var(--primary-color) !important;
 }
 
+body::-webkit-scrollbar {
+  z-index: 0;
+  width: 10px;
+  background-color:#f8f8f8;
+
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-image: -webkit-linear-gradient(var(--gold1), var(--gold2));
+  border-radius: 20px;
+  border: 3px solid #f8f8f8;
+  z-index: 0;
+
+}
 /*internet connection*/
 .internet-connection {
   display: none;

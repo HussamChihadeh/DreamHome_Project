@@ -19,7 +19,27 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@600&family=Signika:wght@500;600&display=swap" rel="stylesheet">
 
-  
+  <style>body::-webkit-scrollbar {
+  z-index: 0;
+  width: 10px;
+  background-color:#f8f8f8;
+
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-image: -webkit-linear-gradient(var(--gold1), var(--gold2));
+  border-radius: 20px;
+  border: 3px solid #f8f8f8;
+  z-index: 0;
+
+}
+body{
+
+background-color: #e9e9e9;}</style>
 
   
 </head>
@@ -30,7 +50,7 @@
   <nav class="navbar navbar-expand-lg fixed-top ">
     <div class="container">
       <a class="navbar-brand me-4" href="#">
-        <img src="{{asset('images/image_logo.png')}}" alt="" height="40" width="30">
+        <img src="{{asset('images/black_image_logo.png')}}" alt="" height="40" width="30">
       </a>
       <a href="" class="logo me-4 d-none d-md-block">Dream Home</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main" aria-controls="main"
@@ -77,8 +97,8 @@
             <div class="row">
                 <div class="col-md-6 col-lg-4">
                     <div class="info mb-5">
-                        <img src="{{asset('images/image_logo.png')}}" alt="" class="mb-4 img-fluid" height="40" width="30">
-                        <p class="mb-5">hsagdashdgash ahsgdhgadh ashgdhasgd ashdgjdja ashdjhagdj ashdg</p>
+                        <img src="{{asset('images/white_image_logo.png')}}" alt="" class="mb-4 img-fluid" height="40" width="30">
+                        <p class="mb-5">Easiest Way to find your dream place</p>
                         <div class="copyright">
                             Created By <span>XXXX</span>
                             <div>&copy; 2023 - <span>Capstone Project</span></div>
@@ -114,7 +134,7 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="contactUs">
                         <h5 class="text-light">Contact Us</h5>
-                        <p class="lh-lg mt-3 mb-5">Get in touch adasdasd</p>
+                        <p class="lh-lg mt-3 mb-5">Get in touch with Us</p>
                         <a href="mailto:dreamhome@gmail.com" class="btn rounded-pill text-light">dreamhome@gmail.com</a>
                         <ul class="d-flex mt-5 list-unstyled gap-3">
                             <li>

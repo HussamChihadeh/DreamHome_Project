@@ -28,6 +28,8 @@ Route::group(["prefix" => "v1", "namespace"=>"App\Http\Controllers\Api\V1"], fun
     Route::post('users', 'UserController@store');
     // Route::apiResource("users", UserController::class);
     Route::get('properties/getLocation', 'PropertyController@getLocation');
+    Route::get('properties/getLatestProperties', 'PropertyController@getLatestProperties');
+
     Route::get('property/updateSlots', 'TourController@updateSlots');
     Route::put('properties/{id}', 'PropertyController@updatePropertyStatus');
     Route::apiResource("properties", PropertyController::class);
