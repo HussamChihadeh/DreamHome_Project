@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api\V1;
+
 use Illuminate\Validation\ValidationException;
 
 use App\Models\User;
@@ -25,7 +26,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        
     }
 
     /**
@@ -40,7 +40,7 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
 
-     //done
+    //done
     public function store(Request $request)
     {
         //
@@ -51,7 +51,7 @@ class UserController extends Controller
             'address' => 'string|max:250',
             'phone_number' => 'required|string|max:250',
         ]);
-    
+
         try {
             $user = User::create([
                 'name' => $validatedData['name'],
@@ -63,9 +63,8 @@ class UserController extends Controller
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
         }
-    
-        return response()->json($user, 201);
 
+        return response()->json($user, 201);
     }
 
     public function authenticate(Request $request)
@@ -74,21 +73,28 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ];
- 
+
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             if ($user->email === 'admin@dreamhome.org') {
                 return redirect('/admin_assign')->with('success', 'Login Success');
-            } else {
-                    // return redirect('/')->with('success', 'Login Success');
-                    return redirect()->intended('/')->with('success', 'Login Success');
+            } 
+            elseif (strpos($user->email, '@Designer.org') !== false) {
+                // Code for @designer.org domain
+                // Add your desired logic here
+                // For example, you can redirect to a different route or perform additional actions
+                return redirect('/chatify')->with('success', 'Login Success for Designer');
+            } 
+            else {
+                // return redirect('/')->with('success', 'Login Success');
+                return redirect()->intended('/')->with('success', 'Login Success');
             }
         }
- 
+
         return back()->withInput($request->only('email'))->withErrors([
             'email' => 'Invalid email or password',
         ]);
-    } 
+    }
 
     public function logout(Request $request)
     {
@@ -97,9 +103,9 @@ class UserController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('login')
             ->withSuccess('You have logged out successfully!');;
-    }   
+    }
 
-   
+
     public function showProfile()
     {
         $user = Auth::user();
@@ -109,14 +115,16 @@ class UserController extends Controller
         // return view('profile', compact('properties'));
     }
 
-    public function getWishlist(Request $request) {
+    public function getWishlist(Request $request)
+    {
         $user = User::find($request->id);
         $wishlist = json_decode($user->wishlist, true) ?? [];
         return response()->json($wishlist);
     }
-    
 
-    public function addToWishlist(Request $request){
+
+    public function addToWishlist(Request $request)
+    {
         $user = User::find($request->id);
         $wishlistData = json_decode($user->wishlist, true) ?? [];
         $itemIndex = array_search($request->item, $wishlistData);
@@ -128,7 +136,7 @@ class UserController extends Controller
         $user->wishlist = json_encode(array_values($wishlistData));
         $user->save();
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -151,7 +159,7 @@ class UserController extends Controller
      */
     // public function update(UpdateCustomerRequest $request, Customer $customer)
     // {
-    
+
     // }
 
     /**

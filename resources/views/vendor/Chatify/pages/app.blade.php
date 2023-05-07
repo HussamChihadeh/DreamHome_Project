@@ -1,4 +1,9 @@
-@extends("layout")
+@php
+    use Illuminate\Support\Str;
+@endphp
+
+@extends(auth()->check() && Str::endsWith(auth()->user()->email, '@Designer.org') ? "Designer_Layout" : "layout")
+
 @section("title", "Chat")
 
 @section("head")
@@ -16,8 +21,8 @@
     {{-- ----------------------Users/Groups lists side---------------------- --}}
     <div class="messenger-listView {{ !!$id ? 'conversation-active' : '' }}">
         {{-- Header and search bar --}}
-        <div class="m-header">
-            <nav>
+        <div class="m-header" style="margin-bottom:0">
+            <nav >
                 <a href="#"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">Chat</span> </a>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
@@ -25,16 +30,16 @@
                     <a href="#" class="listView-x"><i class="fas fa-times"></i></a>
                 </nav>
             </nav>
-            {{-- Search input --}}
+            <!-- {{-- Search input --}}
             <input type="text" class="messenger-search" placeholder="Search" />
             {{-- Tabs --}}
             {{-- <div class="messenger-listView-tabs">
                 <a href="#" class="active-tab" data-view="users">
                     <span class="far fa-user"></span> Contacts</a>
-            </div> --}}
+            </div> --}} -->
         </div>
         {{-- tabs and lists --}}
-        <div class="m-body contacts-container">
+        <div class="m-body contacts-container" style="margin-top:-50;">
             {{-- Lists [Users/Group] --}}
             {{-- ---------------- [ User Tab ] ---------------- --}}
             <div class="show messenger-tab users-tab app-scroll" data-view="users">
@@ -44,7 +49,7 @@
                     <div class="messenger-favorites app-scroll-hidden"></div>
                 </div>
                 {{-- Saved Messages --}}
-               
+
             </div>
             {{-- ---------------- [ Search Tab ] ---------------- --}}
             <div class="messenger-tab search-tab app-scroll" data-view="search">
@@ -88,7 +93,7 @@
         {{-- Messaging area --}}
         <div class="m-body messages-container app-scroll">
             <div class="messages">
-                <p class="message-hint center-el"><span>Please select a chat to start messaging</span></p>
+                <p class="message-hint center-el" id="Message_Hint"><span>Please select a chat to start messaging</span></p>
             </div>
             {{-- Typing indicator --}}
             <div class="typing-indicator">
@@ -123,21 +128,57 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
+    // Get the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
 
-// Get the URL parameters
-const urlParams = new URLSearchParams(window.location.search);
+    // Get the value of the 'House_id' parameter
+    const houseId = urlParams.get('property_id');
 
-// Get the value of the 'House_id' parameter
-const houseId = urlParams.get('id');
+    // Split the URL path to separate the two values
+    const urlParts = window.location.pathname.split('/');
 
-// Split the URL path to separate the two values
-const urlParts = window.location.pathname.split('/');
+    // Extract the values
+    const id = urlParts[urlParts.length - 1];
+    const value = houseId;
 
-// Extract the values
-const id = urlParts[urlParts.length - 1];
-const value = houseId;
+    // alert('Designer_id: ' + id); // Output: id: 21
+    // alert('House_id: ' + value); // Output: House_id: 3
+    var Message_Hint = document.getElementById("Message_Hint");
 
-// alert('Designer_id: ' + id); // Output: id: 21
-// alert('House_id: ' + value); // Output: House_id: 3
+    setTimeout(function() {
+        var textarea_111 = document.getElementById("textarea_111");
+        var message_form=document.getElementById("message-form");
+        textarea_111.value = "Please Enter the below link to View the Property's Information.\nLocalhost:8000/rent/Property_details?id="+value;
+        
+    }, 5000);
 
+
+    // const observerOptions = {
+    //     attributes: true,
+    //     attributeFilter: ['style'],
+    //     childList: false,
+    //     subtree: false
+    // };
+
+    // const observerCallback = function(mutationsList, observer) {
+    //     for (let mutation of mutationsList) {
+    //         if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+    //             const isHidden = mutation.target.style.display === 'none';
+    //             if (isHidden) {
+    //                 // call your function here
+    //                 console.log('p element is hidden');
+    //             }
+    //         }
+    //     }
+    // };
+
+    // const observer = new MutationObserver(observerCallback);
+    // observer.observe(Message_Hint, observerOptions);
+
+
+
+
+
+
+    // <form id="message-form" method="POST" action="{{ route('send.message') }}" enctype="multipart/form-data">
 </script>
