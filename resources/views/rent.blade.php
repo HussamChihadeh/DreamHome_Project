@@ -131,7 +131,7 @@
       <a> <img src="IMAGES\image_logo.png" width="50" height="100" style="margin-bottom :-14;margin-top:14px; margin-left: -20; border-bottom-left-radius: 15px;"></a>
 
       <button type="submit" class="filter_button" name="filter">Filter</button>
-      <button type="submit" class="Reset_button" name="Reset">Reset</button>
+      <button type="reset" class="Reset_button" name="Reset">Reset</button>
 
 
     </form>

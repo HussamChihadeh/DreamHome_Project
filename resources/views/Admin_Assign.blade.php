@@ -1,7 +1,14 @@
 @extends("admin_layout")
 @section("head")
 <link rel="stylesheet" href="{{asset('css/Admin_Tables.css')}}">
-
+<style>
+    .error-id{
+        font-size: 12px;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+        /* word-spacing: 0.01em !important; */
+    }
+</style>
 @endsection
 @section("content")
 
@@ -73,8 +80,6 @@
                                 <th>Price</th>
                                 <th>Seller ID</th>
                                 <th>Customer ID</th>
-
-
                             </tr>
                         </thead>
                     </table>
@@ -159,6 +164,7 @@
                                                     }
                                                 });
                         });
+                        //view details
                         const trs = document.querySelectorAll('tbody tr');
                         trs.forEach(tr => {
                         tr.addEventListener('click', () => {
@@ -172,6 +178,22 @@
                             window.location.href = "rent/Property_details?id=" + id;
                         });
                         });
+
+                        //assign
+                        const inputs = document.querySelectorAll('.ID_input');
+                        inputs.forEach(function(input) {
+                            input.addEventListener("keyup", function(event) {
+                            if (event.key === "Enter") {
+                                const inputId = event.target.id;
+                                const userId = event.target.value;
+                                const propertyId = inputId.substr(6) ;
+                                // console.log(propertyId);
+                                // console.log(userId);
+                                assign(propertyId, userId, event.target);
+                                
+                            }
+                            });
+                        });
                     },
                     error: function(error) {
                         console.log(error);
@@ -180,84 +202,50 @@
                 
             }
 
-            //Deals with Detail Buttons and Inputs
-            // for (var i = 0; i < ID_input.length; i++) {
-            //     (function (i) {
-
-            //         // To work with the View Details Button
-            //         View_Details_Button = document.getElementById("View_Details_" + i);
-            //         View_Details_Button.onclick = function () {
-            //             alert("Button id: " + this.id + " has been Cliked ");
-            //         }
-
-
-            //         ID_input[i].addEventListener('keydown', function (event) {
-            //             if (event.key === 'Enter') {
-            //                 Assign(ID_input[i].value);
-            //             }
-            //         });
-
-            //         function Assign(Input) {
-            //             //IF NOT FOUND IN DB
-            //             if(Input!="")
-            //             Show_Message(Input);
-            //         }
-
-            //     })(i);
-            // }
-
-            // //To Show the Message when ID is not found in DB
-            // function Show_Message(Input) {
-
-
-
-            //     message_text.innerHTML = Input + " is not Found in Our Customers List";
-            //     message.style.animation = "message_show 1.5s linear ";
-            //     for (var i = 0; i < ID_input.length; i++) {
-            //             (function (i) {
-            //                 ID_input[i].disabled = true;
-            //             })(i);
-            //         }
-            //     setTimeout(function () {
-
-            //         message.style = " top:12%;left: 35%;right: 35%; width: 30%;height:60;z-index:2;";
-
-            //     }, 1450);
-
-            //     setTimeout(function () {
-            //         message_text.hidden = false;
-            //         message_text.style.opacity = 1;
-
-            //     }, 1500);
-
-            //     setTimeout(function () {
-            //         message_text.hidden = true;
-
-            //         setTimeout(function () {
-            //             message.style.animation = "message_hide 1.1s linear";
-
-            //         }, 500);
-            //         setTimeout(function () {
-            //             message.style = "top:0%;width: 50;left: 50%; height: 50;right: 50%;";
-
-            //         }, 1480);
-            //     }, 2400);
-
-            //     setTimeout(function () {
-            //         for (var i = 0; i < ID_input.length; i++) {
-            //             (function (i) {
-            //                 ID_input[i].disabled = false;
-            //             })(i);
-            //         }
-            //     }, 3200);
-
-            // }
+            
 
             const addItemBtn = document.getElementById('add-item-btn');
 
             addItemBtn.addEventListener('click', () => {
                 window.location.href = "/sell";
             });
+
+            function assign(propertyId, userId, target){
+                $.ajax({
+                    url: '/api/v1/properties/assign/' + propertyId,
+                    type: 'PUT',
+                    data: {
+                    'buyer_id': userId,
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                    // console.log(response);
+                        const textNode = document.createTextNode(userId);
+                        target.parentNode.replaceChild(textNode, target);
+                    },
+                    error: function(jqXHR, xhr, status, error) {
+                        var errorMessage = xhr.responseText;
+                        if (jqXHR.status === 400) {
+                            // Bad request error
+                            console.log(jqXHR.responseText);
+                            // Show_Message(userId);
+                            const errorIdNode = target.nextSibling;
+                            if (errorIdNode && errorIdNode.classList.contains('error-id')) {
+                                // If an error message already exists, remove it
+                                target.parentNode.removeChild(errorIdNode);
+                            }
+                            const errorNode = document.createElement('p');
+                            errorNode.classList.add('error-message');
+                            errorNode.classList.add('error-id');
+                            errorNode.innerHTML = 'Invalid ID';
+                            target.parentNode.insertBefore(errorNode, target.nextSibling);
+
+                        }
+                    }
+                });
+            }
+
+            
 
             
 

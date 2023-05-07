@@ -5,7 +5,10 @@ use Illuminate\Http\Request;
 
 class FurnitureQuery{
     protected $allowedParms = [
-        'price' => ['gt','lt'],
+        'style' => ['eq'],
+        'type' => ['eq'],
+        'designer_id' => ['eq'],
+        'color' => ['eq'],
     ];
 
     protected $operatorMap = [

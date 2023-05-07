@@ -129,7 +129,7 @@
                             <div class="Parking_lot1 details"></div>
                         </div>
 
-                        <button type="submit" class="Request_a_Tour_button_details">Request a Tour</button>
+                        <button type="submit" class="Request_a_Tour_button_details" hidden>Request a Tour</button>
                     </div>
                 </div>
 
@@ -225,6 +225,10 @@
         area.append(property.area);
         var Parking_lots = $('.Parking_lot1');
         Parking_lots.append(property.parking);
+
+        if (property.status === 'listed') {
+            $('.Request_a_Tour_button_details').removeAttr('hidden');
+        }
         
       longitude = property.longitude;
       latitude = property.latitude;

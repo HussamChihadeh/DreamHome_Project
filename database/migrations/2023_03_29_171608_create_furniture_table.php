@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer("price");
             $table->string("date");
             $table->string("style");
+            $table->string("type");
             $table->string("material");
             $table->string("place");
             $table->string("quantity");

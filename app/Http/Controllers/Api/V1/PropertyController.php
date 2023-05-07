@@ -6,6 +6,7 @@ use App\Http\Requests\StorePropertyRequest;
 use App\Http\Requests\UpdatePropertyRequest;
 use App\Models\Property;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Database\QueryException;
 use Symfony\Component\HttpFoundation\Request;
 use App\Services\V1\PropertyQuery;
@@ -31,7 +32,7 @@ class PropertyController extends Controller
     }
 
     public function getLocation(){
-        $properties = Property::select('id', 'longitude', 'latitude', 'buy_or_rent','city','name','description','province')->get();
+        $properties = Property::where('status', 'listed')->select('id', 'longitude', 'latitude', 'buy_or_rent','city','name','description','province')->get();
         return response()->json($properties);
     }
     public function getLatestProperties(){
@@ -136,6 +137,26 @@ class PropertyController extends Controller
         
         // Update the status of the property
         $property->status = $status;
+        $property->save();
+        
+        // Return a response
+        return response()->json(['message' => 'Property status updated successfully.']);
+    }
+
+    public function assignProperty(Request $request, $id)
+    {
+        $property = Property::find($id);
+        
+        // Get the selected option
+        $buyer_id = $request->input('buyer_id');
+
+        $buyer = User::find($buyer_id);
+        if (!$buyer) {
+            return response()->json(['error' => 'Invalid customer ID.'], 400);
+        }
+        // Update the status of the property
+        $property->buyer_id = $buyer_id;
+        $property->status = "sold";
         $property->save();
         
         // Return a response

@@ -107,6 +107,21 @@ class FurnitureController extends Controller
         return response()->json($furniture);
     }
 
+    public function filterData()
+    {
+        $designers = Designer::select('id', 'name')->get();
+        $types = Furniture::distinct()->pluck('type');
+        $styles = Furniture::distinct()->pluck('style');
+
+        $data = [
+            ['type' => 'designers', 'data' => $designers],
+            ['type' => 'types', 'data' => $types],
+            ['type' => 'styles', 'data' => $styles],
+        ];
+        
+        return response()->json(compact('data'));
+        }
+
     /**
      * Show the form for editing the specified resource.
      */

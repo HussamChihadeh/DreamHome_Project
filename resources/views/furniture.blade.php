@@ -18,6 +18,19 @@
   <link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet'>
 
   <link rel="icon" type="image/x-icon" href="IMAGES\image_logo.png">
+
+  <style>
+    .filter-designers{
+      height: 85px;
+      width: 85px;
+    }
+
+    /* #colors tr td{
+      /* background-color:black; */
+      display: flex;
+      justify-content: center;
+    } */
+  </style>
 </head>
 
 <body>
@@ -111,83 +124,58 @@
     </div>
     <div style="height: 80px;"></div>
 
-    <h3>Configurations</h3>
-    <div class="Configuration_container">
-      <form method="post" action="/Tests/Post/">
-        <table>
-
-
-          <tr>
-            <td><input type="checkbox" id="Akkar"><label>U Sectionals</label></td>
-            <td><input type="checkbox" id="Baalbeck"><label>Corner Sectionals</label>
-            </td>
-          </tr>
-
-          <tr>
-            <td><input type="checkbox" id="Beirut"><label>Accent Chairs</label>
-            </td>
-            <td><input type="checkbox" id="Bekaa"><label>Loveseats</label></td>
-
-          </tr>
-          <tr>
-            <td><input type="checkbox" id="Mount_Lebanon"><label>Sofas</label></td>
-          </tr>
-
-
+    <h3>Types</h3>
+    <!-- <div class="Configuration_container"> -->
+      <form id="filterForm">
+        <table id="types">
         </table>
         <div class=" line-2"></div>
-    </div>
+    <!-- </div> -->
 
+    <h3>Styles</h3>
+      <table id="styles">
+
+      </table>
+        <div class=" line-2"></div>
     <h3>Colors</h3>
-    <form method="post" action="/Tests/Post/">
-      <table>
+      <table id="colors">
 
 
         <tr>
-          <td><img src="IMAGES\Colors\All_Colors.png" class="colors" id="All_colors" name="Beige">All Colors</td>
-          <td><img src="IMAGES\Colors\Blue.png" class="colors" id="Blue_color"><label>Blue</label></td>
-          <td><img src="IMAGES\Colors\Green.png" class="colors" id="Green_color"><label>Green</label></td>
-
-
-        </tr>
-
-        <tr>
-
-          <td><img src="IMAGES\Colors\Black.png" class="colors" id="Black_color" name="Baalbeck"><label>Black</label>
+        <td><input type="radio" name="color[eq]" value="black"><img src="IMAGES\Colors\Black.png" class="colors" id="Black_color" name="Baalbeck">
           </td>
-          <td><img src="IMAGES\Colors\Dark_Gray.png" class="colors" id="Dark_Gray_color"><label>Dark Gray</label></td>
-          <td><img src="IMAGES\Colors\Gray.png" class="colors" id="Gray_color"><label>Gray</label></td>
+          <td><input type="radio" name="color[eq]" value="blue"><img src="IMAGES\Colors\Blue.png" class="colors" id="Blue_color"></td>
+          <td><input type="radio" name="color[eq]" value="green"><img src="IMAGES\Colors\Green.png" class="colors" id="Green_color"></td>
+
+
+        </tr>
+
+        <tr>
+
+        <td><input type="radio" name="color[eq]" value="purple"><img src="IMAGES\Colors\Purple.png" class="colors" id="Purple_color"></td>
+
+          <td><input type="radio" name="color[eq]" value="dark gray"><img src="IMAGES\Colors\Dark_Gray.png" class="colors" id="Dark_Gray_color"></td>
+          <td><input type="radio" name="color[eq]" value="gray"><img src="IMAGES\Colors\Gray.png" class="colors" id="Gray_color"></td>
 
         </tr>
 
         </tr>
         <tr>
-          <td><img src="IMAGES\Colors\Beige.png" class="colors" id="Beige_color"><label>Beige</label></td>
-          <td><img src="IMAGES\Colors\Pink.png" class="colors" id="Pink_color"><label>Pink</label>
-          <td><img src="IMAGES\Colors\Red.png" class="colors" id="Red_color"><label>Red</label>
+          <td><input type="radio" name="color[eq]" value="beige"><img src="IMAGES\Colors\Beige.png" class="colors" id="Beige_color"></td>
+          <td><input type="radio" name="color[eq]" value="pink"><img src="IMAGES\Colors\Pink.png" class="colors" id="Pink_color">
+          <td><input type="radio" name="color[eq]" value="red"><img src="IMAGES\Colors\Red.png" class="colors" id="Red_color">
 
           </td>
-        </tr>
-
-        <tr>
-          <td><img src="IMAGES\Colors\Purple.png" class="colors" id="Purple_color"><label>Purple</label></td>
-
-
         </tr>
 
 
       </table>
 
-
-
-    </form>
-
     <div class=" line-2"></div>
     <h3>Designers</h3>
-    <form method="post" action="/Tests/Post/">
-      <table>
+      <table id="designers">
 
-        <tr>
+        <!-- <tr>
           <td><img src="IMAGES\Designers\Eny Lee Parker.png" class="ID_Image" id="Bekaa">
             <div class="b"> Eny Lee
               Parker</div>
@@ -210,7 +198,7 @@
             <div class="b">Amigo Modern</div>
           </td>
 
-        </tr>
+        </tr> -->
 
 
 
@@ -221,8 +209,10 @@
       <div style="height: 50px;"></div>
 
       <div class="button_Background" id="Button_In_Filter">
-        <button class="Button_In_Filter">Filter</button>
+        <input type="submit" class="Button_In_Filter" value="Filter">
+        <input type="reset" class="Button_In_Filter" value="Reset">
       </div>
+</form>
   </div>
   <!-- ------------------------------------------------ -->
 
@@ -233,6 +223,7 @@
 
 
   <script>
+    var formData="";
     var Furniture_Grid = document.getElementById("Furniture_Grid");
     window.onload = fetchFurniture();
 
@@ -427,15 +418,15 @@
       }
 
     }
-
+    
     function fetchFurniture(){
         $.ajax({
             url: "/api/v1/furniture",
             type: "GET",
-            // data: formData,
+            data: formData,
             success: function(furniture) {
                 // console.log(furniture);
-
+                $('.furniture_container').remove();
                 $.each(furniture.data, function(index, furniture) {
                     console.log(furniture);
 
@@ -511,63 +502,151 @@
         }
 
         var heart = document.querySelectorAll(".heart");
-for (var i = 0; i < heart.length; i++) {
-    heart[i].onclick = function () {
-      var userId = {!! auth()->check() ? auth()->user()->id : 'null' !!};
-        var itemId = this.id;
-        var heartImg = this;
-        if (userId!==null) {
-          var index = wishlist.indexOf(itemId);
-          if (index !== -1) {
-            // Item already exists, remove it
-            wishlist.splice(index, 1);
-          } else {
-            // Item doesn't exist, add it
-            wishlist.push(itemId);
-          }
-          $.ajax({
-            url: '/api/v1/add-to-wishlist/' + userId,
-            type: 'POST',
-            data: {
-                item: itemId
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-                // Handle the success response
-                setTimeout(heartImg.style.animation = '', 1000);
-                let getAttr = heartImg.getAttribute('src');
-                if (message_text.hidden == true) {
-                    Show_Message();
+    for (var i = 0; i < heart.length; i++) {
+        heart[i].onclick = function () {
+          var userId = {!! auth()->check() ? auth()->user()->id : 'null' !!};
+            var itemId = this.id;
+            var heartImg = this;
+            if (userId!==null) {
+              var index = wishlist.indexOf(itemId);
+              if (index !== -1) {
+                // Item already exists, remove it
+                wishlist.splice(index, 1);
+              } else {
+                // Item doesn't exist, add it
+                wishlist.push(itemId);
+              }
+              $.ajax({
+                url: '/api/v1/add-to-wishlist/' + userId,
+                type: 'POST',
+                data: {
+                    item: itemId
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    // Handle the success response
+                    setTimeout(heartImg.style.animation = '', 1000);
+                    let getAttr = heartImg.getAttribute('src');
+                    if (message_text.hidden == true) {
+                        Show_Message();
+                    }
+                    if (getAttr == "{{asset('images/heart_filled.png')}}") {
+                        heartImg.src = "{{asset('images/heart_unfilled.png')}}";
+                        message_text.innerHTML = "Removed From My Favorites";
+                    }
+                    else {
+                        heartImg.style.animation = " zoom_in .5s linear";
+                        heartImg.src = "{{asset('images/heart_filled.png')}}";
+                        message_text.innerHTML = "Added to My Favorites";
+                    }
+                },
+                error: function(response) {
+                    // Handle the error response
+                    console.log(response);
                 }
-                if (getAttr == "{{asset('images/heart_filled.png')}}") {
-                    heartImg.src = "{{asset('images/heart_unfilled.png')}}";
-                    message_text.innerHTML = "Removed From My Favorites";
-                }
-                else {
-                    heartImg.style.animation = " zoom_in .5s linear";
-                    heartImg.src = "{{asset('images/heart_filled.png')}}";
-                    message_text.innerHTML = "Added to My Favorites";
-                }
-            },
-            error: function(response) {
-                // Handle the error response
-                console.log(response);
+            });
             }
-        });
+
+            
         }
-        
+      }
 
-        // Store a reference to 'this'
-        
+      //handle filter
+      $.ajax({
+                url: '/api/v1/furniture/filterData',
+                type: 'GET',
+                success: function(response) {
+                  response.data.forEach(function(item) {
+                  if (item.type === 'designers') {
+                    var designers_table = document.getElementById("designers");
+                      // Handle designers data
+                      item.data.forEach(function(designer) {
+                          // td, td, img, div
+                          var tr = document.createElement('tr');
+                          const td = document.createElement('td');
+                          const img = document.createElement('img');
+                          img.src = "IMAGES\\Designers\\" + designer.id + ".png";
+                          img.classList.add('filter-designers');
+                          const radio = document.createElement('input');
+                          radio.type = 'radio';
+                          radio.name = "designer_id[eq]";
+                          radio.value = designer.id;
+                          td.appendChild(radio);
+                          td.appendChild(img);
+                          td.appendChild(document.createTextNode(" "+designer.name+" "));
+                          tr.appendChild(td);
+                          designers_table.appendChild(tr);
+                          
+                      });
+                  } else if (item.type === 'types') {
+                      // Handle types data
+                      var types_table = document.getElementById("types");
+                      console.log(item);
+                      var tr = document.createElement('tr');
+                      var i = 0;
+                      item.data.forEach(function(type) {
+                          // Do something with each type
+                          
+                          if(i==3){
+                            tr = document.createElement('tr');
+                            i=0;
+                          }
+                          const td = document.createElement('td');
+                          const radio = document.createElement('input');
+                          radio.type = 'radio';
+                          radio.name = "type[eq]";
+                          // console.log(type);
+                          radio.value = type;
+                          td.appendChild(radio);
+                          td.appendChild(document.createTextNode(" "+type+" "));
+                          tr.appendChild(td);
+                          types_table.appendChild(tr);
+                          i++;
+                      });
+                  } else if (item.type === 'styles') {
+                    var styles_table = document.getElementById("styles");
+                    var tr = document.createElement('tr');
+                      var i = 0;
+                      // Handle styles data
+                      item.data.forEach(function(style) {
+                          // Do something with each style
+                          if(i==2){
+                            tr = document.createElement('tr');
+                            i=0;
+                          }
+                          const td = document.createElement('td');
+                          const radio = document.createElement('input');
+                          radio.type = 'radio';
+                          radio.name = "style[eq]";
+                          // console.log(type);
+                          radio.value = style;
+                          td.appendChild(radio);
+                          td.appendChild(document.createTextNode(" "+style+" "));
+                          tr.appendChild(td);
+                          styles_table.appendChild(tr);
+                          i++;
+                      });
+                  }
+              });
+                },
+                error: function(response){
+                  console.log(response);
+                }
+              });
 
-        // Send a POST request to the addToWishlist route using AJAX
-        
-    }
-}
 
     };
+
+    $('#filterForm').submit(function(event) {
+    event.preventDefault();
+
+    // Serialize the form data to send as a query parameter
+    formData = $('#filterForm').serialize();
+    fetchFurniture();
+    console.log(formData);
+  });
 
   </script>
 </body>

@@ -24,7 +24,11 @@
         rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Sentic+Display&display=swap" rel="stylesheet">
-@endsection
+
+    <style>
+        
+    </style>
+    @endsection
 
 @section("content")
 
@@ -76,8 +80,8 @@
 
                 @foreach ($boughtProperties as $property)
                 <div class='row item'>
-                    <div class='col-lg-6 col-12 p-0'>
-                        <img class='house_image'src="{{asset('images/properties/1.jpg')}}">
+                    <div class='col-lg-6 col-12 p-0 d-flex align-items-center'>
+                        <img src="{{asset('images/properties/'.$property->id.'/1.jpg')}}" class="img-fluid h-100">
                     </div>
                     <div class='col-lg-6 col-12 p-3'>
                         <h3 class='title'>{{ $property->name }}</h3>
@@ -120,7 +124,7 @@
                 @foreach ($ownedProperties as $property)
                     <!-- @if($property->status == 'pending' ||$property->status == 'listed') -->
                 <div class='row Container_1'>
-                    <div class='col-sm-3 col-3'><img src="{{asset('images/properties/1.jpg')}}" class='Circular_Image Edit'></div>
+                    <div class='col-sm-3 col-3'><img src="{{asset('images/properties/'.$property->id.'/1.jpg')}}" class='Circular_Image Edit'></div>
                     
                     <div class='col-sm-9 col-9'>
                         <img src="{{asset('images/X_Button.png')}}" class='X_Button'>
