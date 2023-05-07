@@ -44,8 +44,6 @@ th:last-child {
     border-radius: 15px;
     width: 101%;
     margin-left: -0.5%;
-
-
 }
 
 select,
@@ -108,7 +106,7 @@ select option[value="decline"],
     width: 95%;
     margin-right: 5%;
     padding: 10 15 0 15;
-    height: 130;
+    height: 135;
 }
 
 .Information {

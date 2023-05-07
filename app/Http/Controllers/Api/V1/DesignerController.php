@@ -26,6 +26,10 @@ class DesignerController extends Controller
     {
         //
     }
+    public function getDesigner_Details(){
+        $designer = Designer::select('id', 'name')->get();
+        return response()->json($designer);
+    }
 
     /**
      * Display the specified resource.

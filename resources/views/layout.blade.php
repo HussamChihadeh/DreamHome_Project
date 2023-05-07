@@ -72,7 +72,7 @@ background-color: #e9e9e9;}</style>
             <a class="nav-link p-lg-3" href="{{ route('furniture') }}">Furniture</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link p-lg-3" href="{{ route('contact_designer') }}">Our Agents</a>
+            <a class="nav-link p-lg-3" href="{{ route('contact_designer') }}">Our designers</a>
           </li>
           @auth
           <li class="nav-item">

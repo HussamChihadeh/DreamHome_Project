@@ -212,7 +212,10 @@
 .Designer_View_Details:hover,
 .View_Furniture:hover,
 .Add_to_Favorites:hover,
-.Order_Furniture:hover,.Log_Out_button:hover,.Sign_In_button:hover,.Sign_Up_Button:hover {
+.Order_Furniture:hover,
+.Log_Out_button:hover,
+.Sign_In_button:hover,
+.Sign_Up_Button:hover{
     scale: 1.05;
 
     color: var(--gold1);
@@ -501,10 +504,12 @@
 
 
 }
-.Sign_In_button,.Sign_Up_Button{
+
+.Sign_In_button,
+.Sign_Up_Button {
     width: fit-content;
     height: fit-content;
-    padding: 12 35 ;
+    padding: 12 35;
     background-color: black;
     border: 1px solid black;
     color: white;
@@ -513,14 +518,53 @@
     cursor: pointer;
     font-size: auto;
     display: block;
-    margin: 15 auto; 
-}
-.Sign_In_button:hover,.Sign_In_button:focus,.Sign_In_button:active,.Sign_Up_Button:hover,.Sign_Up_Button:active{
-    background-color: black!important;
-    border: 1px solid black!important;
-    
+    margin: 15 auto;
 }
 
+.Sign_In_button:hover,
+.Sign_In_button:focus,
+.Sign_In_button:active,
+.Sign_Up_Button:hover,
+.Sign_Up_Button:active {
+    background-color: black !important;
+    border: 1px solid black !important;
+
+}
+
+.Add_Item_Button {
+    width: fit-content;
+    height: fit-content;
+    padding: 8 30;
+    background-color: black;
+    border: 0px solid black;
+    color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+    font-size: auto;
+    display: block;
+    margin: 5 auto 10 auto;
+}
+
+.next,
+.prev {
+    width: fit-content;
+    height: fit-content;
+    padding: 8 20;
+    background-color: white;
+    border: 0px solid white;
+    color: black;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+    font-size: auto;
+    margin: 5 0 10 0;
+}
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------------------------------------------------------------------------- */
 /* --------------------------------------------------------------------------------------------------------------------------------------------- */
 

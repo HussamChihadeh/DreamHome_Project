@@ -40,15 +40,11 @@
             <div class="show messenger-tab users-tab app-scroll" data-view="users">
                 {{-- Favorites --}}
                 <div class="favorites-section">
-                    <p class="messenger-title"><span>Favorites</span></p>
+                    <p class="messenger-title"><span>My Designers</span></p>
                     <div class="messenger-favorites app-scroll-hidden"></div>
                 </div>
                 {{-- Saved Messages --}}
-                <p class="messenger-title"><span>Your Space</span></p>
-                {!! view('Chatify::layouts.listItem', ['get' => 'saved']) !!}
-                {{-- Contact --}}
-                <p class="messenger-title"><span>All Messages</span></p>
-                <div class="listOfContacts" style="width: 100%;height: calc(100% - 272px);position: relative;"></div>
+               
             </div>
             {{-- ---------------- [ Search Tab ] ---------------- --}}
             <div class="messenger-tab search-tab app-scroll" data-view="search">
@@ -63,7 +59,7 @@
 
     {{-- ----------------------Messaging side---------------------- --}}
 
-    <div class="messenger-messagingView" >
+    <div class="messenger-messagingView">
         {{-- header title [conversation name] amd buttons --}}
         <div class="m-header m-header-messaging shadow_m_header">
             <nav class="chatify-d-flex chatify-justify-content-between chatify-align-items-center">
@@ -124,3 +120,24 @@
 
 @include('Chatify::layouts.modals')
 @include('Chatify::layouts.footerLinks')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+
+// Get the URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+
+// Get the value of the 'House_id' parameter
+const houseId = urlParams.get('id');
+
+// Split the URL path to separate the two values
+const urlParts = window.location.pathname.split('/');
+
+// Extract the values
+const id = urlParts[urlParts.length - 1];
+const value = houseId;
+
+// alert('Designer_id: ' + id); // Output: id: 21
+// alert('House_id: ' + value); // Output: House_id: 3
+
+</script>

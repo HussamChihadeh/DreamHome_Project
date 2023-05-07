@@ -9,6 +9,11 @@
         /* word-spacing: 0.01em !important; */
     }
 </style>
+
+<link rel="stylesheet" href="{{asset('css/buttons.css')}}">
+
+@section("title", "Assign")
+
 @endsection
 @section("content")
 
@@ -60,11 +65,12 @@
             <div class="Group_container " id="Group_container">
                     <div class="pagination d-flex justify-content-between">
                         <button class="prev">&lt;</button>
+                        <button id="add-item-btn" class="Add_Item_Button">add item</button>
+
                         <button class="next">&gt;</button>
                     </div>
                 </div>
                 <div class="table-responsive">
-                <button id="add-item-btn">add item</button>
                     <table class="table" style="font-size: 0.9vw; text-align: center;" id="Requests_Table">
                         <thead>
                             <tr>

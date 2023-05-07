@@ -21,6 +21,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@600&family=Signika:wght@500;600&display=swap" rel="stylesheet">
 
   
+  <style>body::-webkit-scrollbar {
+  z-index: 0;
+  width: 10px;
+  background-color:#f8f8f8;
+
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-image: -webkit-linear-gradient(var(--gold1), var(--gold2));
+  border-radius: 20px;
+  border: 3px solid #f8f8f8;
+  z-index: 0;
+
+}
+body{
+
+background-color: #e9e9e9;}</style>
 
   
 </head>
@@ -31,7 +52,7 @@
   <nav class="navbar navbar-expand-lg fixed-top ">
     <div class="container">
       <a class="navbar-brand me-4" href="#">
-        <img src="{{asset('images/image_logo.png')}}" alt="" height="40" width="30">
+        <img src="{{asset('images/black_image_logo.png')}}" alt="" height="40" width="30">
       </a>
       <a href="" class="logo me-4 d-none d-md-block">Dream Home</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main" aria-controls="main"
@@ -56,7 +77,7 @@
             <form class="nav-link p-lg-3" action="{{ route('logout') }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button class="logout_nav_button" type="submit">Logout</button>
+                <button class="logout_nav_button" type="submit">LOG OUT</button>
             </form>
           </li>
           <!-- <li class="nav-item">

@@ -94,7 +94,7 @@
     
     var Nav_Buttons = document.querySelectorAll(".nav-link");
 for (var i = 0; i < Nav_Buttons.length; i++) {
-  Nav_Buttons[i].style.transform = "translateX(50px)";
+  Nav_Buttons[i].style.transform = "translateX(88px)";
 }
 
     </script>

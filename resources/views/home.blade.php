@@ -20,7 +20,7 @@
 
 @section("content")
 <div style="height: 13.4%;"></div>
-<div id="on_load"></div>
+<!-- <div id="on_load"></div> -->
 
 <div class="row">
   <div style="width: 40%;">
@@ -141,16 +141,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var on_load = document.getElementById("on_load");
-    var body = document.querySelector('body');
-    body.style.overflow = 'hidden';
-    setTimeout(function() {
-      on_load.style.display = "none";
-      body.style.overflowY = 'auto';
-    }, 3500);
-  });
-
   var Properties_Information = document.getElementById('Properties_Information');
 
   var map = L.map('map').setView([33.901701, 35.478835], 12);
@@ -192,7 +182,6 @@
 
 
   });
-  window.onload = Nav_Editor("transparent");
 
   var searchInput = searchControl._input;
   searchInput.style.border = "0px";
@@ -211,6 +200,9 @@
 
   // Load Property
   window.onload = function() {
+    if (window.pageYOffset === 0) {
+    Nav_Editor("transparent");
+  }
     var newPropertyHtml = "<h3 class='title'></h3><img src='images\\X_Button.png'  class='X_button' id='Close_Property_Details_button'><h5 class='description'>" +
       "</h5><div class='line-1'>" +
       "</div><h5 class='city'></h5><div class='line-1'></div><div class='row'>" +
@@ -370,8 +362,8 @@
     Logo.style.fontSize = "25";
     Logo.style.marginTop = "10";
     var Navbar = document.querySelector("nav");
-    Navbar.style.boxShadow="none";
-    
+    Navbar.style.boxShadow = "none";
+
   }
 
 
@@ -418,5 +410,16 @@
       });
     }
   });
+
+  window.addEventListener('scroll', function() {
+  if (isAtTopOfPage()) {
+    Nav_Editor("transparent");
+ 
+  }
+});
+
+function isAtTopOfPage() {
+  return window.scrollY === 0;
+}
 </script>
 @endsection

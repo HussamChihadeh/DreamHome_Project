@@ -21,6 +21,27 @@
 
   
 
+  <style>body::-webkit-scrollbar {
+  z-index: 0;
+  width: 10px;
+  background-color:#f8f8f8;
+
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-image: -webkit-linear-gradient(var(--gold1), var(--gold2));
+  border-radius: 20px;
+  border: 3px solid #f8f8f8;
+  z-index: 0;
+
+}
+body{
+
+background-color: #e9e9e9;}</style>
   
 </head>
 
@@ -52,7 +73,7 @@
             <a class="nav-link p-lg-3" href="{{ route('furniture') }}">Furniture</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link p-lg-3" href="{{ route('contact_designer') }}">Our Agents</a>
+            <a class="nav-link p-lg-3" href="{{ route('contact_designer') }}">Our designers</a>
           </li>
           @auth
           <li class="nav-item">
