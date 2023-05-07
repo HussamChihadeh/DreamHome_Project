@@ -89,6 +89,8 @@
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const property_id = urlParams.get('id');
     var Container = document.getElementById("Designers");
     $.ajax({
         url: "/api/v1/designers",
@@ -160,9 +162,10 @@
             for (var i = 0; i < View_Details_Button.length; i++) {
                 (function(i) {
                     View_Details_Button[i].onclick = function() {
+                        
                         var buttonId = this.id;
                         // alert(buttonId);
-                        const url1 = "/chatify/" + buttonId+"";
+                        const url1 = "/chatify/" + buttonId+"?property_id="+property_id;
                             window.location.href = url1;
                         if (View_Details_Button[i].innerHTML == "Show More") {
 
@@ -210,7 +213,7 @@
 
     // });
 </script>
-<script>
+<!-- <script>
     var View_Designer = document.querySelectorAll(".Designer_View_Details");
     var i = 0;
 
@@ -234,5 +237,5 @@
             console.log(error);
         }
     });
-</script>
+</script> -->
 </body>

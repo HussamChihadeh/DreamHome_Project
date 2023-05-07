@@ -92,10 +92,10 @@
                         <div class='line-1'></div>
                         <div class='row'>
                             <div class='col-xl-6 col-12 p-2'>
-                                <button type='submit'class='Contact_Designer_button_Profile_Page'>Contact Designer</button>
+                                <button class='Contact_Designer_button_Profile_Page' id="{{$property->id}}">Contact Designer</button>
                             </div>
                             <div class='col-xl-6 col-12 p-2'>
-                                <button type='submit' class='details_button_Profile_Page' id="{{$property->id}}">View Details</button>
+                                <button class='details_button_Profile_Page' id="{{$property->id}}">View Details</button>
                             </div>
                         </div>
                     </div>
@@ -150,6 +150,12 @@
         $(document).on('click', '.details_button_Profile_Page', function() {
             var propertyId = $(this).attr('id');  
             var url1 = "/rent/Property_details?id=" + propertyId;
+            window.location.href = url1;
+        });
+
+        $(document).on('click', '.Contact_Designer_button_Profile_Page', function() {
+            var propertyId = $(this).attr('id');  
+            var url1 = "/contact_designer?id=" + propertyId;
             window.location.href = url1;
         });
 
