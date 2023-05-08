@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Models\Designer;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 use App\Models\User;
@@ -109,10 +111,19 @@ class UserController extends Controller
     public function showProfile()
     {
         $user = Auth::user();
+        $designers="";
         $ownedProperties = $user->properties;
         $boughtProperties = $user->boughtProperties;
-        return view('profile', compact('ownedProperties', 'boughtProperties'));
-        // return view('profile', compact('properties'));
+        $favoriteId = DB::table('ch_favorites')
+                   ->where('user_id', $user->id)
+                   ->pluck('favorite_id');
+
+        if(!empty($favoriteId)){
+            $designers = Designer::whereIn('id', $favoriteId)->get();
+        }
+        return view('profile', compact('ownedProperties', 'boughtProperties', 'designers'));
+
+        
     }
 
     public function getWishlist(Request $request)

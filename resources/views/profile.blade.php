@@ -118,6 +118,21 @@
                 </form> -->
             <div class="My_Designers_Information" id="My_Designers_Information">
                 <p style="margin-left: -20;">My Designers</p>
+                @foreach ($designers as $d)
+                <div class='row Container_1'>
+                    <div class='col-sm-3 col-3'>
+                        <img src="{{asset('images/designers/'.$d->id.'.png')}}" class='Circular_Image'>
+                    </div>
+                    <div class='col-sm-9 col-9'>
+                    <!-- <img src='IMAGES\\X_Button.png' class='X_Button'> -->
+                        <div class='Info1'>
+                            <h7>{{$d->name}} </h7>
+                        </div>
+                    </div>
+                </div>
+                
+                    <!-- <p>{{ $d->name }}</p> -->
+                @endforeach
             </div>
             <div class="Properties_Approval" id="Properties_Approval">
                 <p style="margin-left: -20;">Properties Approval</p>
@@ -127,7 +142,7 @@
                     <div class='col-sm-3 col-3'><img src="{{asset('images/properties/'.$property->id.'/1.jpg')}}" class='Circular_Image Edit'></div>
                     
                     <div class='col-sm-9 col-9'>
-                        <img src="{{asset('images/X_Button.png')}}" class='X_Button'>
+                        <!-- <img src="{{asset('images/X_Button.png')}}" class='X_Button'> -->
                         <div class='Info1'>
                             <h6>{{ $property->name }}</h6>
                             <span> Status: {{ $property->status }}</span> 
@@ -194,20 +209,20 @@
         // }
    
         //Load Designers
-        var My_Designers_Information = document.getElementById("My_Designers_Information");
-        for (var i = 1; i < 2; i++) {
-            var newDesignerHtml = "<div class='row Container_1'>" +
-                "<div class='col-sm-3 col-3'><img src='people-collage-design - Copy.jpg' class='Circular_Image'>" +
-                "</div>" +
-                "<div class='col-sm-9 col-9'>" +
-                "<img src='IMAGES\\X_Button.png' class='X_Button'>" +
-                "<div class='Info1'>" +
-                "<h7>Eny Lee </h7>" +
-                "</div>" +
-                "</div>" +
-                "</div>";
-            My_Designers_Information.innerHTML += newDesignerHtml;
-        }
+        // var My_Designers_Information = document.getElementById("My_Designers_Information");
+        // for (var i = 1; i < 2; i++) {
+        //     var newDesignerHtml = "<div class='row Container_1'>" +
+        //         "<div class='col-sm-3 col-3'><img src='people-collage-design - Copy.jpg' class='Circular_Image'>" +
+        //         "</div>" +
+        //         "<div class='col-sm-9 col-9'>" +
+        //         "<img src='IMAGES\\X_Button.png' class='X_Button'>" +
+        //         "<div class='Info1'>" +
+        //         "<h7>Eny Lee </h7>" +
+        //         "</div>" +
+        //         "</div>" +
+        //         "</div>";
+        //     My_Designers_Information.innerHTML += newDesignerHtml;
+        // }
 
        
         var X_Button = document.querySelectorAll(".X_Button");

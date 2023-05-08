@@ -25,7 +25,7 @@ class DesignerController extends Controller
         $user = Auth::user();
         $designer = Designer::where('id', $user->id)->first();
         $furniture = Furniture::where('designer_id', $user->id)->get();
-        return view('designer_profile', compact('designer', 'furniture'));
+        return view('Designer_Profile', compact('designer', 'furniture'));
     }
 
    
