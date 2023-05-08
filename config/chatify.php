@@ -16,6 +16,7 @@ return [
     */
     'storage_disk_name' => env('CHATIFY_STORAGE_DISK', 'public'),
 
+    
     /*
     |-------------------------------------
     | Routes configurations

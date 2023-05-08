@@ -76,7 +76,7 @@ background-color: #e9e9e9;}</style>
           </li> -->
           @auth
           <li class="nav-item">
-            <a class="nav-link p-lg-3" href="{{ route('profile') }}">profile</a>
+            <a class="nav-link p-lg-3" href="{{ route('designer_profile') }}">profile</a>
           </li>
           @else
           <li class="nav-item">

@@ -6,6 +6,8 @@ use App\Models\Designer;
 use App\Http\Requests\StoreDesignerRequest;
 use App\Http\Requests\UpdateDesignerRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Furniture;
+use Illuminate\Support\Facades\Auth;
 
 class DesignerController extends Controller
 {
@@ -16,6 +18,14 @@ class DesignerController extends Controller
     {
         $designers = Designer::all();
         return response()->json($designers);
+    }
+
+    public function showProfile()
+    {
+        $user = Auth::user();
+        $designer = Designer::where('id', $user->id)->first();
+        $furniture = Furniture::where('designer_id', $user->id)->get();
+        return view('designer_profile', compact('designer', 'furniture'));
     }
 
    

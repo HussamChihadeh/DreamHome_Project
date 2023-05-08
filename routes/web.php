@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\DesignerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\PropertyController;
@@ -123,6 +124,10 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
+Route::group(['middleware' => 'auth', 'designer'], function () {
+    Route::get('/designer_profile', [DesignerController::class, 'showProfile'])->name('designer_profile');
+});
+
 Route::group(['middleware' => ['auth', 'admin']], function () {
     // routes that only the admin should access
     Route::get("/admin_customers", function () {
@@ -142,8 +147,8 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         return view("Admin_Furniture");
     })->name("admin_furniture");
 });
-Route::middleware(['auth'])->group(function () {
-    Route::post('/cart/add', [CartController::class, 'addItem'])->name('cart.add');
-    Route::put('/cart/{cart}', [CartController::class, 'updateItem'])->name('cart.update');
-    Route::delete('/cart/{cart}', [CartController::class, 'deleteItem'])->name('cart.delete');
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::post('/cart/add', [CartController::class, 'addItem'])->name('cart.add');
+//     Route::put('/cart/{cart}', [CartController::class, 'updateItem'])->name('cart.update');
+//     Route::delete('/cart/{cart}', [CartController::class, 'deleteItem'])->name('cart.delete');
+// });
