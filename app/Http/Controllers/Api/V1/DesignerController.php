@@ -7,7 +7,9 @@ use App\Http\Requests\StoreDesignerRequest;
 use App\Http\Requests\UpdateDesignerRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Furniture;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DesignerController extends Controller
 {
@@ -25,7 +27,14 @@ class DesignerController extends Controller
         $user = Auth::user();
         $designer = Designer::where('id', $user->id)->first();
         $furniture = Furniture::where('designer_id', $user->id)->get();
-        return view('Designer_Profile', compact('designer', 'furniture'));
+
+        $user_id= DB::table("ch_favorites")->where('user_id',$user->id)->pluck("favorite_id");
+        $users="";
+        if(!empty($user_id)){
+            $users=User::whereIn('id',$user_id)->get();
+        }
+        return view('designer_profile', compact('designer', 'furniture','users'));
+
     }
 
    

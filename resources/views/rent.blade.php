@@ -33,6 +33,7 @@
   .pagination li,
   .pagination button {
     height: 50px;
+    margin-top: 2.5;
     width: 50px;
     display: flex;
     justify-content: center;

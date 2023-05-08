@@ -63,12 +63,16 @@ background-color: #e9e9e9;}</style>
           <li class="nav-item">
             <a class="nav-link p-lg-3 active" aria-current="page" href="{{ route('home') }}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link p-lg-3" href="{{ route('rent') }}">Rent</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link p-lg-3" href="">Buy</a>
-          </li>
+          <li class="nav-item  p-lg-2 dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Properties
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{{ route('rent') }}">Buy\Rent</a></li>
+            <li><a class="dropdown-item" href="/sell">Sell</a></li>
+
+          </ul>
+        </li>
           <li class="nav-item">
             <a class="nav-link p-lg-3" href="{{ route('furniture') }}">Furniture</a>
           </li>

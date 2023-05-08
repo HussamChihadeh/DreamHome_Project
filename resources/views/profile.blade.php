@@ -1,5 +1,5 @@
 @extends("layout")
-@section("title", "Sign in")
+@section("title", "My Profile")
 
 @section("head")
     <link rel="stylesheet" href="{{asset('css/profile.css')}}">

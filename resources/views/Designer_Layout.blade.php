@@ -59,11 +59,9 @@ background-color: #e9e9e9;}</style>
       </button>
       <div class="collapse navbar-collapse" id="main">
         <ul class="navbar-nav ms-auto mb-2 mt-1 mb-lg-0">
+          
           <li class="nav-item">
-            <a class="nav-link p-lg-3 active" aria-current="page" href="{{ route('home') }}">My Designs</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link p-lg-3" href="{{ route('chatify') }}">Chat</a>
+            <a class="nav-link p-lg-3 active" href="{{ route('chatify') }}">Chat</a>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link p-lg-3" href="">Buy</a>
@@ -75,15 +73,24 @@ background-color: #e9e9e9;}</style>
             <a class="nav-link p-lg-3" href="{{ route('contact_designer') }}">Our designers</a>
           </li> -->
           @auth
+
           <li class="nav-item">
             <a class="nav-link p-lg-3" href="{{ route('designer_profile') }}">profile</a>
+
           </li>
           @else
-          <li class="nav-item">
+          <li class="nav-item" style="border:1px solid black" >
             <a class="nav-link p-lg-3" href="{{ route('login') }}">Sign In</a>
           </li>
           @endauth
 
+          <li class="nav-item">
+            <form class="nav-link p-lg-3" style="margin-bottom:0;" action="{{ route('logout') }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="logout_nav_button"type="submit">LOG OUT</button>
+            </form>
+          </li>
         </ul>
 
       </div>
@@ -92,72 +99,6 @@ background-color: #e9e9e9;}</style>
     
   @yield("content")
 
-  <div class="footer pt-5 pb-5 text-white-50 text-center text-md-start">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 col-lg-4">
-                    <div class="info mb-5">
-                        <img src="{{asset('images/white_image_logo.png')}}" alt="" class="mb-4 img-fluid" height="40" width="30">
-                        <p class="mb-5">Easiest Way to find your dream place</p>
-                        <div class="copyright">
-                            Created By <span>XXXX</span>
-                            <div>&copy; 2023 - <span>Capstone Project</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-2">
-                    <div class="links">
-                        <h5 class="text-light">Links</h5>
-                        <ul class="list-unstyled lh-lg">
-                            <li>Home</li>
-                            <li>Rent</li>
-                            <li>Buy</li>
-                            <li>Furniture</li>
-                            <li>Our Agents</li>
-                            <li>Sign In</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-2">
-                    <div class="links">
-                        <h5 class="text-light">Links</h5>
-                        <ul class="list-unstyled lh-lg">
-                            <li>Home</li>
-                            <li>Rent</li>
-                            <li>Buy</li>
-                            <li>Furniture</li>
-                            <li>Our Agents</li>
-                            <li>Sign In</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="contactUs">
-                        <h5 class="text-light">Contact Us</h5>
-                        <p class="lh-lg mt-3 mb-5">Get in touch with Us</p>
-                        <a href="mailto:dreamhome@gmail.com" class="btn rounded-pill text-light">dreamhome@gmail.com</a>
-                        <ul class="d-flex mt-5 list-unstyled gap-3">
-                            <li>
-                                <a href="https://www.facebook.com" class="d-block text-light">
-                                    <i class="fa-brands fa-facebook fa-lg facebook p-2"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.facebook.com" class="d-block text-light">
-                                    <i class="fa-brands fa-instagram fa-lg instagram rounded-circle p-2"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="https://www.facebook.com" class="d-block text-light">
-                                    <i class="fa-brands fa-twitter fa-lg twitter rounded-circle p-2"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="{{asset('bootstrap_js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('bootstrap_js/all.min.js')}}"></script>
