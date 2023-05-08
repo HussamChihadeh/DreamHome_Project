@@ -5,15 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class cart extends Model
+class Cart extends Model
 {
     use HasFactory;
+
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
-    public function furniture()
+
+    /**
+     * Get the property for which the tour was requested.
+     */
+    public function property()
     {
-        return $this->belongsTo(Furniture::class);
+        return $this->belongsTo(Property::class, 'property_id');
     }
 }
