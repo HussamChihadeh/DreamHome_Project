@@ -63,6 +63,8 @@
                                 <th>Location</th>
                                 <th>Age</th>
                                 <th>Experience</th>
+                                <th>Bio</th>
+                                <th>LinkedIn</th>
                             </tr>
                         </thead>
                     </table>
@@ -110,7 +112,9 @@
                             "<td>"+designer.phone_number+"</td>" +
                             "<td>"+designer.address+"</td>" +
                             "<td>"+designer.age+"</td>" +
-                            "<td>"+designer.experience+"</td></tr>"; 
+                            "<td>"+designer.experience+"</td>" +
+                            "<td>"+designer.bio+"</td>" +
+                            "<td>"+designer.linkedin+"</td></tr>"; 
 
                             Requests_Table.appendChild(tbody);
 
@@ -214,6 +218,12 @@
                 const experienceCell = document.createElement('td');
                 experienceCell.innerHTML = '<input type="number" name="experience" id="experience">';
 
+                const bioCell = document.createElement('td');
+                bioCell.innerHTML = '<input type="text" name="bio" id="bio">';
+
+                const linkedinCell = document.createElement('td');
+                linkedinCell.innerHTML = '<input type="text" name="linkedin" id="linkedin">';
+
                 const imageCell = document.createElement('td');
                 imageCell.innerHTML = `
                     <button class="choose-file-btn">Choose File</button>
@@ -239,8 +249,8 @@
                 newRow.appendChild(addressCell);
                 newRow.appendChild(ageCell);
                 newRow.appendChild(experienceCell);
-                // newRow.appendChild(priceCell);
-                // newRow.appendChild(designerCell);
+                newRow.appendChild(bioCell);
+                newRow.appendChild(linkedinCell);
                 // newRow.appendChild(quantityCell);
                 newRow.appendChild(imageCell);
                 newRow.appendChild(saveCell);
@@ -263,6 +273,8 @@
                     const address = newRow.querySelector('input[name="address"]').value;
                     const age = newRow.querySelector('input[name="age"]').value;
                     const experience = newRow.querySelector('input[name="experience"]').value;
+                    const bio = newRow.querySelector('input[name="bio"]').value;
+                    const linkedin = newRow.querySelector('input[name="linkedin"]').value;
                     // const date = newRow.querySelector('input[name="date"]').value;
                     // const designer_id = newRow.querySelector('input[name="designer_id"]').value;
                     // const quantity = newRow.querySelector('input[name="quantity"]').value;
@@ -273,9 +285,8 @@
                     formData.append('address', address);
                     formData.append('age', age);
                     formData.append('experience', experience);
-                    // formData.append('date', date);
-                    // formData.append('designer_id', designer_id);
-                    // formData.append('quantity', quantity);
+                    formData.append('bio', bio);
+                    formData.append('linkedin', linkedin);
                     console.log(fileInput);
                     if (fileInput.files.length > 0) {
                         formData.append('image', fileInput.files[0]);
@@ -293,15 +304,15 @@
     
     // Set the inner HTML of the new row to the entered data
                             newRow.innerHTML = `
+                                <td><p></p></td>
                                 <td>${name}</td>
                                 <td>${email}</td>
                                 <td>${phone_number}</td>
                                 <td>${address}</td>
                                 <td>${age}</td>
                                 <td>${experience}</td>
-                                // <td>${date}</td>
-                                // <td>${designer_id}</td>
-                                // <td>${quantity}</td>
+                                <td>${bio}</td>
+                                <td>${linkedin}</td>
                             `;
                             
                             // Replace the row of inputs with the new row

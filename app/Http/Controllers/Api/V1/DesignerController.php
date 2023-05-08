@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateDesignerRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Furniture;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -34,30 +35,30 @@ class DesignerController extends Controller
             'address' => 'required|string',
             'age' => 'required',
             'experience' => 'required',
+            'bio' => 'required',
+            'linkedin' => 'required',
         ]);
         try {
+            $user = User::create([
+                'name' => $validatedData['name'],
+                'email' => strtolower(str_replace(' ', '', $validatedData['name'])) . '@Designer.org',
+                'password' => Hash::make("12345678"),
+                'address' => $validatedData['address'] ?? null,
+                'phone_number' => $validatedData['phone_number'] ?? null,
+            ]);
+            
             $designer = Designer::create([
+                'id' => $user->id, 
                 'name' => $validatedData['name'],
                 'email' => $validatedData['email'],
                 'phone_number' => $validatedData['phone_number'],
                 'address' => $validatedData['address'],
                 'age' => $validatedData['age'] ,
                 'experience' => $validatedData['experience'],
+                'bio' => $validatedData['bio'],
+                'linkedin' => $validatedData['linkedin'],
             ]);
-            // if ($request->hasFile('images')) {
-            //     $images = $request->file('images');
-            //     $furnitureItemFolderPath = public_path('images/designers/' . $furniture->id);
-            //     if (!file_exists($furnitureItemFolderPath)) {
-            //         mkdir($furnitureItemFolderPath, 0777, true);
-            //     }
-            //     $i = 1;
-            //     foreach ($images as $image) {
-            //         $fileName = $i . '.' . $image->getClientOriginalExtension();
-            //         $image->move($furnitureItemFolderPath, $fileName);
-            //         $i++;
-            //     }
-            // }
-
+         
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 // $designerId = $request->input('designer_id');

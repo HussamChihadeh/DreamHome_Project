@@ -16,6 +16,8 @@ class Designer extends Model
         'phone_number',
         'age',
         'experience',
+        'bio',
+        'linkedin'
     ];
 
     public function furniture(){

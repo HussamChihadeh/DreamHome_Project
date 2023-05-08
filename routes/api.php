@@ -36,11 +36,8 @@ Route::group(["prefix" => "v1", "namespace"=>"App\Http\Controllers\Api\V1"], fun
     Route::put('properties/assign/{id}', 'PropertyController@assignProperty');
     Route::get('furniture/filterData', 'FurnitureController@filterData');
     Route::post('furniture/storeItem', 'FurnitureController@storeItem');
-<<<<<<< HEAD
     Route::post('designers/storeDesigner', 'DesignerController@storeDesigner');
-=======
     Route::post('furniture/addToCart', 'CartController@addToCart');
->>>>>>> 935f9b5d5ddf7992cb8e9091a48073135a3a9d47
     Route::apiResource("properties", PropertyController::class);
     Route::apiResource("furniture", FurnitureController::class);
     Route::apiResource("designers", DesignerController::class);
