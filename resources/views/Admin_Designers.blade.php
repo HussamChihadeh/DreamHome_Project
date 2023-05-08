@@ -184,10 +184,15 @@
 
         <script>
             const table = document.getElementById('Requests_Table');
-            
+            const tbodyyy = table.getElementsByTagName('tbody')[0];
             const addItemBtn = document.getElementById('add-item-btn');
             console.log(table);
             // console.log(tbodyy);
+            if (!tbodyyy) {
+                const newTbody = document.createElement('tbody');
+                table.appendChild(newTbody);
+                console.log("hello")
+            }
             
 
             // Add an event listener to the button
@@ -262,7 +267,12 @@
 
                 // Add the new row to the table
                 console.log(newRow);
-                tbodyy.insertBefore(newRow, tbody.firstChild);
+                
+                if (tbodyy.firstChild) {
+                    tbodyy.insertBefore(newRow, tbodyy.firstChild);
+                } else {
+                    tbodyy.appendChild(newRow);
+                }
 
                 // Add an event listener to the "Save" button
                 const saveBtn = newRow.querySelector('.save-btn');

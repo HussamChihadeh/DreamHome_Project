@@ -61,6 +61,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Style</th>
+                                <th>Type</th>
                                 <th>Description</th>
                                 <th>Material</th>
                                 <th>Made in</th>
@@ -110,6 +111,7 @@
                             tbody.innerHTML += "<tr>" +
                                                 "<td>"+property.name+"</td>" +
                                                 "<td>"+property.style+"</td>" +
+                                                "<td>"+property.type+"</td>" +
                                                 "<td>"+property.description+"</td>" +
                                                 "<td>"+property.material+"</td>" +
                                                 "<td>"+property.place+"</td>" +
@@ -162,12 +164,17 @@
             
         <script>
             const table = document.getElementById('Requests_Table');
-            
+            const tbodyyy = table.getElementsByTagName('tbody')[0];
+
             const addItemBtn = document.getElementById('add-item-btn');
             console.log(table);
             // console.log(tbodyy);
             
-
+            if (!tbodyyy) {
+                const newTbody = document.createElement('tbody');
+                table.appendChild(newTbody);
+                console.log("hello")
+            }
             // Add an event listener to the button
             addItemBtn.addEventListener('click', () => {
                 // Create a new row element
@@ -180,6 +187,9 @@
 
                 const styleCell = document.createElement('td');
                 styleCell.innerHTML = '<input type="text" name="style" id="style">';
+
+                const typeCell = document.createElement('td');
+                typeCell.innerHTML = '<input type="text" name="type" id="type">';
 
                 const descCell = document.createElement('td');
                 descCell.innerHTML = '<input type="text" name="description" id="description">';
@@ -222,6 +232,7 @@
                 // Add the new cell elements to the new row
                 newRow.appendChild(nameCell);
                 newRow.appendChild(styleCell);
+                newRow.appendChild(typeCell);
                 newRow.appendChild(descCell);
                 newRow.appendChild(materialCell);
                 newRow.appendChild(placeCell);
@@ -239,13 +250,18 @@
 
                 // Add the new row to the table
                 console.log(newRow);
-                tbodyy.insertBefore(newRow, tbody.firstChild);
+                if (tbodyy.firstChild) {
+                    tbodyy.insertBefore(newRow, tbodyy.firstChild);
+                } else {
+                    tbodyy.appendChild(newRow);
+                }
 
                 // Add an event listener to the "Save" button
                 const saveBtn = newRow.querySelector('.save-btn');
                 saveBtn.addEventListener('click', () => {
                     const name = newRow.querySelector('input[name="name"]').value;
                     const style = newRow.querySelector('input[name="style"]').value;
+                    const type = newRow.querySelector('input[name="type"]').value;
                     const description = newRow.querySelector('input[name="description"]').value;
                     const price = newRow.querySelector('input[name="price"]').value;
                     const material = newRow.querySelector('input[name="material"]').value;
@@ -256,6 +272,7 @@
                     const formData = new FormData();
                     formData.append('name', name);
                     formData.append('style', style);
+                    formData.append('type', type);
                     formData.append('description', description);
                     formData.append('price', price);
                     formData.append('material', material);
@@ -282,6 +299,7 @@
                             newRow.innerHTML = `
                                 <td>${name}</td>
                                 <td>${style}</td>
+                                <td>${type}</td>
                                 <td>${description}</td>
                                 <td>${price}</td>
                                 <td>${material}</td>

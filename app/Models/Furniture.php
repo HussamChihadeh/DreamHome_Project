@@ -13,6 +13,7 @@ class Furniture extends Model
     protected $fillable = [
         'name',
         'style',
+        'type',
         'description',
         'material',
         'place',

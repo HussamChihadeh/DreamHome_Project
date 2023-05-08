@@ -46,7 +46,7 @@ class DesignerController extends Controller
                 'address' => $validatedData['address'] ?? null,
                 'phone_number' => $validatedData['phone_number'] ?? null,
             ]);
-            
+
             $designer = Designer::create([
                 'id' => $user->id, 
                 'name' => $validatedData['name'],
@@ -66,7 +66,7 @@ class DesignerController extends Controller
                 if (!file_exists($folderPath)) {
                     mkdir($folderPath, 0777, true);
                 }
-                $fileName = $designer->id . '.' . $image->getClientOriginalExtension();
+                $fileName = $user->id . '.' . $image->getClientOriginalExtension();
                 $image->move($folderPath, $fileName);
             }
         } catch (ValidationException $e) {

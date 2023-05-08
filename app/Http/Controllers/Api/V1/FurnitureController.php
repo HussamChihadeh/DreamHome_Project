@@ -23,7 +23,7 @@ class FurnitureController extends Controller
         $filter = new FurnitureQuery();
         $queryItems = $filter->transform($request);
         if(count($queryItems)==0){
-            $furniture = Furniture::select('id', 'name','price', 'style', 'material', 'designer_id', 'date', 'place', 'quantity', 'description')->paginate(15);
+            $furniture = Furniture::select('id', 'name','price', 'style', 'type','material', 'designer_id', 'date', 'place', 'quantity', 'description')->paginate(15);
             return response()->json($furniture);
         }
         else{
@@ -49,6 +49,7 @@ class FurnitureController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:250',
             'style' => 'required|string',
+            'type' => 'required|string',
             'description' => 'required|string',
             'material' => 'required|string',
             'place' => 'required|string',
@@ -66,6 +67,7 @@ class FurnitureController extends Controller
             $furniture = Furniture::create([
                 'name' => $validatedData['name'],
                 'style' => $validatedData['style'],
+                'type' => $validatedData['type'],
                 'description' => $validatedData['description'],
                 'material' => $validatedData['material'],
                 'place' => $validatedData['place'] ,

@@ -97,7 +97,7 @@
         type: "GET",
         success: function(designers) {
             // console.log(designers);
-            $.each(designers, function(index, designer) {
+            $.each(designers.data, function(index, designer) {
                 console.log(designer);
                 Container.innerHTML += "<div class='col-md-6 col-12  p-3'>" +
                     "<div class='Designer_Container' id='Container_'" + designer.id + ">" +
