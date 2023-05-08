@@ -35,6 +35,7 @@ Route::group(["prefix" => "v1", "namespace"=>"App\Http\Controllers\Api\V1"], fun
     Route::put('properties/assign/{id}', 'PropertyController@assignProperty');
     Route::get('furniture/filterData', 'FurnitureController@filterData');
     Route::post('furniture/storeItem', 'FurnitureController@storeItem');
+    Route::post('designers/storeDesigner', 'DesignerController@storeDesigner');
     Route::apiResource("properties", PropertyController::class);
     Route::apiResource("furniture", FurnitureController::class);
     Route::apiResource("designers", DesignerController::class);

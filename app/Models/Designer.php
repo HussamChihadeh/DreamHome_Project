@@ -9,6 +9,15 @@ class Designer extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'email',
+        'address',
+        'phone_number',
+        'age',
+        'experience',
+    ];
+
     public function furniture(){
         return $this->hasMany(Furniture::class);
     }

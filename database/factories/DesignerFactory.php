@@ -21,6 +21,7 @@ class DesignerFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             "age" => $this->faker->numberBetween(24, 50),
+            "address" => $this->faker->city(),
             "experience" =>$this->faker->numberBetween(3,9),
             "phone_number" =>$this->faker->phoneNumber(),
             "bio" => $this->faker->text(),

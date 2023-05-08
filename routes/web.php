@@ -143,6 +143,10 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         return view("Admin_Assign");
     })->name("assign");
 
+    Route::get("/admin_designer", function () {
+        return view("Admin_Designers");
+    })->name("admin_designer");
+
     Route::get("/admin_furniture", function () {
         return view("Admin_Furniture");
     })->name("admin_furniture");
