@@ -61,32 +61,49 @@ class PropertyController extends Controller
 
     public function sell(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'name' => 'required|string|max:255',
-        //     'email' => 'required|email|unique:users,email|max:255',
-        //     // add more validation rules as needed
-        // ]);
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'description' => 'required',
+            'user_id' => 'required',
+            'bedrooms' => 'required|numeric',
+            'bathrooms' => 'required|numeric',
+            'status' => 'required',
+            'parking' => 'required|numeric',
+            'type' => 'required',
+            'buy_or_rent' => 'required',
+            'built_in' => 'required|numeric',
+            'area' => 'required|numeric',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'province' => 'required',
+            'city' => 'required',
+            'street' => 'required',
+            // add more validation rules as needed
+        ], [
+            'required' => 'The :attribute field is required.',
+        ]);
 
         // Step 4: Create a new instance of the model
         try{
         $property = new Property;
-        $property->name = $request->input('name');
-        $property->price = $request->input('price');
-        $property->user_id = $request->input('user_id');
-        $property->description = $request->input('description');
-        $property->bedrooms = $request->input('bedrooms');
-        $property->bathrooms = $request->input('bathrooms');
-        $property->status = $request->input('status');
-        $property->parking = $request->input('parking');
-        $property->type = $request->input('type');
-        $property->buy_or_rent = $request->input('buy_or_rent');
-        $property->built_in = $request->input('built_in');
-        $property->area = $request->input('area');
-        $property->latitude = $request->input('latitude');
-        $property->longitude = $request->input('longitude');
-        $property->province = $request->input('province');
-        $property->city = $request->input('city');
-        $property->street = $request->input('street');
+        $property->name = $validatedData['name'];
+        $property->price = $validatedData['price'];
+        $property->user_id = $validatedData['user_id'];
+        $property->description = $validatedData['description'];
+        $property->bedrooms = $validatedData['bedrooms'];
+        $property->bathrooms = $validatedData['bathrooms'];
+        $property->status = $validatedData['status'];
+        $property->parking = $validatedData['parking'];
+        $property->type = $validatedData['type'];
+        $property->buy_or_rent = $validatedData['buy_or_rent'];
+        $property->built_in = $validatedData['built_in'];
+        $property->area = $validatedData['area'];
+        $property->latitude = $validatedData['latitude'];
+        $property->longitude = $validatedData['longitude'];
+        $property->province = $validatedData['province'];
+        $property->city = $validatedData['city'];
+        $property->street = $validatedData['street'];
 
         
         // set other attributes as needed
@@ -108,10 +125,16 @@ class PropertyController extends Controller
         }
         // return a response or redirect to a success page
         return view("rent");
-    } catch (QueryException $e) {
+        } catch (QueryException $e) {
         // handle the error
-        return response('Error: ' . $e->getMessage(), 500);
+            return response('Error: ' . $e->getMessage(), 500);
+        }
     }
+
+    public function getPropertiesCount()
+    {
+        $count = Property::count();
+        return response()->json(['count' => $count]);
     }
 
     /**

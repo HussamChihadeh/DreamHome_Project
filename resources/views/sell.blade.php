@@ -35,15 +35,24 @@
                     
                     <div class="mb-3 form-outline w-75">
                         <label class="form-label ">Title</label>
-                        <input type="text" class="form-control" name="name">
+                        <input type="text" class="form-control" name="name" value="{{ old('name') }}" required>
+                        @error('name')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3 form-outline w-75">
                         <label class="form-label ">Price</label>
-                        <input type="text" class="form-control" placeholder="$(USD)" required name="price">
+                        <input type="text" class="form-control" placeholder="$(USD)" value="{{ old('price') }}" required name="price">
+                        @error('price')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3 form-outline w-75">
                         <label class="form-label ">Description</label>
-                        <textarea name="description" id="" cols="30" rows="10" class="form-control" maxlength="500"></textarea>
+                        <textarea name="description" id="" cols="30" rows="10" class="form-control" maxlength="500" value="{{ old('description') }}" required></textarea>
+                        @error('description')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
 
@@ -60,8 +69,8 @@
                     <hr class="hr">
                     <div class="mb-3 form-outline w-75">
                         <label class="form-label ">Province</label>
-                        <select class="form-select" name="province" required>
-                        <option value="" selected disabled>-- Select a province --</option>
+                        <select class="form-select" name="province" value="{{ old('province') }}" required>
+                        <option value="" selected disabled >-- Select a province --</option>
                             <option value="Akkar">Akkar</option>
                             <option value="Baalbeck">Baalbeck</option>
                             <option value="Beirut">Beirut</option>
@@ -71,23 +80,38 @@
                             <option value="Nabatiyeh">Nabatiyeh</option>
                             <option value="South Lebanon">South Lebanon</option>
                         </select>
+                        @error('province')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3 form-outline w-75">
                         <label class="form-label ">Town / City</label>
-                        <input type="text" class="form-control" placeholder="" required name="city">
+                        <input type="text" class="form-control" placeholder="" value="{{ old('city') }}" required name="city">
+                        @error('city')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3 form-outline w-75">
                         <label class="form-label ">Street address</label>
-                        <input type="text" class="form-control" placeholder="" required name="street">
+                        <input type="text" class="form-control" placeholder="" value="{{ old('street') }}" required name="street">
+                        @error('street')
+                            <div class="text-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="row">
                         <div class="col-auto mb-3">
                             <label class="form-label ">Latitude</label>
-                            <input type="text" id="latitude" class="form-control w-75" readonly name="latitude">
+                            <input type="text" id="latitude" class="form-control w-75" readonly name="latitude" value="{{ old('latitude') }}" required>
+                            @error('latitude')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-auto mb-3 ">
                             <label class="form-label ">Longitude</label>
-                            <input type="text" id="longitude" class="form-control w-75" readonly name="longitude">
+                            <input type="text" id="longitude" class="form-control w-75" readonly name="longitude" value="{{ old('longitude') }}" required>
+                            @error('longitude')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                 </div>
@@ -111,36 +135,54 @@
                         <div class="col-auto mb-3 ">
                             <!-- should be made as list -->
                             <label class="form-label ">Property type</label>
-                            <select class="form-select" name="type">
+                            <select class="form-select" name="type" value="{{ old('type') }}" required>
                                 <option value="" selected disabled>-- Select a type --</option>
                                 <option value="apartment">apartment</option>
                                 <option value="flat">flat</option>
                                 <option value="villa">villa</option>
                             </select>
+                            @error('type')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-auto mb-3 ">
                             <label class="form-label ">Parking lots</label>
-                            <input type="text" class="form-control" placeholder="" required name="parking">
+                            <input type="text" class="form-control" placeholder="" value="{{ old('parking') }}" required name="parking">
+                            @error('parking')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-auto mb-3 ">
                             <label class="form-label ">Bedrooms</label>
-                            <input type="text" class="form-control" name="bedrooms">
+                            <input type="text" class="form-control" name="bedrooms" value="{{ old('bedrooms') }}" required>
+                            @error('bedrooms')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-auto mb-3 ">
                             <label class="form-label ">Bathrooms</label>
-                            <input type="text" class="form-control" placeholder="" required name="bathrooms">
+                            <input type="text" class="form-control" placeholder="" value="{{ old('bathrooms') }}" required name="bathrooms">
+                            @error('bathrooms')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-auto mb-3 ">
                             <label class="form-label ">Area</label>
-                            <input type="text" class="form-control" placeholder="m&#178;" name="area">
+                            <input type="text" class="form-control" placeholder="m&#178;" name="area" value="{{ old('area') }}" required>
+                            @error('area')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-auto mb-3 ">
                             <label class="form-label ">Built in</label>
-                            <input type="text" class="form-control" placeholder="Year" required name="built_in">
+                            <input type="text" class="form-control" placeholder="Year" value="{{ old('built_in') }}" required name="built_in">
+                            @error('built_in')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
 

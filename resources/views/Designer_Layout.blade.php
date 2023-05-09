@@ -61,7 +61,7 @@ background-color: #e9e9e9;}</style>
         <ul class="navbar-nav ms-auto mb-2 mt-1 mb-lg-0">
           
           <li class="nav-item">
-            <a class="nav-link p-lg-3 active" href="{{ route('chatify') }}">Chat</a>
+            <a class="nav-link p-lg-3" href="{{ route('chatify') }}">Chat</a>
           </li>
           <!-- <li class="nav-item">
             <a class="nav-link p-lg-3" href="">Buy</a>

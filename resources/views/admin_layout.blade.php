@@ -62,7 +62,7 @@ background-color: #e9e9e9;}</style>
       <div class="collapse navbar-collapse" id="main">
         <ul class="navbar-nav ms-auto mb-2 mt-1 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link p-lg-3 active" aria-current="page" href="{{ route('customers') }}">Customers</a>
+            <a class="nav-link p-lg-3" aria-current="page" href="{{ route('customers') }}">Customers</a>
           </li>
           <li class="nav-item">
             <a class="nav-link p-lg-3" href="{{ route('requests') }}">Requests</a>

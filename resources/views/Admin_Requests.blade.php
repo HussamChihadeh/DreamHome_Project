@@ -19,13 +19,13 @@
             <div class="row">
                 <div class="col-sm-3 col-6 p-2">
                     <div class="Top_Container">
-                        <h2>300</h2>
+                        <h2 id="customers_number"></h2>
                         <h6>Total Requests</h6>
                     </div>
                 </div>
                 <div class="col-sm-3 col-6 p-2">
                     <div class="Top_Container">
-                        <h2>200</h2>
+                        <h2 id="properties_number"></h2>
                         <h6>Total Accepted</h6>
                     </div>
                 </div>
@@ -83,6 +83,34 @@
             var formData="status[eq]=pending"; 
             // window.onload = LoadData(currentPage);
             const tbody = document.createElement('tbody');
+            window.onload = LoadStatistics();
+            function LoadStatistics() {
+                var customers_number = document.getElementById("customers_number");
+                var properties_number = document.getElementById("properties_number");
+                $.ajax({
+                    url: "/api/v1/properties/getPropertiesCount",
+                    type: "GET",
+                    success: function(response) {
+                        properties_number.innerHTML=response.count;
+                    },
+                    error: function(error){
+                        console.log(error);
+                    }
+                });
+
+                $.ajax({
+                    url: "/api/v1/users/getCustomersCount",
+                    type: "GET",
+                    success: function(response) {
+                        customers_number.innerHTML=response.count;
+                    },
+                    error: function(error){
+                        console.log(error);
+                    }
+                });
+
+            }
+
             function LoadData(page) {
 
                 const Requests_Table = document.getElementById('Requests_Table');

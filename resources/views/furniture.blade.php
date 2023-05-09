@@ -95,41 +95,8 @@
 
       </table>
         <div class=" line-2"></div>
-    <h3>Colors</h3>
-      <table id="colors">
+   
 
-
-        <tr>
-        <td><input type="radio" name="color[eq]" value="black"><img src="IMAGES\Colors\Black.png" class="colors" id="Black_color" name="Baalbeck">
-          </td>
-          <td><input type="radio" name="color[eq]" value="blue"><img src="IMAGES\Colors\Blue.png" class="colors" id="Blue_color"></td>
-          <td><input type="radio" name="color[eq]" value="green"><img src="IMAGES\Colors\Green.png" class="colors" id="Green_color"></td>
-
-
-        </tr>
-
-        <tr>
-
-        <td><input type="radio" name="color[eq]" value="purple"><img src="IMAGES\Colors\Purple.png" class="colors" id="Purple_color"></td>
-
-          <td><input type="radio" name="color[eq]" value="dark gray"><img src="IMAGES\Colors\Dark_Gray.png" class="colors" id="Dark_Gray_color"></td>
-          <td><input type="radio" name="color[eq]" value="gray"><img src="IMAGES\Colors\Gray.png" class="colors" id="Gray_color"></td>
-
-        </tr>
-
-        </tr>
-        <tr>
-          <td><input type="radio" name="color[eq]" value="beige"><img src="IMAGES\Colors\Beige.png" class="colors" id="Beige_color"></td>
-          <td><input type="radio" name="color[eq]" value="pink"><img src="IMAGES\Colors\Pink.png" class="colors" id="Pink_color">
-          <td><input type="radio" name="color[eq]" value="red"><img src="IMAGES\Colors\Red.png" class="colors" id="Red_color">
-
-          </td>
-        </tr>
-
-
-      </table>
-
-    <div class=" line-2"></div>
     <h3>Designers</h3>
       <table id="designers">
 
@@ -175,8 +142,6 @@
   <!-- ------------------------------------------------ -->
 
   
-  <script src="../js/bootstrap.bundle.min.js"></script>
-  <script src="../js/all.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
@@ -405,61 +370,20 @@
                 if (userId!==null) {
                   updateWishlist(userId);
                 }
-                                
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-    }
 
-    function updateWishlist(userId){
-      
-      $.ajax({
-          url: '/api/v1/get-wishlist/' + userId,
-          type: 'GET',
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          },
-          success: function(response) {
-            console.log(response);
-            wishlist = response;
-            
-            // Loop through the wishlist and update the heart image for each item
-            wishlist.forEach(function(item) {
-              console.log(item);
-              // console.log(item.id);
-              var heartImg = document.querySelector('.heart-' + item);
-              // console.log(heartImg);
-              if (heartImg) {
-                heartImg.src = "{{asset('images/heart_filled.png')}}";
-              }
-            });
-            Favorites_button.onclick = function() {
-                favorites(wishlist);
-            };
-          },
-          error: function(response) {
-            // Handle the error response
-            console.log(response);
-          }
-        }); 
-    }
+                var Furniture_Image = document.querySelectorAll(".image");
+                function handleClick() {
+                    var furnitureId = this.getAttribute('id');
+                    console.log(furnitureId);
+                    var url1 = "/furniture/furniture_details?id=" + furnitureId;
+                    window.location.href = url1;
+                }
 
-    window.onload = function() {
-        var Furniture_Image = document.querySelectorAll(".image");
-        function handleClick() {
-            var furnitureId = this.getAttribute('id');
-            console.log(furnitureId);
-            var url1 = "/furniture/furniture_details?id=" + furnitureId;
-            window.location.href = url1;
-        }
+                for (var i = 0; i < Furniture_Image.length; i++) {
+                    Furniture_Image[i].addEventListener('click', handleClick);
+                }
 
-        for (var i = 0; i < Furniture_Image.length; i++) {
-            Furniture_Image[i].addEventListener('click', handleClick);
-        }
-
-        var heart = document.querySelectorAll(".heart");
+                var heart = document.querySelectorAll(".heart");
     for (var i = 0; i < heart.length; i++) {
         heart[i].onclick = function () {
           var userId = {!! auth()->check() ? auth()->user()->id : 'null' !!};
@@ -510,7 +434,49 @@
             
         }
       }
+                                
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
 
+    function updateWishlist(userId){
+      
+      $.ajax({
+          url: '/api/v1/get-wishlist/' + userId,
+          type: 'GET',
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success: function(response) {
+            console.log(response);
+            wishlist = response;
+            
+            // Loop through the wishlist and update the heart image for each item
+            wishlist.forEach(function(item) {
+              console.log(item);
+              // console.log(item.id);
+              var heartImg = document.querySelector('.heart-' + item);
+              // console.log(heartImg);
+              if (heartImg) {
+                heartImg.src = "{{asset('images/heart_filled.png')}}";
+              }
+            });
+            Favorites_button.onclick = function() {
+                favorites(wishlist);
+            };
+          },
+          error: function(response) {
+            // Handle the error response
+            console.log(response);
+          }
+        }); 
+    }
+
+    window.onload = function() {
+        
       //handle filter
       $.ajax({
                 url: '/api/v1/furniture/filterData',

@@ -40,6 +40,8 @@ Route::group(["prefix" => "v1", "namespace"=>"App\Http\Controllers\Api\V1"], fun
     Route::delete('designers/deleteDesigner/{id}', 'DesignerController@deleteDesigner');
     Route::post('furniture/addToCart', 'CartController@addToCart');
     Route::get('furniture/getRecommendedProducts', 'FurnitureController@getRecommendedProducts');
+    Route::get('properties/getPropertiesCount', 'PropertyController@getPropertiesCount');
+    Route::get('users/getCustomersCount', 'UserController@getCustomersCount');
     // getRecommendedProducts
 
     Route::apiResource("properties", PropertyController::class);
