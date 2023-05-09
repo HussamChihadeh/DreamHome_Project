@@ -209,7 +209,7 @@
 .Favorites_Furniture_button:hover:enabled,
 .Cart_Furniture_button:hover:enabled,
 .Button_In_Filter:hover,
-.Designer_View_Details:hover,
+.Designer_View_Details:hover,.Designer_Contact:hover,
 .View_Furniture:hover,
 .Add_to_Favorites:hover,
 .Order_Furniture:hover,
@@ -347,7 +347,7 @@
     color: var(--gold1);
 }
 
-.Designer_View_Details {
+.Designer_View_Details,.Designer_Contact {
     width: 100%;
     height: fit-content;
     padding: 8 9 6 3;
@@ -364,6 +364,11 @@
     font-size: auto;
 
 
+}
+.Designer_Contact{
+    color: black;
+    border: 0;
+    background-color: white;
 }
 
 .Button_In_Filter {

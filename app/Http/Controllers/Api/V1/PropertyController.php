@@ -36,7 +36,7 @@ class PropertyController extends Controller
         return response()->json($properties);
     }
     public function getLatestProperties(){
-        $properties = Property::select('id','name','description')
+        $properties = Property::where('status', 'listed')->select('id','name','description')
                                ->latest()
                                ->limit(4)
                                ->get();

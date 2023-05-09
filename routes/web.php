@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\CartController;
 use App\Http\Controllers\Api\V1\DesignerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -72,9 +73,7 @@ Route::get("/sell", function () {
 Route::get("/furniture", function () {
     return view("furniture");
 })->name('furniture');
-Route::get("/furniture/furniture_details", function () {
-    return view("furniture_details");
-});
+
 Route::get("/My_Cart", function () {
     return view("My_Cart");
 });
@@ -109,8 +108,13 @@ Route::group(['middleware' => 'guest'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get("/furniture/furniture_details", function () {
+        return view("furniture_details");
+    });
     Route::delete('/logout', [UserController::class, 'logout'])->name('logout');
     Route::get('/profile', [UserController::class, 'showProfile'])->name('profile');
+    Route::get('/My_Cart', [CartController::class,'getCartsByUserID'])->name('My_Cart');
+
     Route::get('/sell', function () {
         return view('sell');
     })->name("sell");
@@ -126,7 +130,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth', 'designer'], function () {
     Route::get('/designer_profile', [DesignerController::class, 'showProfile'])->name('designer_profile');
+
 });
+Route::get('/designers', [DesignerController::class, 'showAllDesignerDetails'])->name('designers');
+
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     // routes that only the admin should access

@@ -1,22 +1,23 @@
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Furniture</title>
+@extends("layout_No_Footer")
+@section("title", "Furniture")
 
+@section("head")
+<link rel="stylesheet" href="{{asset('css/furniture.css')}}">
+<link rel="stylesheet" href="{{asset('css/animation.css')}}">
+<link rel="stylesheet" href="{{asset('css/buttons.css')}}">
 
-  <link rel="stylesheet" href="..\CSS\Navbar.css">
-  <link rel="stylesheet" href="..\CSS\Furniture.css">
-  <link rel="stylesheet" href="..\CSS\Buttons.css">
-  <link rel="stylesheet" href="..\CSS\Animation.css">
-  <link rel="stylesheet" href="..\CSS\Main.css">
-  
-  <link rel="stylesheet" href="{{asset('css/furniture.css')}}">
-  <link rel="stylesheet" href="..\bootstrap_css\all.min.css">
-  <link rel="stylesheet" href="..\bootstrap_css\bootstrap.min.css">
-  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
-  <link href='https://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet'>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+<script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
 
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@600&family=Signika:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@700&family=Signika:wght@500;600&display=swap" rel="stylesheet">
+<script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+@endsection
+
+@section("content")
   <link rel="icon" type="image/x-icon" href="IMAGES\image_logo.png">
 
   <style>
@@ -25,48 +26,9 @@
       width: 85px;
     }
 
-    
+
   </style>
-</head>
 
-<body>
-  <!-- Nav BAR -->
-  <!--RESPONSIVE NAV-->
-  <nav class="navbar navbar-expand-lg fixed-top ">
-    <div class="container">
-      <a class="navbar-brand me-4" href="#">
-        <img src="IMAGES/image_logo.png" alt="" height="40" width="30">
-      </a>
-      <a href="" class="logo me-4 d-none d-md-block">Dream Home</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main" aria-controls="main"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="main">
-        <ul class="navbar-nav ms-auto mb-2 mt-1 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link p-lg-3 active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link p-lg-3" href="#">Rent</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link p-lg-3" href="#">Buy</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link p-lg-3" href="#">Furniture</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link p-lg-3" href="#">Our Agents</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link p-lg-3" href="#">Sign In</a>
-          </li>
-        </ul>
-
-      </div>
-    </div>
-  </nav>
 
   <!-- -------------------------EXTRA --------------------------------------------------------->
 

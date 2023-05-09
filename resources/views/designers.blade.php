@@ -114,72 +114,91 @@
                     "</div>" +
                     "<div class='Info2'>" +
                     "<h6>Experience: " + designer.experience + " years</h6>" +
-                    "<img src='IMAGES\\filled_star.png' width='15' height='15'>" +
-                    "<img src='IMAGES\\filled_star.png' width='15' height='15'>" +
-                    "<img src='IMAGES\\filled_star.png' width='15' height='15'>" +
-                    "<img src='IMAGES\\filled_star.png' width='15' height='15'>" +
-                    "<img src='IMAGES\\unfilled_star.png' width='15' height='15'>" +
+                    "<h6 class=Info_Editor>LinkedIn: " + designer.linkedin + " years</h6>" +
+
                     "</div>" +
                     "</div>" +
 
                     "<div class='row'>" +
                     "<div class='col-sm-12 col-12 '>" +
-                    "<div class='Info3' hidden></div>" +
+                    "<div class='Info3'style='height:fit-content' hidden><h6>Email: " + designer.email + "</h6>" +
+                    "<h6 id='designer_phone_nb_1" + designer.id + "'>Phone Number: "+designer.phone_number+"</h6>" +
+
+                  
                     "</div>" +
                     "</div>" +
                     "<div class='row'>" +
-                    "<div class='col-sm-6 col-6 '>" +
-                    "<div class='Info4' hidden></div>" +
+                    "<div class='col-sm-12'>" +
+                    "<div class='Info4' style='width:105%;margin-left:3%' hidden>Bio:"+ designer.bio+"</div>" +
                     "</div>" +
-                    "<div class='col-sm-6 col-6 '>" +
-                    "<div class='Info5' hidden></div>" +
-                    "</div>" +
-
-                    "</div>" +
-
                     "</div>" +
 
                     "<div class='row'>" +
-                    "<div class='col-sm-4 col-4 '></div>" +
-                    "<div class='col-sm-5 col-5 '>" +
-                    "<button class='Designer_View_Details' id='" + designer.id + "'>Show More</button>" +
+                    "<div class='col-sm-5 col-5 offset-1'>" +
+                    "<button class='Designer_Contact' id='" + designer.id + "'>Contact</button>" +
                     "</div>" +
-                    "<div class='col-sm-3 col-3'></div>" +
+                    "<div class='col-sm-5 col-5'>" +
+                    "<button class='Designer_View_Details'>Show More</button>" +
+
                     "</div>" +
+
                     "</div>" +
                     "</div>";
             });
+            // $.ajax({
+            //     url: "/api/v1/showAllDesignerDetails",
+            //     type: "GET",
+            //     data: {
+            //         designer_id: "1"
+            //     },
+            //     success: function(users) {
+            //         $.each(designers, function(index, user) {
+            //             var a = document.getElementById("designer_phone_nb_"+designer_id);
+            //             // a.innerHTML = designer.phone_number;
+            //         });
+            //     },
+            //     error: function(xhr, status, error) {
+            //         console.log(xhr.responseText);
+            //         alert("Error: Failed to retrieve designer details");
+            //     }
+            // });
+
 
             var Designer_Container = document.querySelectorAll(".Designer_Container");
             var Info1 = document.querySelectorAll(".Info1");
             var Info2 = document.querySelectorAll(".Info2");
             var Info3 = document.querySelectorAll(".Info3");
             var Info4 = document.querySelectorAll(".Info4");
-            var Info5 = document.querySelectorAll(".Info5");
             var View_Details_Button = document.querySelectorAll(".Designer_View_Details");
-
+            var Designer_Contact_Button = document.querySelectorAll(".Designer_Contact");
 
             for (var i = 0; i < View_Details_Button.length; i++) {
                 (function(i) {
-                    View_Details_Button[i].onclick = function() {
-                        
+
+                    Designer_Contact_Button[i].onclick = function() {
                         var buttonId = this.id;
                         // alert(buttonId);
-                        const url1 = "/chatify/" + buttonId+"?property_id="+property_id;
-                            window.location.href = url1;
+                        const url1 = "/chatify/" + buttonId + "?property_id=" + property_id;
+                        window.location.href = url1;
+                    }
+
+                    View_Details_Button[i].onclick = function() {
+
+
                         if (View_Details_Button[i].innerHTML == "Show More") {
 
                             Designer_Container[i].style.animation = "Designer_Details 0.6s forwards";
                             Info3[i].hidden = false;
                             Info4[i].hidden = false;
-                            Info5[i].hidden = false;
                             Info3[i].style.animation = "appear 0.3s forwards";
                             Info4[i].style.animation = "appear 1s forwards";
-                            Info5[i].style.animation = "appear 1s forwards";
                             View_Details_Button[i].hidden = true;
+                            Designer_Contact_Button[i].hidden = true;
                             setTimeout(function() {
                                 View_Details_Button[i].hidden = false;
                                 View_Details_Button[i].style.animation = "appear 0.5s forwards";
+                                Designer_Contact_Button[i].hidden = false;
+                                Designer_Contact_Button[i].style.animation = "appear 0.5s forwards";
                                 View_Details_Button[i].innerHTML = "Show Less";
                             }, 350);
 
@@ -188,16 +207,16 @@
 
                             Info3[i].style.animation = "disappear 0.3s forwards";
                             Info4[i].style.animation = "disappear 0.4s forwards";
-                            Info5[i].style.animation = "disappear 0.5s forwards";
-
+                            Designer_Contact_Button[i].hidden = true;
                             View_Details_Button[i].hidden = true;
                             setTimeout(function() {
                                 View_Details_Button[i].hidden = false;
                                 View_Details_Button[i].style.animation = "appear 0.5s forwards";
+                                Designer_Contact_Button[i].hidden = false;
+                                Designer_Contact_Button[i].style.animation = "appear 0.5s forwards";
                                 View_Details_Button[i].innerHTML = "Show More";
                                 Info3[i].hidden = true;
                                 Info4[i].hidden = true;
-                                Info5[i].hidden = true;
                             }, 300);
                         }
                     };

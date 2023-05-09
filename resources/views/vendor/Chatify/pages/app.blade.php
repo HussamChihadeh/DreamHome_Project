@@ -1,5 +1,5 @@
 @php
-    use Illuminate\Support\Str;
+use Illuminate\Support\Str;
 @endphp
 
 @extends(auth()->check() && Str::endsWith(auth()->user()->email, '@Designer.org') ? "Designer_Layout" : "layout")
@@ -22,7 +22,7 @@
     <div class="messenger-listView {{ !!$id ? 'conversation-active' : '' }}">
         {{-- Header and search bar --}}
         <div class="m-header" style="margin-bottom:0">
-            <nav >
+            <nav>
                 <a href="#"><i class="fas fa-inbox"></i> <span class="messenger-headTitle">Chat</span> </a>
                 {{-- header buttons --}}
                 <nav class="m-header-right">
@@ -45,7 +45,17 @@
             <div class="show messenger-tab users-tab app-scroll" data-view="users">
                 {{-- Favorites --}}
                 <div class="favorites-section">
-                    <p class="messenger-title"><span>My Designers</span></p>
+                    <p class="messenger-title"><span id="Message_Title"></span></p>
+                    <script>
+                        window.addEventListener('DOMContentLoaded', function() {
+                            var messageTitle = document.getElementById('Message_Title');
+                            if (messageTitle && "{{ auth()->check() && Str::endsWith(auth()->user()->email, '@Designer.org') }}") {
+                                messageTitle.innerHTML = "My Clients";
+                            } else {
+                                messageTitle.innerHTML = "My Designers";
+                            }
+                        });
+                    </script>
                     <div class="messenger-favorites app-scroll-hidden"></div>
                 </div>
                 {{-- Saved Messages --}}
@@ -116,7 +126,17 @@
     <div class="messenger-infoView app-scroll">
         {{-- nav actions --}}
         <nav>
-            <p class="m-header">User Details</p>
+            <p class="m-header" id="user_details"></p>
+            <script>
+                window.addEventListener('DOMContentLoaded', function() {
+                    var user_details = document.getElementById('user_details');
+                    if (user_details && "{{ auth()->check() && Str::endsWith(auth()->user()->email, '@Designer.org') }}") {
+                        user_details.innerHTML = "Client Details";
+                    } else {
+                        user_details.innerHTML = "Designer Details";
+                    }
+                });
+            </script>
             <a href="#"><i class="fas fa-times"></i></a>
         </nav>
         {!! view('Chatify::layouts.info')->render() !!}
@@ -145,14 +165,31 @@
     // alert('House_id: ' + value); // Output: House_id: 3
     var Message_Hint = document.getElementById("Message_Hint");
 
-    setTimeout(function() {
-        var textarea_111 = document.getElementById("textarea_111");
-        var message_form=document.getElementById("message-form");
-        textarea_111.value = "Please Enter the below link to View the Property's Information.\nLocalhost:8000/rent/Property_details?id="+value;
-        
-    }, 5000);
 
 
+        setTimeout(function() {
+            var textarea_111 = document.getElementById("textarea_111");
+            var message_form = document.getElementById("message-form");
+            var submit_button = document.getElementById("send_message");
+
+            if ("{{ auth()->check() && Str::endsWith(auth()->user()->email, '@Designer.org') }}") {
+                textarea_111.value = "Hello, I am " + "{{ auth()->user()->name }}" + ", how can I help you?";
+            } else {
+                textarea_111.value = "Please enter the below link to view the Property's Information.\nLocalhost:8000/rent/Property_details?id=" + value;
+            }
+
+            // Submit the form programmatically
+            function submitForm() {
+                submit_button.click();
+            }
+
+            // Call the function after a slight delay
+            setTimeout(submitForm, 00);
+
+
+        }, 5000);
+
+    
     // const observerOptions = {
     //     attributes: true,
     //     attributeFilter: ['style'],

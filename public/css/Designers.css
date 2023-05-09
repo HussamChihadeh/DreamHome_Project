@@ -207,6 +207,19 @@ h6 {
     }
 }
 
+.grid_container {
+    border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: grid;
+    background-color: white;
+    grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr;
+    gap: 3%;
+    padding: 3%;
+    overflow: auto;
+    grid-row-gap: 40px;
+}
+
+
 @media (max-width:575px) {
     .left_space {
         width: 10% !important;
@@ -226,6 +239,18 @@ h6 {
         float: left;
         margin-left: 10%;
     }
+
+    .grid_container {
+        border-radius: 30px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        display: grid;
+        background-color: white;
+        grid-template-columns: 1fr 1fr;
+        gap: 3%;
+        padding: 3%;
+        overflow: auto;
+        grid-row-gap: 40px;
+    }
 }
 
 
@@ -237,35 +262,57 @@ h6 {
 
 
 
-.grid_container {
-    border-radius: 30px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    display: grid;
-    background-color: white;
-    grid-template-columns: 1fr 1fr; /* Two columns with equal width */
-    gap: 4%; /* Gap between columns */
-    overflow-y: auto; /* Set container height to fit content */
-    padding: 4%;
-  }
-  
-  .grid_item {
+
+.grid_container::-webkit-scrollbar,
+.Designer_Container::-webkit-scrollbar {
+    z-index: 0;
+    width: 5px;
+    background-color: transparent;
+
+}
+
+.grid_container::-webkit-scrollbar-track,
+.Designer_Container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.grid_container::-webkit-scrollbar-thumb,
+.Designer_Container::-webkit-scrollbar-thumb {
+    background-image: -webkit-linear-gradient(var(--gold1), var(--gold2));
+    border-radius: 20px;
+    border: 0px solid #f8f8f8;
+    z-index: 0;
+
+}
+
+.grid_item {
     background-color: #dad8d863;
-    /* padding: 3%; */
-    height: fit-content; 
+    height: fit-content;
     border-radius: 30px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding-bottom: 3%;
-/* Set height of grid items to 300px */
-  }
+}
 
 .Furniture_container:hover {
     scale: 1.005;
 }
 
-.Furniture_Image{
+.Furniture_Image {
     width: 100%;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
+    cursor: pointer;
 
-    
 }
+.Info_Editor{
+
+        max-width: 55ch;
+        height: fit-content;
+        line-height: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
+      

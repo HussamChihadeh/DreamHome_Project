@@ -28,8 +28,8 @@
       Easiest Way to find your dream place
     </Header>
     <h7>find your dream home at affordable prices from anywhere in the world with us</h7>
-    <div class="Buy_container">Buy</div>
-    <div class="Rent_container Clicked">Rent</div>
+  
+    <div class="Rent_container Clicked" onclick="OpenProperties()">View Properties</div>
   </div>
   <div style="width: 65%;margin-left: -5%;">
     <img src="images/Villa_Homepage.png" id="Main_Image" class="Home_Main_Image">
@@ -223,6 +223,13 @@
     const url1 = "/furniture";
     window.location.href = url1;
   }
+
+  function OpenProperties() {
+    const url1 = "/rent";
+    window.location.href = url1;
+  }
+  
+
   $.ajax({
     url: '/api/v1/properties/getLocation',
     type: 'GET',

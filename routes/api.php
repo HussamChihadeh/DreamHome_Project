@@ -30,7 +30,7 @@ Route::group(["prefix" => "v1", "namespace"=>"App\Http\Controllers\Api\V1"], fun
     // Route::apiResource("users", UserController::class);
     Route::get('properties/getLocation', 'PropertyController@getLocation');
     Route::get('properties/getLatestProperties', 'PropertyController@getLatestProperties');
-    
+
     Route::get('property/updateSlots', 'TourController@updateSlots');
     Route::put('properties/{id}', 'PropertyController@updatePropertyStatus');
     Route::put('properties/assign/{id}', 'PropertyController@assignProperty');
@@ -41,6 +41,7 @@ Route::group(["prefix" => "v1", "namespace"=>"App\Http\Controllers\Api\V1"], fun
     Route::post('furniture/addToCart', 'CartController@addToCart');
     Route::get('furniture/getRecommendedProducts', 'FurnitureController@getRecommendedProducts');
     // getRecommendedProducts
+
     Route::apiResource("properties", PropertyController::class);
     Route::apiResource("furniture", FurnitureController::class);
     Route::apiResource("designers", DesignerController::class);

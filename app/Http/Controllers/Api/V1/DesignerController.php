@@ -11,9 +11,10 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\HttpFoundation\Request;
+// use Symfony\Component\HttpFoundation\Request;
 
 class DesignerController extends Controller
 {
@@ -126,7 +127,17 @@ class DesignerController extends Controller
 
     }
 
-   
+    public function showAllDesignerDetails(Request $request)
+    {
+        $designer_id = $request->input('designer_id');
+    
+        $User = User::where('id',$designer_id)->get();
+    
+      
+        return view('My_Cart', compact('user'));
+
+    }
+    
     /**
      * Store a newly created resource in storage.
      */

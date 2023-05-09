@@ -25,6 +25,8 @@
             <Header>My Cart</Header>
         </div>
     </div>
+
+       
     <div class="row">
         <div class="col-1"></div>
         <div class="col-sm-6 col-12 p-5">
@@ -33,10 +35,12 @@
 
             <!-- ---------------------ROW INSIDE THE MAIN CART -->
             <!-- -------------------------------------------------------- -->
+            
+    @foreach ($furniture as $furn)
             <div class="row container_1">
-                <row class="Header1">1111111111111111111111111
+                <row class="Header1">{{ $furn->name}}
                 </row>
-                <row class="Header2">Sofa</row>
+                <row class="Header2">{{ $furn->type}}</row>
 
                 <div class="col-4">
                     <img src="images\furniture\Sofas\Sofa2\1.png" class="Furniture_Image">
@@ -44,7 +48,7 @@
 
                 <div class="col-lg-3 col-3 p-0" style="margin-top:9%">
                     <div class="price">
-                        $2,895.99
+                    $ {{ number_format($furn->price, 0, ',', ',') }}
                     </div>
                 </div>
                 <div class="col-2 p-0" style="margin-top:9%">
@@ -57,17 +61,20 @@
                     <button class="minus_btn">-</button>
                 </div>
                 <div class="col-1 p-0" style="margin-top:9%">
-                    <input type="number" class="input" min="0" max="10" value="0">
+                    <input type="number" class="input" min="1" max="9" value="1">
                 </div>
                 <div class="col-1 p-0" style="margin-top:9%">
                     <button class="plus_btn">+</button>
 
                 </div>
             </div>
+
+            
+    @endforeach
             <!-- //////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 
-            <div class="row container_1">
+            <!-- <div class="row container_1">
                 <row class="Header1">22222222222222222222222222222222
                 </row>
                 <row class="Header2">Sofa</row>
@@ -160,7 +167,7 @@
                     <button class="plus_btn">+</button>
 
                 </div>
-            </div>
+            </div> -->
 
 
         </div>

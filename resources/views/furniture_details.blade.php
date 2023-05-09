@@ -1,14 +1,24 @@
-@extends("layout")
+@php
+use Illuminate\Support\Str;
+@endphp
+
+@extends(auth()->check() && Str::endsWith(auth()->user()->email, '@Designer.org') ? "Designer_Layout" : "layout")
+
 @section("title", "Furniture Details")
+
 
 @section("head")
 <link rel="stylesheet" href="{{asset('css/main.css')}}">
 <link rel="stylesheet" href="{{asset('css/buttons.css')}}">
+<link rel="stylesheet" href="{{asset('css/animation.css')}}">
 <link rel="stylesheet" href="{{asset('css/furniture_details.css')}}">
+
+
 @endsection
 
 @section("content")
 <div style="height: 10%;"></div>
+
 <div class="row" style="width:95%; margin-left: 2.5%;">
     <div class="col-md-5 col-10">
         <img class="Furniture_Image" id="Selected_Image">
@@ -169,8 +179,9 @@
 </div>
 <div id="on_load">
 </div>
-
-@endsection
+<div class="message" id="message">
+    <h2 class="h22" hidden id="message_text"></h2>
+  </div>
 
 @section("script")
 
@@ -184,6 +195,14 @@
     var on_load = document.getElementById("on_load");
     var title = document.getElementById("Title");
     title.innerText = Furniture_Name.innerHTML;
+   
+
+    window.addEventListener("load", function() {
+
+ var message = document.getElementById("message");
+    var message_text = document.getElementById("message_text");
+
+    });
 
 </script>
 <script>
@@ -226,7 +245,35 @@
                 console.log(error);
             }
         });
+        function Show_Message() {
 
+
+message.style.animation = "message_show 1.1s linear ";
+setTimeout(function() {
+
+    message.style = " top:12%;left: 35%;right: 35%; width: 30%;height:60;z-index:2";
+
+}, 1050);
+
+setTimeout(function() {
+    message_text.hidden = false;
+    message_text.style.opacity = 1;
+
+}, 1100);
+
+setTimeout(function() {
+    message_text.hidden = true;
+
+    setTimeout(function() {
+        message.style.animation = "message_hide 1.1s linear";
+
+    }, 100);
+    setTimeout(function() {
+        message.style = "top:0%;width: 50;left: 50%; height: 50;right: 50%;";
+
+    }, 1180);
+}, 2000);
+}
         element.onclick = function() {
             var userId = {{ auth()->user()->id }};
             $.ajax({
@@ -238,7 +285,8 @@
                 },
                 
                 success: function(response) {
-                    alert(response);
+                    Show_Message();
+                    message_text.innerHTML="Added to Cart";
 
                 },
 
@@ -277,6 +325,10 @@
             }
         }
     };
+
+
+
+   
 </script>
 <script>
      var furnitureId = new URLSearchParams(window.location.search).get('id');
