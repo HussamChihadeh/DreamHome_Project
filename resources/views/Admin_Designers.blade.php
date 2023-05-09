@@ -122,12 +122,14 @@
 
                             const delete_designer = document.getElementById('delete_designer');
                             const designerId = delete_designer.getAttribute('data-id');
+                            const row = delete_designer.closest('tr');
                             delete_designer.addEventListener('click', () => {
                                 $.ajax({
                                     type: "DELETE",
                                     url: "/api/v1/designers/deleteDesigner/" + designerId,
                                     success: function(data) {
                                         // Handle success response
+                                        row.remove();
                                         console.log(data);
                                     },
                                     error: function(xhr, status, error) {

@@ -90,15 +90,9 @@ class DesignerController extends Controller
             $user->delete();
             
             // Delete the designer's image folder
-            $folderPath = public_path('images/designers/' . $id);
-            if (file_exists($folderPath)) {
-                $files = glob($folderPath . '/*');
-                foreach ($files as $file) {
-                    if (is_file($file)) {
-                        unlink($file);
-                    }
-                }
-                rmdir($folderPath);
+            $imagePath = public_path('images/designers/' . $id . '.png');
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
             }
             
             // Delete the designer
