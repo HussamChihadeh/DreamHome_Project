@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateDesignerRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Furniture;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
@@ -77,6 +78,39 @@ class DesignerController extends Controller
         return response()->json(['message' => 'Item saved successfully']);
     }
 
+    public function deleteDesigner($id)
+    {
+        try {
+            // Find the designer by ID
+            $designer = Designer::findOrFail($id);
+            
+            // Delete the associated user
+            $user = User::findOrFail($id);
+            $user->delete();
+            
+            // Delete the designer's image folder
+            $folderPath = public_path('images/designers/' . $id);
+            if (file_exists($folderPath)) {
+                $files = glob($folderPath . '/*');
+                foreach ($files as $file) {
+                    if (is_file($file)) {
+                        unlink($file);
+                    }
+                }
+                rmdir($folderPath);
+            }
+            
+            // Delete the designer
+            $designer->delete();
+        } catch (ModelNotFoundException $e) {
+            // Return an error response if the designer was not found
+            return response()->json(['error' => 'Designer not found'], 404);
+        }
+        
+        // Return a success response
+        return response()->json(['message' => 'Designer deleted successfully']);
+    }
+
     public function showProfile()
     {
         $user = Auth::user();
@@ -132,8 +166,5 @@ class DesignerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Designer $designer)
-    {
-        //
-    }
+    
 }

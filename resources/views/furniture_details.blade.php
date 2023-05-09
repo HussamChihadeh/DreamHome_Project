@@ -127,10 +127,10 @@
 </div>
 
 <Header>Recommended Products</Header>
-<div class="row" style="width: 90%;margin-left: 5%; margin-top: 30; margin-bottom: 50;">
+<div class="row" id="recommended-products" style="width: 90%;margin-left: 5%; margin-top: 30; margin-bottom: 50;">
 
 
-    <div class="col-xl-3 col-lg-4 col-sm-6 col-12 p-4">
+    <!-- <div class="col-xl-3 col-lg-4 col-sm-6 col-12 p-4">
         <div class="Recommended_container">
             <img src="..\images\furniture\Chandelier\Chandelier_1\1.png" class="Image_In_Recommended">
             <div class="Inner_Container">
@@ -161,18 +161,9 @@
             </div>
         </div>
 
-    </div>
+    </div> -->
 
-    <div class="col-xl-3 col-lg-4 col-sm-6 col-12 p-4">
-        <div class="Recommended_container">
-            <img src="..\images\furniture\Sofas\Sofa2\1.png" class="Image_In_Recommended">
-            <div class="Inner_Container">
-                <p class="Recommended_Product_Name">Italian Pink Sofa Upholstery</p>
-                <button class="View_Furniture">View Furniture</button>
-            </div>
-        </div>
-
-    </div>
+    
     <div class="col-md-2"></div>
 
 </div>
@@ -194,11 +185,6 @@
     var title = document.getElementById("Title");
     title.innerText = Furniture_Name.innerHTML;
 
-    window.addEventListener("load", function() {
-
-
-
-    });
 </script>
 <script>
     $(document).ready(function() {
@@ -207,13 +193,20 @@
         const element = document.querySelector('.Order_Furniture');
         element.setAttribute('id', furnitureId);
 
-
+        var Selected_Image = document.getElementById("Selected_Image");
+        var Image1 = document.getElementById("Image1");
+        var Image2 = document.getElementById("Image2");
+        var Image3 = document.getElementById("Image3");
 
         $.ajax({
             url: "/api/v1/furniture/" + furnitureId,
             type: "GET",
             success: function(furniture) {
                 console.log(furniture);
+                Selected_Image.src = "../images/furniture/"+furniture.id+"/1.png";
+                Image1.src = "../images/furniture/"+furniture.id+"/1.png";
+                Image2.src = "../images/furniture/"+furniture.id+"/1.png";
+                // Image3.src = "../images/furniture/"+furniture.id+"/1.png";
                 var furniture_name = $('.Furniture_Name');
                 furniture_name.append(furniture.name);
                 var description = $('.Description');
@@ -284,5 +277,41 @@
             }
         }
     };
+</script>
+<script>
+     var furnitureId = new URLSearchParams(window.location.search).get('id');
+    $.ajax({
+            url: "/api/v1/furniture/getRecommendedProducts",
+            type: "GET",
+            data: {id: furnitureId},
+            success: function(response) {
+                console.log(response);
+                const recommendedProducts = response.recommendedProducts;
+                const recommendedProductsContainer = $('#recommended-products');
+                recommendedProductsContainer.empty();
+                $.each(recommendedProducts, function(index, product) {
+
+                    const html = "<div class='col-xl-3 col-lg-4 col-sm-6 col-12 p-4'>"+
+                "<div class='Recommended_container' >"+
+                "<img src='..\\images\\furniture\\" + product.id  + "\\1.png' class='Image_In_Recommended'>"+
+                    "<div class='Inner_Container'>"+
+                        "<p class='Recommended_Product_Name'>" + product.name  + "</p>"+
+                        "<button class='View_Furniture' id='"+product.id  + "'>View Furniture</button>"+
+                    "</div>"+
+                "</div>"+
+            "</div>";
+                    
+                    recommendedProductsContainer.append(html);
+                });
+
+                $('.View_Furniture').click(function() {
+                    const productId = $(this).attr('id');
+                    window.location.href = '/furniture/furniture_details?id=' + productId;
+                });
+            },
+            error: function(error) {
+                    console.log(error);
+            }
+        });
 </script>
 @endsection

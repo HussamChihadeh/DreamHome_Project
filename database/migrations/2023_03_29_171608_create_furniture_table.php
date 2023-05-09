@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('furniture', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('designer_id');
-            $table->foreign('designer_id')->references('id')->on('designers');
+            $table->foreign('designer_id')->references('id')->on('designers')->onDelete('cascade');;
             $table->string("name");
             $table->integer("price");
             $table->string("date");

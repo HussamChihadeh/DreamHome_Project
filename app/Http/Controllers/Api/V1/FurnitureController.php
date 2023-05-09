@@ -124,6 +124,39 @@ class FurnitureController extends Controller
         return response()->json(compact('data'));
         }
 
+
+        public function getRecommendedProducts(Request $request)
+        {
+            $furniture = Furniture::findOrFail($request->id);
+            $designer = $furniture->designer_id;
+            $type = $furniture->type;
+            $style = $furniture->style;
+
+            $recommendedByDesigner = Furniture::where('designer_id', $designer)
+                                                ->where('id', '!=', $request->id)
+                                                ->take(1)->get();
+
+            $recommendedByType = Furniture::where('type', $type)
+                                                ->where('id', '!=', $request->id)
+                                                ->take(1)->get();
+
+            $recommendedByStyle = Furniture::where('style', $style)
+                                                ->where('id', '!=', $request->id)
+                                                ->take(1)->get();
+
+            $recommendedProducts = $recommendedByDesigner->merge($recommendedByType)->merge($recommendedByStyle);
+
+            // Handle the case when there is only one item in the Furniture table
+            // if ($recommendedProducts->count() === 1 && $recommendedProducts->first()->id === $furniture->id) {
+            //     $recommendedProducts = collect();
+            // }
+
+            return response()->json([
+                'furniture' => $furniture,
+                'recommendedProducts' => $recommendedProducts,
+            ]);
+        }
+
     /**
      * Show the form for editing the specified resource.
      */

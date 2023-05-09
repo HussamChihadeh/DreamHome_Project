@@ -65,6 +65,7 @@
                                 <th>Experience</th>
                                 <th>Bio</th>
                                 <th>LinkedIn</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                     </table>
@@ -114,10 +115,28 @@
                             "<td>"+designer.age+"</td>" +
                             "<td>"+designer.experience+"</td>" +
                             "<td>"+designer.bio+"</td>" +
-                            "<td>"+designer.linkedin+"</td></tr>"; 
+                            "<td>"+designer.linkedin+"</td>"+
+                            "<td><button id='delete_designer' data-id='"+designer.id+"'>Delete</button></td></tr>"; 
 
                             Requests_Table.appendChild(tbody);
 
+                            const delete_designer = document.getElementById('delete_designer');
+                            const designerId = delete_designer.getAttribute('data-id');
+                            delete_designer.addEventListener('click', () => {
+                                $.ajax({
+                                    type: "DELETE",
+                                    url: "/api/v1/designers/deleteDesigner/" + designerId,
+                                    success: function(data) {
+                                        // Handle success response
+                                        console.log(data);
+                                    },
+                                    error: function(xhr, status, error) {
+                                        // Handle error response
+                                        console.log(xhr.responseText);
+                                    }
+                                });
+
+                            });
                             
 
                         })
@@ -364,5 +383,8 @@
                     });
                 });
             });
+
+
+            
         </script>
 @endsection

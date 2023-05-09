@@ -37,7 +37,10 @@ Route::group(["prefix" => "v1", "namespace"=>"App\Http\Controllers\Api\V1"], fun
     Route::get('furniture/filterData', 'FurnitureController@filterData');
     Route::post('furniture/storeItem', 'FurnitureController@storeItem');
     Route::post('designers/storeDesigner', 'DesignerController@storeDesigner');
+    Route::delete('designers/deleteDesigner/{id}', 'DesignerController@deleteDesigner');
     Route::post('furniture/addToCart', 'CartController@addToCart');
+    Route::get('furniture/getRecommendedProducts', 'FurnitureController@getRecommendedProducts');
+    // getRecommendedProducts
     Route::apiResource("properties", PropertyController::class);
     Route::apiResource("furniture", FurnitureController::class);
     Route::apiResource("designers", DesignerController::class);
