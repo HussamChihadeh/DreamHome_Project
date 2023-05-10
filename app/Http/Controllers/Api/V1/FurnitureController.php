@@ -106,6 +106,16 @@ class FurnitureController extends Controller
         //
         $furniture = Furniture::find($furniture->id);
         $furniture->designer_name = $furniture->designers->name;
+
+        $folderPath = public_path('images/furniture/' . $furniture->id);
+
+        // Get the list of image file names in the folder
+        $imageNames = collect(scandir($folderPath))
+            ->reject(function($name) {
+                return in_array($name, ['.', '..']);
+            });
+
+        $furniture->image_names = $imageNames;
         return response()->json($furniture);
     }
 
@@ -125,37 +135,82 @@ class FurnitureController extends Controller
         }
 
 
+        // public function getRecommendedProducts(Request $request)
+        // {
+        //     $furniture = Furniture::findOrFail($request->id);
+        //     $designer = $furniture->designer_id;
+        //     $type = $furniture->type;
+        //     $style = $furniture->style;
+
+        //     $recommendedByDesigner = Furniture::where('designer_id', $designer)
+        //                                         ->where('id', '!=', $request->id)
+        //                                         ->take(1)->get();
+
+        //     $recommendedByType = Furniture::where('type', $type)
+        //                                         ->where('id', '!=', $request->id)
+        //                                         ->take(1)->get();
+
+        //     $recommendedByStyle = Furniture::where('style', $style)
+        //                                         ->where('id', '!=', $request->id)
+        //                                         ->take(1)->get();
+
+        //     $recommendedProducts = $recommendedByDesigner->merge($recommendedByType)->merge($recommendedByStyle);
+
+        //     return response()->json([
+        //         'furniture' => $furniture,
+        //         'recommendedProducts' => $recommendedProducts,
+        //     ]);
+        // }
         public function getRecommendedProducts(Request $request)
         {
             $furniture = Furniture::findOrFail($request->id);
-            $designer = $furniture->designer_id;
-            $type = $furniture->type;
-            $style = $furniture->style;
 
-            $recommendedByDesigner = Furniture::where('designer_id', $designer)
-                                                ->where('id', '!=', $request->id)
-                                                ->take(1)->get();
+            // Get all furniture items with a different ID
+            $otherFurniture = Furniture::where('id', '!=', $request->id)->get();
 
-            $recommendedByType = Furniture::where('type', $type)
-                                                ->where('id', '!=', $request->id)
-                                                ->take(1)->get();
+            // Calculate the Jaccard similarity coefficient for each item
+            $similarities = $otherFurniture->map(function($other) use ($furniture) {
+                $featuresA = collect([
+                    $furniture->type,
+                    $furniture->style,
+                    $furniture->designer_id,
+                    // add more features as needed
+                ])->filter(function($value) {
+                    return !empty($value);
+                })->toArray();
 
-            $recommendedByStyle = Furniture::where('style', $style)
-                                                ->where('id', '!=', $request->id)
-                                                ->take(1)->get();
+                $featuresB = collect([
+                    $other->type,
+                    $other->style,
+                    $other->designer_id,
+                    // add more features as needed
+                ])->filter(function($value) {
+                    return !empty($value);
+                })->toArray();
 
-            $recommendedProducts = $recommendedByDesigner->merge($recommendedByType)->merge($recommendedByStyle);
+                $intersection = count(array_intersect($featuresA, $featuresB));
+                $union = count(array_unique(array_merge($featuresA, $featuresB)));
 
-            // Handle the case when there is only one item in the Furniture table
-            // if ($recommendedProducts->count() === 1 && $recommendedProducts->first()->id === $furniture->id) {
-            //     $recommendedProducts = collect();
-            // }
+                return [
+                    'id' => $other->id,
+                    'similarity' => $union == 0 ? 0 : $intersection / $union,
+                ];
+            });
+
+            // Sort the furniture items by their similarity to the target item
+            $sortedFurniture = $similarities->sortByDesc('similarity');
+
+            // Get the top 3 most similar items
+            $recommendedProducts = $sortedFurniture->take(4)->map(function($item) {
+                return Furniture::findOrFail($item['id']);
+            });
 
             return response()->json([
                 'furniture' => $furniture,
                 'recommendedProducts' => $recommendedProducts,
             ]);
         }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -24,11 +24,8 @@ use Illuminate\Support\Str;
         <img class="Furniture_Image" id="Selected_Image">
     </div>
     <div class="col-md-1 col-2">
-        <div class="vertical-line"></div>
-        <img src="..\images\furniture\Sofas\Sofa1\sofa1.png" class="Furniture_Image_Vertical Furniture_Image_Vertical_Clicked" id="Image1">
-        <img src="..\images\furniture\Sofas\Sofa1\sofa4.png" class="Furniture_Image_Vertical" id="Image2">
-        <img src="..\images\furniture\Sofas\Sofa1\sofa3.png" class="Furniture_Image_Vertical" id="Image3">
-
+        <div class="vertical-line" ></div>
+        <div id="showed_images"></div>
     </div>
 
     <div class="col-md-6 col-12">
@@ -91,17 +88,17 @@ use Illuminate\Support\Str;
 
     <div class="col-sm-6 col-md-5 col-xl-3 col-12 p-5">
         <div class="Extra_Info_container">
-            <img src="{{asset('images/furniture/Sofas/Sofa1/sofa4.png')}}" class="Image_In_Extra_Info">
+            <img class="Image_In_Extra_Info" id="details_image_1">
             <div class="Inner_Container" style="line-height: 2.5;">
-                <span class="title">Height:</span> 33.67 inch
+                <!-- <span class="title">Height:</span> 33.67 inch
                 <br>
                 <span class="title">Width:</span> 92.1 inch
                 <br>
                 <span class="title">Depth:</span> 70 inch
+                <br> -->
+                <span class="title">Manufactured year: </span><span id="year_of_made"></span>
                 <br>
-                <span class="title">Weight:</span> 5 Kg
-                <br>
-                <span class="title">Made in: </span>Italy, 2019
+                <span class="title">Manufactured country: </span><span id="country_of_made"></span>
                 <br>
                 <span class="title">Designed by: </span><span class="designer_name"></span>
 
@@ -113,15 +110,15 @@ use Illuminate\Support\Str;
 
     <div class="col-sm-6 col-md-5 col-xl-3 col-12 p-5">
         <div class="Extra_Info_container">
-            <img src="..\images\furniture\Sofas\Sofa1\sofa3.png" class="Image_In_Extra_Info">
+            <img class="Image_In_Extra_Info" id="details_image_2">
             <div class="Inner_Container">
-                <span class="title">Material:</span><span><br>Brass Fabric Metal</span>
+                <span class="title">Type:</span><span id="type"><br></span>
                 <br>
-                <span class="title">Legs:</span>
+                <!-- <span class="title">Legs:</span>
                 <span><br>Tapered legs have an elegant look created by
                     three metal rods that converge towards the brass ends. </span>
-                <br>
-                <span class="title">Style:</span><span><br>Mid-Century Modern</span>
+                <br> -->
+                <span class="title">Style:</span><span id="style"><br></span>
                 <br>
 
 
@@ -140,39 +137,6 @@ use Illuminate\Support\Str;
 <div class="row" id="recommended-products" style="width: 90%;margin-left: 5%; margin-top: 30; margin-bottom: 50;">
 
 
-    <!-- <div class="col-xl-3 col-lg-4 col-sm-6 col-12 p-4">
-        <div class="Recommended_container">
-            <img src="..\images\furniture\Chandelier\Chandelier_1\1.png" class="Image_In_Recommended">
-            <div class="Inner_Container">
-                <p class="Recommended_Product_Name">Stilnovo Large Chandelier</p>
-                <button class="View_Furniture">View Furniture</button>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="col-xl-3 col-lg-4 col-sm-6 col-12 p-4">
-        <div class="Recommended_container">
-            <img src="..\images\furniture\Seats\Seat1\1.png" class="Image_In_Recommended">
-            <div class="Inner_Container">
-                <p class="Recommended_Product_Name">Carlo De Carli '915' Lounge </p>
-                <button class="View_Furniture">View Furniture</button>
-            </div>
-        </div>
-
-    </div>
-
-    <div class="col-xl-3 col-lg-4 col-sm-6 col-12 p-4">
-        <div class="Recommended_container">
-            <img src="..\images\furniture\Chandelier\Chandelier_2\1.png" class="Image_In_Recommended">
-            <div class="Inner_Container">
-                <p class="Recommended_Product_Name">Pyramid Pendants Opaline Glass</p>
-                <button class="View_Furniture">View Furniture</button>
-            </div>
-        </div>
-
-    </div> -->
-
     
     <div class="col-md-2"></div>
 
@@ -186,7 +150,7 @@ use Illuminate\Support\Str;
 @section("script")
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
+<!-- <script>
     var Selected_Image = document.getElementById("Selected_Image");
     var Image1 = document.getElementById("Image1");
     var Image2 = document.getElementById("Image2");
@@ -204,7 +168,7 @@ use Illuminate\Support\Str;
 
     });
 
-</script>
+</script> -->
 <script>
     $(document).ready(function() {
         var furnitureId = new URLSearchParams(window.location.search).get('id');
@@ -213,9 +177,9 @@ use Illuminate\Support\Str;
         element.setAttribute('id', furnitureId);
 
         var Selected_Image = document.getElementById("Selected_Image");
-        var Image1 = document.getElementById("Image1");
-        var Image2 = document.getElementById("Image2");
-        var Image3 = document.getElementById("Image3");
+        var details_image_1 = document.getElementById("details_image_1");
+        var details_image_2 = document.getElementById("details_image_2");
+        var showed_images = document.getElementById("showed_images");
 
         $.ajax({
             url: "/api/v1/furniture/" + furnitureId,
@@ -223,9 +187,8 @@ use Illuminate\Support\Str;
             success: function(furniture) {
                 console.log(furniture);
                 Selected_Image.src = "../images/furniture/"+furniture.id+"/1.png";
-                Image1.src = "../images/furniture/"+furniture.id+"/1.png";
-                Image2.src = "../images/furniture/"+furniture.id+"/1.png";
-                // Image3.src = "../images/furniture/"+furniture.id+"/1.png";
+                details_image_1.src = "../images/furniture/"+furniture.id+"/1.png";
+                details_image_2.src = "../images/furniture/"+furniture.id+"/2.png";
                 var furniture_name = $('.Furniture_Name');
                 furniture_name.append(furniture.name);
                 var description = $('.Description');
@@ -240,40 +203,68 @@ use Illuminate\Support\Str;
                 var designer_name = $('.designer_name');
                 console.log(furniture.designer_name)
                 designer_name.append(furniture.designer_name);
+
+                var country_of_made = $('#country_of_made');
+                country_of_made.append(furniture.place);
+
+                var year_of_made = $('#year_of_made');
+                year_of_made.append(furniture.date);
+
+                var style = $('#style');
+                style.append(furniture.style);
+
+                var type = $('#type');
+                type.append(furniture.type);
+
+                var images = furniture.image_names;
+                console.log(furniture.image_names);
+                // var showed_images = $('.Showed_Images');
+
+                Object.values(images).forEach((image, index) => {
+                    console.log(image);
+                    var img = document.createElement('img');
+                    img.classList.add('Furniture_Image_Vertical');
+                    img.src = "../images/furniture/"+furniture.id+"/"+image;
+                    if (index === 0) {
+                        img.classList.add('Furniture_Image_Vertical_Clicked');
+                    }
+                    
+                    showed_images.append(img);
+                });
+                clickController();
             },
             error: function(error) {
                 console.log(error);
             }
         });
         function Show_Message() {
+            message.style.animation = "message_show 1.1s linear ";
+            setTimeout(function() {
 
+                message.style = " top:12%;left: 35%;right: 35%; width: 30%;height:60;z-index:2";
 
-message.style.animation = "message_show 1.1s linear ";
-setTimeout(function() {
+            }, 1050);
 
-    message.style = " top:12%;left: 35%;right: 35%; width: 30%;height:60;z-index:2";
+            setTimeout(function() {
+                message_text.hidden = false;
+                message_text.style.opacity = 1;
 
-}, 1050);
+            }, 1100);
 
-setTimeout(function() {
-    message_text.hidden = false;
-    message_text.style.opacity = 1;
+            setTimeout(function() {
+                message_text.hidden = true;
 
-}, 1100);
+                setTimeout(function() {
+                    message.style.animation = "message_hide 1.1s linear";
 
-setTimeout(function() {
-    message_text.hidden = true;
+                }, 100);
+                setTimeout(function() {
+                    message.style = "top:0%;width: 50;left: 50%; height: 50;right: 50%;";
 
-    setTimeout(function() {
-        message.style.animation = "message_hide 1.1s linear";
+                }, 1180);
+            }, 2000);
+        }
 
-    }, 100);
-    setTimeout(function() {
-        message.style = "top:0%;width: 50;left: 50%; height: 50;right: 50%;";
-
-    }, 1180);
-}, 2000);
-}
         element.onclick = function() {
             var userId = {{ auth()->user()->id }};
             $.ajax({
@@ -299,13 +290,17 @@ setTimeout(function() {
         };
     });
 
-    window.onload = function() {
+    // window.onload = function() {
+        function clickController(){
 
         setTimeout(function() {
             on_load.style.display = "none";
         }, 1350);
 
+        var Selected_Image = document.getElementById("Selected_Image");
+        const Image1 = document.querySelector('.Furniture_Image_Vertical_Clicked');
         Selected_Image.src = Image1.src;
+        const Images = document.querySelectorAll('.Furniture_Image_Vertical');
 
         for (var i = 0; i < Images.length; i++) {
             Images[i].onclick = function() {
