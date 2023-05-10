@@ -1,3 +1,7 @@
+body{
+    background-color: white !important;
+}
+
 .bedroom_image, .bathroom_image {
     margin-top: 0px;
     width: 20px;

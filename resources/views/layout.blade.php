@@ -55,7 +55,7 @@ background-color: #e9e9e9;}</style>
       <a href="" class="logo me-4 d-none d-md-block">Dream Home</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main" aria-controls="main"
         aria-expanded="false" aria-label="Toggle navigation">
-        <i class="fa-solid fa-bars"></i>
+        <i class="fa-solid fa-bars" style="color:black;"></i>
       </button>
       <div class="collapse navbar-collapse" id="main">
         <ul class="navbar-nav ms-auto mb-2 mt-1 mb-lg-0">

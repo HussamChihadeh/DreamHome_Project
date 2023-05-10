@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\V1\DesignerController;
 use App\Http\Controllers\Api\V1\PropertyController;
 use App\Http\Controllers\Api\V1\FurnitureController;
 use App\Http\Controllers\Api\V1\CartController;
+use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,7 @@ Route::group(["prefix" => "v1", "namespace"=>"App\Http\Controllers\Api\V1"], fun
     Route::get('properties/getLatestProperties', 'PropertyController@getLatestProperties');
 
     Route::get('property/updateSlots', 'TourController@updateSlots');
+    Route::get('property/tourRequests', 'TourController@index');
     Route::put('properties/{id}', 'PropertyController@updatePropertyStatus');
     Route::put('properties/assign/{id}', 'PropertyController@assignProperty');
     Route::get('furniture/filterData', 'FurnitureController@filterData');
@@ -45,6 +47,7 @@ Route::group(["prefix" => "v1", "namespace"=>"App\Http\Controllers\Api\V1"], fun
     // getRecommendedProducts
 
     Route::apiResource("properties", PropertyController::class);
+    Route::apiResource("users", UserController::class);
     Route::apiResource("furniture", FurnitureController::class);
     Route::apiResource("designers", DesignerController::class);
     Route::apiResource("chat", ChatController::class);

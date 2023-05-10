@@ -87,7 +87,7 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             if ($user->email === 'admin@dreamhome.org') {
-                return redirect('/admin_assign')->with('success', 'Login Success');
+                return redirect('/admin_customers')->with('success', 'Login Success');
             } 
             elseif (strpos($user->email, '@Designer.org') !== false) {
                 // Code for @designer.org domain

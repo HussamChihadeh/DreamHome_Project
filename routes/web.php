@@ -141,10 +141,13 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
         return view("Admin_Customers");
     })->name("customers");
 
+    Route::get("/admin_tourRequests", function () {
+        return view("Admin_TourRequests");
+    })->name("tourRequests");
+
     Route::get("/admin_requests", function () {
         return view("Admin_Requests");
     })->name("requests");
-
 
     Route::get("/admin_assign", function () {
         return view("Admin_Assign");

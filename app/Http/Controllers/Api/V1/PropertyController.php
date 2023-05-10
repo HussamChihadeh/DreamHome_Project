@@ -124,6 +124,10 @@ class PropertyController extends Controller
             }
         }
         // return a response or redirect to a success page
+        if (auth()->user()->email === 'admin@dreamhome.org') {
+            // return to the Admin_Assign view
+            return view('Admin_Assign');
+        }
         return view("rent");
         } catch (QueryException $e) {
         // handle the error

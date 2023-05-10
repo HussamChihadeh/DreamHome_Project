@@ -51,10 +51,10 @@
             <div class="Group_container " id="Group_container">
                     <div class="pagination d-flex justify-content-between">
                         <button class="prev">&lt;</button>
-                        <button class="next">&gt;</button>
+                        <button id="add-item-btn" class="Add_Item_Button">add item</button>                        <button class="next">&gt;</button>
                     </div>
                 </div>
-                <button id="add-item-btn">add item</button>
+                
                 <div class="table-responsive">
                     <table class="table" style="font-size: 0.9vw; text-align: center;" id="Requests_Table">
                         <thead>

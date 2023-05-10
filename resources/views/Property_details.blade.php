@@ -109,7 +109,7 @@
 
 
                         <div class="d-flex mt-2 mb-1 align-items-center">
-                            <div class="for_Rent_details fw-bold pe-1">For Rent:</div>
+                            <div class="for_Rent_details fw-bold pe-1">For:</div>
                             <div class="price_details details"></div>
                         </div>
 
@@ -142,7 +142,6 @@
         <div class="main-title mt-5 mb-5 position-relative text-center">
             <img src="" alt="">
             <h2>Location</h2>
-            <p class="text-black-50 text-uppercase">Some of the stuufffff</p>
           </div>
         <div id="map" style="width: 50%; height: 400px;"></div>
       </div>
@@ -152,7 +151,6 @@
         <div class="main-title mt-5 mb-5 position-relative text-center">
             <img src="" alt="">
             <h2>Apartment Map</h2>
-            <p class="text-black-50 text-uppercase">Some of the stuufffff</p>
           </div>
         <img src="{{asset('images/properties/apartment_map.jpg')}}" alt="">
       </div>

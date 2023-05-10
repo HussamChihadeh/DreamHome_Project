@@ -64,17 +64,30 @@ background-color: #e9e9e9;}</style>
           <li class="nav-item">
             <a class="nav-link p-lg-3" aria-current="page" href="{{ route('customers') }}">Customers</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item  p-lg-2 dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Properties
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="{{ route('requests') }}">Requests</a></li>
+              <li><a class="dropdown-item" href="{{ route('assign') }}">Assign</a></li>
+              <li><a class="dropdown-item" href="{{ route('tourRequests') }}">Tours</a></li>
+            </ul>
+          </li>
+          <!-- <li class="nav-item">
             <a class="nav-link p-lg-3" href="{{ route('requests') }}">Requests</a>
-          </li>
-          <li class="nav-item">
+          </li> -->
+          <!-- <li class="nav-item">
+            <a class="nav-link p-lg-3" href="{{ route('tourRequests') }}">Tours</a>
+          </li> -->
+          <!-- <li class="nav-item">
             <a class="nav-link p-lg-3" href="{{ route('assign') }}">Assign</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link p-lg-3" href="{{ route('admin_furniture') }}">Furniture</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link p-lg-3" href="{{ route('admin_designer') }}">Designer</a>
+            <a class="nav-link p-lg-3" href="{{ route('admin_designer') }}">Designers</a>
           </li>
           <li class="nav-item">
             <form class="nav-link p-lg-3" action="{{ route('logout') }}" method="POST">
@@ -104,4 +117,6 @@ background-color: #e9e9e9;}</style>
     
   @yield("content")
 
+  <script src="{{asset('bootstrap_js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{asset('bootstrap_js/all.min.js')}}"></script>
 </body>

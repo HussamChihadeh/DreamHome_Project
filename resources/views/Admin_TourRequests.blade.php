@@ -36,7 +36,7 @@
                 <div class="col-sm-6 col-12 p-2">
                     <div class="Top_Container Information">
                         <h4>Information</h4>
-                        <p>-This page shows this Website's Customers.
+                        <p>-This page shows the Tour Requests.
                                                     </p>
                     </div>
                 </div>
@@ -53,12 +53,12 @@
                     <table class="table" style="font-size: 0.9vw; text-align: center;" id="Requests_Table">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-
-                                <th>Email</th>
-                                <th>Phone Number</th>
-                                <th>Location</th>
+                                <th>Customer ID</th>
+                                <th>Customer Name</th>
+                                <th>Property ID</th>
+                                <th>Property Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
                             </tr>
                         </thead>
                     </table>
@@ -118,18 +118,20 @@
                 
 
                 $.ajax({
-                    url: "/api/v1/users?page=" + page,
+                    url: "/api/v1/property/tourRequests?page=" + page,
                     type: "GET",
-                    success: function(users) {
+                    success: function(tours) {
                         tbody.innerHTML = '';
-                        $.each(users.data, function(index, user) {
-                            console.log(user);
+                        $.each(tours.data, function(index, tour) {
+                            console.log(tour);
                             tbody.innerHTML += "<tr>" +
-                        "<td>"+user.id+"</td>" +
-                        "<td>"+user.name+"</td>" +
-                        "<td>"+user.email+"</td>" +
-                        "<td>"+user.phone_number+"</td>" +
-                        "<td>"+user.address+"</td></tr>" ;
+                        // "<td>"+tour.id+"</td>" +
+                        "<td>"+tour.user_id+"</td>" +
+                        "<td>"+tour.user.name+"</td>" +
+                        "<td>"+tour.property_id+"</td>" +
+                        "<td>"+tour.property.name+"</td>" +
+                        "<td>"+tour.tour_date+"</td>" +
+                        "<td>"+tour.tour_time+"</td></tr>" ;
 
                         // "<td><div class='dropdown'>" +
                         // "<button class='dropbtn'>House A</button>" +
@@ -148,7 +150,7 @@
 
                         Requests_Table.appendChild(tbody);
                         $(".pagination .prev").prop('disabled', page == 1);
-                                                $(".pagination .next").prop('disabled', page == users.last_page);
+                                                $(".pagination .next").prop('disabled', page == tours.last_page);
                                                 $(".pagination .prev").off();
                                                 $(".pagination .next").off();
 
@@ -161,7 +163,7 @@
                                                 });
 
                                                 $(".pagination .next").click(function () {
-                                                    if (currentPage < users.last_page) {
+                                                    if (currentPage < tours.last_page) {
                                                         currentPage++;
                                                         LoadData(currentPage);
                                                     }

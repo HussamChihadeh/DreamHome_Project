@@ -15,8 +15,11 @@ class TourController extends Controller
      */
     public function index()
     {
-        //
+        $tours = Tour::with(['user:id,name', 'property:id,name'])
+                    ->paginate(15);
+        return response()->json($tours);
     }
+
 
     public function updateSlots(Request $request)
     {
