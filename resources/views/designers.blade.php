@@ -28,64 +28,6 @@
 </div>
 
 
-
-<script>
-    // window.onload = LoadData();
-
-    // function LoadData() {
-
-    //     for (var i = 0; i < 5; i++) {
-    //         Container.innerHTML += "<div class='col-md-6 col-12  p-3'>" +
-    //             "<div class='Designer_Container' id='Container_'" + i + ">" +
-    //             "<div class='row'>" +
-    //             "<div class='col-sm-5 col-5'><img src='IMAGES\\Designers\\Johnny Floyd.png' class='ID_Image'>" +
-
-    //             "</div>" +
-    //             "<div class='col-sm-7 col-7 '>" +
-    //             "<div class='Info1'>" +
-    //             "<h6>Lee Parker</h6>" +
-    //             "<h6>Age: 28</h6>" +
-    //             "<h6>Location: Beirut</h6>" +
-
-    //             "</div>" +
-    //             "<div class='Info2'>" +
-    //             "<h6>Experience: 8 </h6>" +
-    //             "<img src='IMAGES\\filled_star.png' width='15' height='15'>" +
-    //             "<img src='IMAGES\\filled_star.png' width='15' height='15'>" +
-    //             "<img src='IMAGES\\filled_star.png' width='15' height='15'>" +
-    //             "<img src='IMAGES\\filled_star.png' width='15' height='15'>" +
-    //             "<img src='IMAGES\\unfilled_star.png' width='15' height='15'>" +
-    //             "</div>" +
-    //             "</div>" +
-
-    //             "<div class='row'>" +
-    //             "<div class='col-sm-12 col-12 '>" +
-    //             "<div class='Info3' hidden></div>" +
-    //             "</div>" +
-    //             "</div>" +
-    //             "<div class='row'>" +
-    //             "<div class='col-sm-6 col-6 '>" +
-    //             "<div class='Info4' hidden></div>" +
-    //             "</div>" +
-    //             "<div class='col-sm-6 col-6 '>" +
-    //             "<div class='Info5' hidden></div>" +
-    //             "</div>" +
-
-    //             "</div>" +
-
-    //             "</div>" +
-
-    //             "<div class='row'>" +
-    //             "<div class='col-sm-4 col-4 '></div>" +
-    //             "<div class='col-sm-5 col-5 '>" +
-    //             "<button class='Designer_View_Details'>Show More</button>" +
-    //             "</div>" +
-    //             "<div class='col-sm-3 col-3'></div>" +
-    //             "</div>" +
-    //             "</div>" +
-    //             "</div>";
-    //     }
-    // }
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -145,25 +87,7 @@
                     "</div>" +
                     "</div>";
             });
-            // $.ajax({
-            //     url: "/api/v1/showAllDesignerDetails",
-            //     type: "GET",
-            //     data: {
-            //         designer_id: "1"
-            //     },
-            //     success: function(users) {
-            //         $.each(designers, function(index, user) {
-            //             var a = document.getElementById("designer_phone_nb_"+designer_id);
-            //             // a.innerHTML = designer.phone_number;
-            //         });
-            //     },
-            //     error: function(xhr, status, error) {
-            //         console.log(xhr.responseText);
-            //         alert("Error: Failed to retrieve designer details");
-            //     }
-            // });
-
-
+        
             var Designer_Container = document.querySelectorAll(".Designer_Container");
             var Info1 = document.querySelectorAll(".Info1");
             var Info2 = document.querySelectorAll(".Info2");
@@ -171,7 +95,7 @@
             var Info4 = document.querySelectorAll(".Info4");
             var View_Details_Button = document.querySelectorAll(".Designer_View_Details");
             var Designer_Contact_Button = document.querySelectorAll(".Designer_Contact");
-
+           
             for (var i = 0; i < View_Details_Button.length; i++) {
                 (function(i) {
 
@@ -232,29 +156,18 @@
 
     // });
 </script>
-<!-- <script>
-    var View_Designer = document.querySelectorAll(".Designer_View_Details");
-    var i = 0;
-
-    $.ajax({
-        url: "/api/v1/designers",
-        type: "GET",
-        success: function(designers) {
-            // console.log(designers);
-            $.each(designers, function(index, designer) {
-                console.log("THISSSSSSSSSSSSS" + designer.id);
-                View_Designer[i].onclick = function() {
-                    alert(designer.id);
-                    // const url1 = "/chatify?id=" + designer.id;
-                    // window.location.href = url1;
-
-                }
-                i++;
+@guest
+    <script>
+        // User is not authenticated, do something else
+        $(document).ready(function() {
+            var Designer_Contact_Button = document.querySelectorAll(".Designer_Contact");
+            console.log("hello");
+            console.log(Designer_Contact_Button);
+            Designer_Contact_Button.forEach(function(button) {
+                console.log(button);
+                button.classList.add('d-none');
             });
-        },
-        error: function(error) {
-            console.log(error);
-        }
-    });
-</script> -->
+        });
+    </script>
+@endguest
 </body>
