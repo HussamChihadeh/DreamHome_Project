@@ -1,5 +1,5 @@
 @extends("layout")
-@section("title", "rent")
+@section("title", "Properties")
 @section("head")
 <link rel="stylesheet" href="{{asset('css/rent.css')}}">
 <link rel="stylesheet" href="{{asset('css/buttons.css')}}">

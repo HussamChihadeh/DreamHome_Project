@@ -2,6 +2,7 @@
 @section("head")
 <link rel="stylesheet" href="{{asset('css/Admin_Tables.css')}}">
 
+@section("title", "Tour Requests")
 @endsection
 @section("content")
 

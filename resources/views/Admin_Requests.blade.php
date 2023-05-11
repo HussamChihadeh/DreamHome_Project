@@ -2,6 +2,7 @@
 @section("head")
 <link rel="stylesheet" href="{{asset('css/Admin_Tables.css')}}">
 
+@section("title", "Requests")
 @endsection
 @section("content")
     <div style="height: 10%;"></div>
