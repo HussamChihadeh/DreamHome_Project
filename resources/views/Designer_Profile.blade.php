@@ -151,5 +151,16 @@
 @endsection
 @section("script")
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    window.onload = function() {
+        var nav_items = document.querySelectorAll(".nav-item");
+        for (var i = 0; i < nav_items.length; i++) {
+            if (nav_items[i].innerHTML.includes("profile")) {
+                var link = nav_items[i].querySelector('a');
+                link.classList.add("active");
+            }
 
+        }
+    }
+</script>
 @endsection

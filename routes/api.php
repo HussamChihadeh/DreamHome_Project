@@ -35,6 +35,10 @@ Route::group(["prefix" => "v1", "namespace"=>"App\Http\Controllers\Api\V1"], fun
     Route::get('property/updateSlots', 'TourController@updateSlots');
     Route::get('property/tourRequests', 'TourController@index');
     Route::put('properties/{id}', 'PropertyController@updatePropertyStatus');
+
+    Route::put('cart/{id}', 'CartController@updateCart');
+    Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+    
     Route::put('properties/assign/{id}', 'PropertyController@assignProperty');
     Route::get('furniture/filterData', 'FurnitureController@filterData');
     Route::post('furniture/storeItem', 'FurnitureController@storeItem');

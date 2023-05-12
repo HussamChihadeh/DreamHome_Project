@@ -416,3 +416,30 @@ input[type=number]::-webkit-outer-spin-button {
     font-family: 'Sentic Display', sans-serif;
 
 }
+
+.message {
+
+    background-color: white;
+    border-radius: 30px;
+    /* border: 1px solid black; */
+    position: fixed;
+    z-index: 2;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+    top: 0%;
+    left: 50%;
+    right: 50%;
+    width: 100;
+    height: 50;
+    transform-style: preserve-3d;
+
+
+}
+
+.h22 {
+    text-align: center;
+    margin: 18 20 20 20;
+    opacity: 0;
+    font-size: 20px;
+    font-family: "poppins";
+    font-weight: bolder;
+}
