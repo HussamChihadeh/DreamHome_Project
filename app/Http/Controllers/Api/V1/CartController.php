@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Furniture;
 
+
+
+
 // use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -41,19 +44,23 @@ class CartController extends Controller
     {
         //
     }
-
     function getCartsByUserID()
     {
         $user = Auth::user();
         $user_id = $user->id;
 
-        $carts = Cart::where('user_id', $user_id)->get();
+        $carts = Cart::where('user_id', $user_id)
+            ->where('checkout', 'no')
+            ->get();
 
         $furnitureIds = $carts->pluck('furniture_id');
         $furniture = Furniture::whereIn('id', $furnitureIds)->get();
 
         return view('My_Cart', compact('user', 'carts', 'furniture'));
     }
+
+ 
+
     public function updateCart(Request $request, $id)
     {
         $quantity = $request->input('quantity');
@@ -101,23 +108,24 @@ class CartController extends Controller
         return response()->json(['message' => 'Cart item deleted successfully']);
     }
 
-    // public function updatePropertyStatus(Request $request, $id)
-    // {
-    //     $property = Property::find($id);
+    
+    
+    public function checkout()
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user_id = $user->id;
 
-    //     // Get the selected option
-    //     $status = $request->input('accept-decline');
+            Cart::where('user_id', $user_id)->update(['checkout' => 'yes']);
 
-    //     // Update the status of the property
-    //     $property->status = $status;
-    //     $property->save();
-
-    //     // Return a response
-    //     return response()->json(['message' => 'Property status updated successfully.']);
-    // }
-
-
-
+            // Optionally, you can return a response if needed
+            return response()->json(['message' => 'Checkout successful']);
+        } else {
+            // User is not authenticated, handle accordingly
+            return response()->json(['message' => 'User is not authenticated'], 401);
+        }
+    }
+    
 
     public function addToCart(Request $request)
     {
@@ -162,7 +170,13 @@ class CartController extends Controller
     public function edit(Cart $tour)
     {
         //
+
     }
+
+    // setTimeout(function() {
+    //     increaseQuantity(furnitureId);
+    //   }, 15 * 60 * 1000); 
+
 
     /**
      * Update the specified resource in storage.

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('furniture_id');
             $table->integer('quantity');
-       
+            $table->string('checkout')->default('no');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('furniture_id')->references('id')->on('furniture')->onDelete('cascade');
             $table->timestamps();

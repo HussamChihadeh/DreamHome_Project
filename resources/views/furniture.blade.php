@@ -40,7 +40,7 @@
       <button class="Filter_Furniture_button" id="Filter_Button">
         <img src="{{asset('images/Filter_logo.png')}}" class="filter_image" id="Filter_Image">Filters</button>
 
-      <button class="cart_Furniture_button" id="My_Cart_Button">
+      <button class="cart_Furniture_button" id="My_Cart_Button" onclick="OpenCart();">
         <img src="{{asset('images/cart_logo.png')}}" class="Cart_image">My Cart</button>
 
       <button class="Favorites_Furniture_button" id="Favorites_button">
@@ -175,27 +175,6 @@
 
 
 
-    My_Cart_Button.onclick = function () {
-
-      setTimeout(function () { Furniture_Grid.style.animation = ''; }, 1500);
-
-      Furniture_Grid.style.animation = "Animate_Grid_In 1.5s forwards";
-
-      Show_Message();
-      message_text.innerHTML = "My Cart";
-      Filter_Button.innerHTML = "Our Shop";
-
-      Active_Button_Editor(My_Cart_Button);
-
-
-      //Just to show the favorites, to be removed/edited later.
-      setTimeout(function () {
-        for (var i = 0; i < heart.length; i++) {
-          heart[i].src = "{{asset('images/heart_unfilled.png')}}";
-        }
-      }, 1200);
-      /////////////////////////////////////////////////////////
-    }
 
       var wishlist;
       function favorites(wishlist){
@@ -227,6 +206,7 @@
       Active_Button_Editor(Favorites_button);
 
     }
+    
     Filter_Button.onclick = function () {
 
 
@@ -317,6 +297,10 @@
       }, 2000);
     }
 
+    function OpenCart(){
+      window.location.href = '/My_Cart';
+
+    }
     function Exit_Filter() {
 
       Filter_Container.style.animation = "Filter_Out 0.4s forwards";

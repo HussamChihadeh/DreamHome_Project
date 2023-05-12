@@ -38,7 +38,8 @@ Route::group(["prefix" => "v1", "namespace"=>"App\Http\Controllers\Api\V1"], fun
 
     Route::put('cart/{id}', 'CartController@updateCart');
     Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
-    
+    Route::put('/checkout', 'CartController@checkout')->middleware('api');
+
     Route::put('properties/assign/{id}', 'PropertyController@assignProperty');
     Route::get('furniture/filterData', 'FurnitureController@filterData');
     Route::post('furniture/storeItem', 'FurnitureController@storeItem');

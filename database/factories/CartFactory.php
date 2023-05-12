@@ -25,12 +25,13 @@ class CartFactory extends Factory
         $furnitures = Furniture::all();
         $user = $this->faker->randomElement($users);
         $furniture = $this->faker->randomElement($furnitures);
+        
         return [
-           
             'user_id' => $user->id,
             'furniture_id' => $furniture->id,
-            'quantity' => $this->faker->numberBetween(1,9),
-          
+            'quantity' => $this->faker->numberBetween(1, 9),
+            'checkout' => 'no'
         ];
-    }   
+    }
+    
 }

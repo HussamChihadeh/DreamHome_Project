@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@600&family=Signika:wght@500;600&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@700&family=Signika:wght@500;600&display=swap" rel="stylesheet">
 <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
 @endsection
@@ -29,7 +30,7 @@
 
 <div class="row">
     <div class="col-1"></div>
-    <div class="col-sm-6 col-12 p-5" id="Order_Summary">
+    <div class="col-sm-6 col-12 p-5">
         <!-- -------------------------------------------------- -->
 
 
@@ -38,15 +39,15 @@
 
         @foreach ($furniture as $furn)
         @php $cart = $carts->where('furniture_id', $furn->id)->first();
-            @endphp
-            
+        @endphp
+
         <div class="row container_1">
-           
+
             <row class="Header1">{{ $furn->name }}</row>
             <row class="Header2">{{ $furn->type }}</row>
 
             <div class="col-4">
-                <img src="images\furniture\Sofas\Sofa2\1.png" class="Furniture_Image">
+                <img src="images\furniture\{{$furn->id}}\1.png" onclick='Furniture_Details("{{$furn->id}}")' class="Furniture_Image">
             </div>
 
             <div class="col-lg-3 col-3 p-0" style="margin-top:9%">
@@ -78,11 +79,11 @@
     @endphp
 
     <div class="col-sm-4 col-12 p-2">
-        <div class="Order_Summary">
+        <div class="Order_Summary" id="Order_Summary">
             <p style=" color: black;
                 font-weight: 600;
                 font-size: 1.1vw;">Order Summary</p>
-            <div class="Orders">
+            <div class="Orders" id="dataa">
                 @foreach ($furniture as $furn)
                 <div class="row p-1">
                     @php
@@ -134,14 +135,14 @@
 
             </div>
             <div class="Amount">
-                <div class="row p-1">
+                <div class="row p-1" id="Total_Price">
                     <div class="col-8">Order Total</div>
                     <div class="col-4 p-0">$ {{ number_format($totalPrice+150, 2, '.',',') }}</div>
                 </div>
 
             </div>
             <div class="row">
-                <div class="col-12 p-3"><button class="Check_out">Check Out</button></div>
+                <div class="col-12 p-3"><button id="{{$user->id}}" class="Check_out">Check Out</button></div>
             </div>
         </div>
     </div>
@@ -217,70 +218,99 @@
         })(j));
     }
 
-    // Function to send an AJAX request to update the cart
-    // Function to send an AJAX request to update the cart
-    function updateCart(quantity, id) {
-        
-    $.ajax({
-        url: '/api/v1/cart/' + id,
-        type: 'PUT',
-        data: {
-            'quantity': quantity,
-            _token: $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(response) {
-            console.log("success");
-            // refreshCart();
-        },
-        error: function(response) {
-            console.log("unavailable");
-            console.log(quantity);
-            Show_Message();
-            message_text.innerHTML = "Unavailable";
 
-            quantity--; // Decrease the quantity after logging the error
 
-            // Find the quantity input element based on the id
-            const quantityInputElem = document.getElementById(id);
-            if (quantityInputElem) {
-                quantityInputElem.value = quantity;
-                quantityInputElem.dispatchEvent(new Event('input'));
-                //console.log(quantityInputElem.value);
-
+    $('#{{$user->id}}').on('click', function() {
+        $.ajax({
+            url: '/api/v1/checkout',
+            method: 'PUT',
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                // Handle the success response
+                console.log(response);
+                // Optionally, you can perform additional actions or update the UI
+            },
+            error: function(xhr, status, error) {
+                // Handle the error response
+                console.error(error);
             }
-        }
+        });
     });
-}
+
+
+    function updateCart(quantity, id) {
+
+        $.ajax({
+            url: '/api/v1/cart/' + id,
+            type: 'PUT',
+            data: {
+                'quantity': quantity,
+                _token: $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(response) {
+                console.log("success");
+                refreshCart();
+            },
+            error: function(response) {
+                console.log("unavailable");
+                console.log(quantity);
+                Show_Message();
+                message_text.innerHTML = "Unavailable";
+
+                quantity--; // Decrease the quantity after logging the error
+
+                // Find the quantity input element based on the id
+                const quantityInputElem = document.getElementById(id);
+                if (quantityInputElem) {
+                    quantityInputElem.value = quantity;
+                    quantityInputElem.dispatchEvent(new Event('input'));
+                    //console.log(quantityInputElem.value);
+
+                }
+            }
+        });
+    }
 
 
 
-    // function refreshCart() {
-    //     $.ajax({
-    //         url: '/My_Cart', // Replace with your cart route
-    //         method: 'GET',
-    //         dataType: 'html',
-    //         success: function(data) {
-    //             document.getElementById("Order_Summary").innerHTML=data;
-    //         },
-    //         error: function(xhr, status, error) {
-    //             console.error(error);
-    //         }
-    //     });
-    // }
+    function refreshCart() {
+        $.ajax({
+            url: '/My_Cart', // Replace with your cart route
+            method: 'GET',
+            dataType: 'html',
+            success: function(response) {
+                var newContainer = $('<div>').html(response);
+                $('#dataa').replaceWith(newContainer.find('#dataa'));
+                newContainer = $('<div>').html(response);
+                $('#Total_Price').replaceWith(newContainer.find('#Total_Price'));
+
+            },
+            error: function(xhr, status, error) {
+                console.error("Error:", error);
+            }
+        });
+    }
+
+
 
     const deleteBtns = document.querySelectorAll('.Delete');
-    const container_1=document.querySelectorAll(".container_1");
-for (let x = 0; x < deleteBtns.length; x++) {
-    deleteBtns[x].addEventListener('click', function() {
-        const index = Array.from(deleteBtns).indexOf(this);
-        const cartItemId = quantityInput[index].id;
-      
-        deleteCartItem(cartItemId);
-        container_1[x].innerHTML="";
-        // container_1[x].remove(); 
-            container_1[x].style.borderBottom="0.5px solid transparent";
+    const container_1 = document.querySelectorAll(".container_1");
+    for (let x = 0; x < deleteBtns.length; x++) {
+        deleteBtns[x].addEventListener('click', function() {
+            const index = Array.from(deleteBtns).indexOf(this);
+            const cartItemId = quantityInput[index].id;
+
+            deleteCartItem(cartItemId);
+            container_1[x].innerHTML = "";
+            // container_1[x].remove(); 
+            container_1[x].style.height = "0";
+            container_1[x].style.padding = "0";
+            container_1[x].style.borderBottom = "0.5px solid transparent";
+            refreshCart()
         });
-}
+    }
 
     function deleteCartItem(cartId) {
         // Send an AJAX request to delete the cart item
@@ -327,5 +357,10 @@ for (let x = 0; x < deleteBtns.length; x++) {
 
             }, 1180);
         }, 2000);
+    }
+
+    function Furniture_Details(id) {
+        window.location.href = '/furniture/furniture_details?id=' + id;
+
     }
 </script>

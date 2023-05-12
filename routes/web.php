@@ -134,6 +134,7 @@ Route::group(['middleware' => 'auth', 'designer'], function () {
 });
 Route::get('/designers', [DesignerController::class, 'showAllDesignerDetails'])->name('designers');
 
+Route::post('Cartupdate', 'CartController@Cartupdate')->name('Cartupdate');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
     // routes that only the admin should access
