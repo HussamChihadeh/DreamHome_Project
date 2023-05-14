@@ -227,5 +227,18 @@
                     }
                 });
             }
+
+
+            window.onload = function() {
+        var nav_items = document.querySelectorAll(".nav-item");
+        for (var i = 0; i < nav_items.length; i++) {
+            if (nav_items[i].innerHTML.includes("Properties")) {
+                var link = nav_items[i].querySelector('a');
+                link.innerHTML = "Properties";
+                link.classList.add("active");
+            }
+        }
+        }
+        </script>
         </script>
 @endsection

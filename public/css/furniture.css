@@ -49,7 +49,6 @@ body {
 
 
 
-
 }
 
 .furniture_container:hover {
@@ -59,10 +58,9 @@ body {
 .furniture_grid {
     background-color: #dad8d863;
     border: 10px solid #dad8d800;
-    padding: 0 0 0 0;
+    padding: 0 0 120 0;
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
     overflow-y: auto;
     position: fixed;
     overflow-x: hidden;

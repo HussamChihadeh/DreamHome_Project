@@ -3,6 +3,7 @@
 
 @section("head")
 <link rel="stylesheet" href="{{asset('css/furniture.css')}}">
+<link rel="stylesheet" href="{{asset('css/main.css')}}">
 <link rel="stylesheet" href="{{asset('css/animation.css')}}">
 <link rel="stylesheet" href="{{asset('css/buttons.css')}}">
 
@@ -72,7 +73,7 @@
   
 
   <!---------------------------------- Filter Container -->
-  <div class="Background" id="Background" onclick="Exit_Filter()" hidden></div>
+  <div class="Background" id="Background" hidden onclick="Exit_Filter()"></div>
   <div class="Filter_Container" id="Filter_Container" hidden>
     <div class="Filter_Title">
       <h1>Filters <img src="IMAGES\X_Button.png" height="15px" id="X_Button"
@@ -180,9 +181,8 @@
       function favorites(wishlist){
 
       setTimeout(function () { Furniture_Grid.style.animation = ''; }, 1500);
-
       Furniture_Grid.style.animation = "Animate_Grid_In 1.5s forwards";
-
+      
       Show_Message();
       message_text.innerHTML = "My Favorites";
 
@@ -195,13 +195,13 @@
         itemDiv.style.display = 'none';
         console.log(itemDiv);
       });
-
+      setTimeout(function(){
       wishlist.forEach(function(itemId) {
         var item = document.querySelector('.item-' + itemId);
         if (item) {
           item.style.display = 'block';
         }
-      });
+      });},500);
 
       Active_Button_Editor(Favorites_button);
 
@@ -220,17 +220,19 @@
 
         setTimeout(function () {
 
-          Furniture_Grid.style.animation = "Animate_Grid_In 1.5s forwards";
+          Furniture_Grid.style.animation = "Animate_Grid_In_1 1.5s forwards";
 
         }, 100);
 
         //Just to show the favorites, to be removed/edited later.
         var itemDivs = document.querySelectorAll('.item');
         console.log(itemDivs);
+        setTimeout(function(){
         itemDivs.forEach(function(itemDiv) {
           itemDiv.style.display = 'block';
           console.log(itemDiv);
         });
+      },500);
         /////////////////////////////////////////////////////////
       }
       else {
@@ -296,6 +298,7 @@
         }, 1180);
       }, 2000);
     }
+
 
     function OpenCart(){
       window.location.href = '/My_Cart';
@@ -460,7 +463,14 @@
     }
 
     window.onload = function() {
-        
+      var nav_items = document.querySelectorAll(".nav-item");
+        for (var i = 0; i < nav_items.length; i++) {
+            if (nav_items[i].innerHTML.includes("Furniture")) {
+                var link = nav_items[i].querySelector('a');
+                link.innerHTML = "Furniture";
+                link.classList.add("active");
+            }
+        }
       //handle filter
       $.ajax({
                 url: '/api/v1/furniture/filterData',
@@ -556,5 +566,7 @@
     console.log(formData);
   });
 
+
+        </script>
   </script>
 </body>

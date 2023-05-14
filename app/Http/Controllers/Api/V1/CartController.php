@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Api\V1;
 
 // use App\Http\Requests\UpdatecartRequest;
+use App\Jobs\DecreaseAndReaddFurnitureJob;
 use App\Models\Cart;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
+use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Queue;
 use Symfony\Component\HttpFoundation\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Furniture;
@@ -59,7 +63,7 @@ class CartController extends Controller
         return view('My_Cart', compact('user', 'carts', 'furniture'));
     }
 
- 
+
 
     public function updateCart(Request $request, $id)
     {
@@ -108,30 +112,71 @@ class CartController extends Controller
         return response()->json(['message' => 'Cart item deleted successfully']);
     }
 
-    
-    
-    public function checkout()
+
+
+    public function checkout(Request $request)
     {
-        if (Auth::check()) {
-            $user = Auth::user();
-            $user_id = $user->id;
-
-            Cart::where('user_id', $user_id)->update(['checkout' => 'yes']);
-
-            // Optionally, you can return a response if needed
-            return response()->json(['message' => 'Checkout successful']);
-        } else {
-            // User is not authenticated, handle accordingly
-            return response()->json(['message' => 'User is not authenticated'], 401);
+        $user_id = $request->user_id;
+    
+        // Retrieve the cart items for the user
+        $cartItems = Cart::where('user_id', $user_id)->get();
+    
+        // Decrease the quantity of furniture based on the cart items
+        foreach ($cartItems as $cartItem) {
+            $furniture = Furniture::find($cartItem->furniture_id);
+            $newQuantity = $furniture->quantity - $cartItem->quantity;
+            
+            // Make sure the quantity doesn't go below zero
+            if ($newQuantity >= 0) {
+                $furniture->quantity = $newQuantity;
+                $furniture->save();
+            }
         }
+    
+        // Delete the cart items for the user
+        Cart::where('user_id', $user_id)->delete();
+    
+        // Optionally, you can return a response if needed
+        return response()->json(['message' => 'Checkout successful']);
     }
     
+
+
+
+    // public function reviewCartQuantitiesAjax()
+    // {
+    //     // Call the reviewCartQuantities function
+    //     $this->reviewCartQuantities();
+
+    //     // Optionally, you can return a response
+    //     return response()->json(['message' => 'Cart quantities reviewed successfully']);
+    // }
+
+    function reviewCartQuantities()
+    {
+        // Retrieve all the carts
+        $carts = Cart::all();
+
+        foreach ($carts as $cart) {
+            // Retrieve the associated furniture
+            $furniture = Furniture::find($cart->furniture_id);
+
+            if ($furniture && $cart->quantity > $furniture->quantity) {
+                // Adjust the cart quantity to match the available furniture quantity
+                $cart->quantity = $furniture->quantity;
+                $cart->save();
+            }
+        }
+        return response()->json(['message' => 'Revision successful']);
+    }
 
     public function addToCart(Request $request)
     {
         $furniture_id = $request->furniture_id;
         $user_id = $request->user_id;
 
+
+        // Bus::dispatch(new DecreaseAndReaddFurnitureJob($furniture_id))->delay(now()->addMinutes(1));
         try {
             $cart = Cart::where('furniture_id', $furniture_id)
                 ->where('user_id', $user_id)

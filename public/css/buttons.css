@@ -123,8 +123,8 @@
 
 .Request_a_Tour_button_details {
     width: fit-content;
-    height: 32px;
-    padding: 5 7 7 7;
+    height: fit-content;
+    padding: 8 10;
     margin: 60 10 0 0;
     float: right;
     background-color: black;
@@ -215,7 +215,7 @@
 .Order_Furniture:hover,
 .Log_Out_button:hover,
 .Sign_In_button:hover,
-.Sign_Up_Button:hover{
+.Sign_Up_Button:hover,.Check_out:hover{
     scale: 1.05;
 
     color: var(--gold1);

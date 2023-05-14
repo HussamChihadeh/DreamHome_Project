@@ -205,7 +205,7 @@ h7 {
 
 .Info1 {
     width: 95%;
-    margin: 1.1vw 2.5% 1.2vw 0%;
+    margin: 0.9vw 2.5% 1vw 0%;
     height: fit-content;
     border-radius: 20px;
 
@@ -249,6 +249,21 @@ h7 {
     margin-left: -10;
 }
 
+
+.Designer_Image_11 {
+    width: 70;
+    height: 70;
+    border-radius: 50px;
+    margin-top: -10;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-left: -10;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 15px;
+    border-bottom-right-radius: 0px;
+}
+
 .Edit {
     width: 70;
     height: 70;
@@ -283,9 +298,11 @@ h7 {
         font-family: "Signika" !important;
         font-size: 1.7vw;
     }
+
     p {
         font-size: 1.9vw;
-}
+    }
+
     .house_image {
         border-bottom-left-radius: 0px;
         border-top-right-radius: 15px;
@@ -296,9 +313,10 @@ h7 {
     }
 
 }
+
 @media (max-width:500px) {
     body {
-        font-size: 3vw!important;
+        font-size: 3vw !important;
 
     }
 
@@ -310,17 +328,46 @@ h7 {
 
     h7 {
         font-family: "Signika" !important;
-        font-size: 3.6vw!important;
-      
+        font-size: 3.6vw !important;
+
 
     }
+
     p {
-        font-size: 3.9vw!important;
-}
+        font-size: 3.9vw !important;
+    }
 }
 
 @media (max-width:1200px) {
     .Orders_Information {
         margin-top: 0px;
     }
+}
+
+
+.message {
+
+    background-color: white;
+    border-radius: 30px;
+    /* border: 1px solid black; */
+    position: fixed;
+    z-index: 2;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+    top: 0%;
+    left: 50%;
+    right: 50%;
+    width: 100;
+    height: 50;
+    transform-style: preserve-3d;
+
+
+}
+
+.h22 {
+    text-align: center;
+    margin: 18 20 20 20;
+    opacity: 0;
+    font-size: 20px;
+    font-family: "poppins";
+    font-weight: bolder;
 }

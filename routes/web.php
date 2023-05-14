@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\PropertyController;
 use App\Http\Controllers\Api\V1\UserController;
 use App\Http\Controllers\Api\V1\TourController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
 
 
 /*
@@ -98,7 +99,6 @@ Route::get("/admin_assign", function () {
 });
 
 
-
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [UserController::class, 'login'])->name('login');
     Route::post('/login', [UserController::class, 'authenticate'])->name('login');
@@ -106,6 +106,7 @@ Route::group(['middleware' => 'guest'], function () {
         return view("signup");
     })->name('signup');
 });
+
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get("/furniture/furniture_details", function () {
@@ -126,6 +127,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/rent/request_tour', function () {
         return view('request_tour');
     });
+
+  
+    
+    Route::get("/Checkout", function () {
+        return view("Checkout");
+    });
+  
 });
 
 Route::group(['middleware' => 'auth', 'designer'], function () {

@@ -24,8 +24,8 @@ use Illuminate\Support\Str;
         <img class="Furniture_Image" id="Selected_Image">
     </div>
     <div class="col-md-1 col-2">
-        <div class="vertical-line" ></div>
-        <div id="showed_images"></div>
+        <div class="vertical-line"></div>
+        <div class="Vertical_Images p-0" id="showed_images"></div>
     </div>
 
     <div class="col-md-6 col-12">
@@ -112,13 +112,13 @@ use Illuminate\Support\Str;
         <div class="Extra_Info_container">
             <img class="Image_In_Extra_Info" id="details_image_2">
             <div class="Inner_Container">
-                <span class="title">Type:</span><span id="type"><br></span>
+                <span class="title">Type:</span><span id="type"> </span>
                 <br>
                 <!-- <span class="title">Legs:</span>
                 <span><br>Tapered legs have an elegant look created by
                     three metal rods that converge towards the brass ends. </span>
                 <br> -->
-                <span class="title">Style:</span><span id="style"><br></span>
+                <span class="title">Style:</span><span id="style"> </span>
                 <br>
 
 
@@ -224,10 +224,13 @@ use Illuminate\Support\Str;
                     console.log(image);
                     var img = document.createElement('img');
                     img.classList.add('Furniture_Image_Vertical');
+                   
                     img.src = "../images/furniture/"+furniture.id+"/"+image;
                     if (index === 0) {
                         img.classList.add('Furniture_Image_Vertical_Clicked');
+                        img.style.marginTop="0";
                     }
+
                     
                     showed_images.append(img);
                 });
@@ -290,6 +293,7 @@ use Illuminate\Support\Str;
         };
     });
 
+    
     // window.onload = function() {
         function clickController(){
 
@@ -360,5 +364,17 @@ use Illuminate\Support\Str;
                     console.log(error);
             }
         });
+
+        var nav_items = document.querySelectorAll(".nav-item");
+    for (var i = 0; i < nav_items.length; i++) {
+        if (nav_items[i].innerHTML.includes("Furniture")) {
+            var link = nav_items[i].querySelector('a');
+            link.innerHTML = "My Cart";
+          link.href="/My_Cart";
+        }
+
+    }
 </script>
+
+
 @endsection

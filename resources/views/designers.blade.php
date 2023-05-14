@@ -56,7 +56,7 @@
                     "</div>" +
                     "<div class='Info2'>" +
                     "<h6>Experience: " + designer.experience + " years</h6>" +
-                    "<h6 class=Info_Editor>LinkedIn: " + designer.linkedin + " years</h6>" +
+                    "<h6 class=Info_Editor>LinkedIn: " + designer.linkedin +"</h6>" +
 
                     "</div>" +
                     "</div>" +
@@ -155,7 +155,20 @@
     //     $(document).ready(function() {
 
     // });
+
+
+    window.onload = function() {
+        var nav_items = document.querySelectorAll(".nav-item");
+        for (var i = 0; i < nav_items.length; i++) {
+            if (nav_items[i].innerHTML.includes("Our designers")) {
+                var link = nav_items[i].querySelector('a');
+                link.innerHTML = "Our Designers";
+                link.classList.add("active");
+            }
+        }
+        }
 </script>
+
 @guest
     <script>
         // User is not authenticated, do something else
@@ -168,6 +181,10 @@
                 button.classList.add('d-none');
             });
         });
+
+     
     </script>
 @endguest
+
+
 </body>

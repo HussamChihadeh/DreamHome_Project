@@ -135,6 +135,7 @@ h7 {
 
 }
 
+
 .About_Us_container {
     left: 50%;
     transform: translateX(-50%);
@@ -188,7 +189,7 @@ h7 {
     height: fit-content;
     width: 45%;
     float: right;
-    margin-right: 13vw;
+    margin-right: 13.5vw;
     right: -70%;
     margin-top: -610px;
     z-index: 100;
@@ -207,6 +208,7 @@ h7 {
 .title {
     font-size: 24px;
     font-weight: bolder;
+    color: black;
 }
 
 .description {

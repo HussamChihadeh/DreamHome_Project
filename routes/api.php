@@ -28,6 +28,8 @@ Route::group(["prefix" => "v1", "namespace"=>"App\Http\Controllers\Api\V1"], fun
     Route::post('/add-to-wishlist/{id}', 'UserController@addToWishlist');
     Route::get('/get-wishlist/{id}', 'UserController@getWishlist');
     Route::post('users', 'UserController@store');
+    Route::put('/updateUser', 'UserController@update_user');
+
     // Route::apiResource("users", UserController::class);
     Route::get('properties/getLocation', 'PropertyController@getLocation');
     Route::get('properties/getLatestProperties', 'PropertyController@getLatestProperties');
@@ -39,6 +41,10 @@ Route::group(["prefix" => "v1", "namespace"=>"App\Http\Controllers\Api\V1"], fun
     Route::put('cart/{id}', 'CartController@updateCart');
     Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
     Route::put('/checkout', 'CartController@checkout')->middleware('api');
+    Route::put('/reviewCartQuantities', 'CartController@reviewCartQuantities');
+    Route::get('/getUserDetails/{id}', 'UserController@getUserDetails')->middleware('api');
+
+    Route::put('furniture/UpdateFurn', 'FurnitureController@updateFurn');
 
     Route::put('properties/assign/{id}', 'PropertyController@assignProperty');
     Route::get('furniture/filterData', 'FurnitureController@filterData');

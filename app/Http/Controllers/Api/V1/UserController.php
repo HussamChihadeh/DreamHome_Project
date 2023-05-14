@@ -50,7 +50,40 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
 
+
+     public function update_user(Request $request)
+     {
+         // Get the updated values from the request
+         $updatedName = $request->address;
+         $updatedEmail = $request->email;
+         $updatedPhone = $request->phone;
+         
+         // Find the user you want to update
+         $user = User::find($request->id);
+         
+         // Update the user with the new values
+         $user->address = $updatedName;
+         $user->email = $updatedEmail;
+         $user->phone_number = $updatedPhone;
+         
+         // Save the changes to the user
+         $user->save();
+         
+         // Return a response indicating success
+         return response()->json(['message' => 'User updated successfully']);
+     }
     //done
+    public function getUserDetails($id)
+    {
+        $user = User::find($id);
+    
+        if ($user) {
+            return response()->json($user);
+        } else {
+            return response()->json(['error' => 'User not found.']);
+        }
+    }
+    
     public function store(Request $request)
     {
         //

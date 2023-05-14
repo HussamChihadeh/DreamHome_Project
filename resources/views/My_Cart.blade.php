@@ -30,7 +30,7 @@
 
 <div class="row">
     <div class="col-1"></div>
-    <div class="col-sm-6 col-12 p-5">
+    <div class="col-sm-6 col-12 p-5" id="Cart">
         <!-- -------------------------------------------------- -->
 
 
@@ -63,7 +63,7 @@
                 <button class="minus_btn">-</button>
             </div>
             <div class="col-1 p-0" style="margin-top:9%">
-                <input id='{{ $cart->id}}' type="number" class="input" min="1" max="9" value="{{ $cart->quantity }}">
+                <input id='{{$cart->id}}' type="number" class="input" min="1" max="9" value="{{$cart->quantity}}">
             </div>
             <div class="col-1 p-0" style="margin-top:9%">
                 <button class="plus_btn">+</button>
@@ -159,7 +159,7 @@
     var message_text = document.getElementById("message_text");
 
     var minus_btn = document.querySelectorAll(".minus_btn");
-    var input = document.querySelectorAll(".input");
+    // var input = document.querySelectorAll(".input");
     var plus_btn = document.querySelectorAll(".plus_btn");
     var Delete = document.querySelectorAll(".Delete");
     // var container_1 = document.querySelectorAll(".container_1");
@@ -186,47 +186,11 @@
     //     })(i));
     // }
 
-
-    // Get the necessary elements
-    const minusBtn = document.querySelectorAll('.minus_btn');
-    const plusBtn = document.querySelectorAll('.plus_btn');
-    const quantityInput = document.querySelectorAll('.input');
-
-    for (let j = 0; j < quantityInput.length; j++) {
-        // Add event listener for subtracting from the quantity
-        minusBtn[j].addEventListener('click', (function(index) {
-            return function() {
-                let currentQuantity = parseInt(quantityInput[index].value);
-                if (currentQuantity > 1) {
-                    quantityInput[index].value = currentQuantity - 1;
-                }
-                // Send an AJAX request to update the cart
-                updateCart(quantityInput[index].value, quantityInput[j].id);
-            };
-        })(j));
-
-        // Add event listener for adding to the quantity
-        plusBtn[j].addEventListener('click', (function(index) {
-            return function() {
-                let currentQuantity = parseInt(quantityInput[index].value);
-                if (currentQuantity < 9) {
-                    quantityInput[index].value = currentQuantity + 1;
-                }
-                // Send an AJAX request to update the cart
-                updateCart(quantityInput[index].value, quantityInput[j].id);
-            };
-        })(j));
-    }
-
-
-
-    $('#{{$user->id}}').on('click', function() {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Refresh();
         $.ajax({
-            url: '/api/v1/checkout',
+            url: '/api/v1/reviewCartQuantities',
             method: 'PUT',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
             success: function(response) {
                 // Handle the success response
                 console.log(response);
@@ -237,7 +201,13 @@
                 console.error(error);
             }
         });
+        refreshCart();
+        refreshWholeCart();
+        // Refresh();
+
+        // Get the necessary elements
     });
+
 
 
     function updateCart(quantity, id) {
@@ -293,43 +263,126 @@
         });
     }
 
-
-
-    const deleteBtns = document.querySelectorAll('.Delete');
-    const container_1 = document.querySelectorAll(".container_1");
-    for (let x = 0; x < deleteBtns.length; x++) {
-        deleteBtns[x].addEventListener('click', function() {
-            const index = Array.from(deleteBtns).indexOf(this);
-            const cartItemId = quantityInput[index].id;
-
-            deleteCartItem(cartItemId);
-            container_1[x].innerHTML = "";
-            // container_1[x].remove(); 
-            container_1[x].style.height = "0";
-            container_1[x].style.padding = "0";
-            container_1[x].style.borderBottom = "0.5px solid transparent";
-            refreshCart()
-        });
-    }
-
-    function deleteCartItem(cartId) {
-        // Send an AJAX request to delete the cart item
+    function refreshWholeCart() {
         $.ajax({
-            url: '/api/v1/cart/' + cartId,
-            type: 'DELETE',
-            data: {
-                _token: $('meta[name="csrf-token"]').attr('content')
-            },
+            url: '/My_Cart', // Replace with your cart route
+            method: 'GET',
+            dataType: 'html',
             success: function(response) {
-                // Refresh the cart or update the UI as needed
-                // refreshCart();
-                console.log("done");
+                var newContainer = $('<div>').html(response);
+                $('#Cart').replaceWith(newContainer.find('#Cart'));
+                newContainer = $('<div>').html(response);
+                // $('#Total_Price').replaceWith(newContainer.find('#Total_Price'));
+                var minusBtn;
+                var plusBtn;
+                var quantityInput;
+
+                minusBtn = document.querySelectorAll('.minus_btn');
+                plusBtn = document.querySelectorAll('.plus_btn');
+                quantityInput = document.querySelectorAll('.input');
+
+                for (let j = 0; j < quantityInput.length; j++) {
+                    // Add event listener for subtracting from the quantity
+                    minusBtn[j].addEventListener('click', (function(index) {
+                        return function() {
+                            let currentQuantity = parseInt(quantityInput[index].value);
+                            if (currentQuantity > 1) {
+                                quantityInput[index].value = currentQuantity - 1;
+                            }
+                            // Send an AJAX request to update the cart
+                            updateCart(quantityInput[index].value, quantityInput[j].id);
+                        };
+                    })(j));
+
+                    // Add event listener for adding to the quantity
+                    plusBtn[j].addEventListener('click', (function(index) {
+                        return function() {
+                            let currentQuantity = parseInt(quantityInput[index].value);
+                            if (currentQuantity < 9) {
+                                quantityInput[index].value = currentQuantity + 1;
+                            }
+                            // Send an AJAX request to update the cart
+                            updateCart(quantityInput[index].value, quantityInput[j].id);
+                        };
+                    })(j));
+
+                
+                    $('#{{$user->id}}').on('click', function() {
+                        $.ajax({
+                            url: '/api/v1/checkout',
+                            method: 'PUT',
+                            data: {
+                                'user_id': 1,
+                                _token: $('meta[name="csrf-token"]').attr('content')
+                            },
+                            success: function(response) {
+                                // Handle the success response
+                                console.log(response);
+                                window.location.href = '/Checkout?id={{$user->id}}';
+
+                                // Optionally, you can perform additional actions or update the UI
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle the error response
+                                console.error(error);
+                            }
+                        });
+                    });
+                }
+
+
+
+
+                var deleteBtns;
+                var container_1;
+                deleteBtns = document.querySelectorAll('.Delete');
+                container_1 = document.querySelectorAll(".container_1");
+
+                function deleteCartItem(cartId) {
+                    // Send an AJAX request to delete the cart item
+                    $.ajax({
+                        url: '/api/v1/cart/' + cartId,
+                        type: 'DELETE',
+                        data: {
+                            _token: $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            // Refresh the cart or update the UI as needed
+                            // refreshCart();
+                            console.log("done");
+                        },
+                        error: function(response) {
+                            console.log(response);
+                        }
+                    });
+
+
+                }
+
+
+                for (let x = 0; x < deleteBtns.length; x++) {
+                    deleteBtns[x].addEventListener('click', function() {
+                        const index = Array.from(deleteBtns).indexOf(this);
+                        const cartItemId = quantityInput[index].id;
+
+                        deleteCartItem(cartItemId);
+                        container_1[x].innerHTML = "";
+                        // container_1[x].remove(); 
+                        container_1[x].style.height = "0";
+                        container_1[x].style.padding = "0";
+                        container_1[x].style.borderBottom = "0.5px solid transparent";
+                        refreshCart();
+                    });
+
+
+                }
             },
-            error: function(response) {
-                console.log(response);
+            error: function(xhr, status, error) {
+                console.error("Error:", error);
             }
         });
     }
+
 
     function Show_Message() {
         message.style.animation = "message_show 1.1s linear ";
