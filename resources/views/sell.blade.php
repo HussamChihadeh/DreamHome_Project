@@ -132,7 +132,7 @@
 
 
                     <div class="row">
-                        <div class="col-auto mb-3 ">
+                        <div class="col-xl-5 col-auto mb-3 ">
                             <!-- should be made as list -->
                             <label class="form-label ">Property type</label>
                             <select class="form-select" name="type" value="{{ old('type') }}" required>

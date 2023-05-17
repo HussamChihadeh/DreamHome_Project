@@ -29,9 +29,9 @@
 
 @section("content")
 
-<div class="mt-5 pt-5">
-  <div class="container">
-    <div class="row ">
+<div class="mt-5 pt-4">
+  <div class=""  >
+    <div class="row p-4" style="width:100%!important;">
       <!-- <div class="col-md-5 col-10">
         <img class="Furniture_Image" id="Selected_Image">
       </div>
@@ -42,18 +42,18 @@
 
 
       <!-- <div class="col-lg-6 text-center"> -->
-        <div class="col-md-5 col-10">
+        <div class="col-md-5 col-10" >
           <img class="Furniture_Image" id="Selected_Image">
         </div>
         <div class="col-md-1 col-2">
-            <div class="vertical-line"></div>
+            <div class="vertical-line p-0"></div>
             <div class="Vertical_Images p-0" id="showed_images"></div>
         </div>
       <!-- </div> -->
           
     
 
-      <div class="col-md-6 col-12 mb-4 text-center text-md-start">
+      <div class="col-md-6 p-5 col-12 mb-4 text-center text-md-start">
         <div class="text1">
           <h2 class="house_name"></h2>
           <h6 class="description_details">
