@@ -186,9 +186,9 @@ use Illuminate\Support\Str;
             type: "GET",
             success: function(furniture) {
                 console.log(furniture);
-                Selected_Image.src = "../images/furniture/"+furniture.id+"/1.png";
-                details_image_1.src = "../images/furniture/"+furniture.id+"/1.png";
-                details_image_2.src = "../images/furniture/"+furniture.id+"/2.png";
+                // Selected_Image.src = "../images/furniture/"+furniture.id+"/1.png";
+                // details_image_1.src = "../images/furniture/"+furniture.id+"/1.png";
+                // details_image_2.src = "../images/furniture/"+furniture.id+"/2.png";
                 var furniture_name = $('.Furniture_Name');
                 furniture_name.append(furniture.name);
                 var description = $('.Description');

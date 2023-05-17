@@ -108,14 +108,27 @@ background-color: #e9e9e9;}</style>
                 <div class="col-md-6 col-lg-4">
                     <div class="info mb-5">
                         <img src="{{asset('images/white_image_logo.png')}}" alt="" class="mb-4 img-fluid" height="40" width="30">
-                        <p class="mb-5">Easiest Way to find your dream place</p>
+                        <p class="mb-5">DreamHome is the easiest Way to find your dream place. Find your dream property and furnish it with the high quality furniture provided from our professional designers.</p>
                         <div class="copyright">
-                            Created By <span>XXXX</span>
+                            Created By <span>Hussam & Chahine</span>
                             <div>&copy; 2023 - <span>Capstone Project</span></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-2">
+                <div class="col-md-6 col-lg-4 text-center">
+                    <div class="links">
+                        <h5 class="text-light">Links</h5>
+                        <ul class="list-unstyled lh-lg">
+                            <li><a class="text-decoration-none text-light" href="{{ route('home') }}">Home</a></li>
+                            <li><a class="text-decoration-none text-light" href="{{ route('rent') }}">Buy\Rent</a></li>
+                            <li><a class="text-decoration-none text-light" href="/sell">Sell</a></li>
+                            <li><a class="text-decoration-none text-light" href="{{ route('furniture') }}">Furniture</a></li>
+                            <li><a class="text-decoration-none text-light" href="{{ route('contact_designer') }}">Our designers</a></li>
+                            <!-- <li>Sign In</li> -->
+                        </ul>
+                    </div>
+                </div>
+                <!-- <div class="col-md-6 col-lg-2">
                     <div class="links">
                         <h5 class="text-light">Links</h5>
                         <ul class="list-unstyled lh-lg">
@@ -127,20 +140,7 @@ background-color: #e9e9e9;}</style>
                             <li>Sign In</li>
                         </ul>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-2">
-                    <div class="links">
-                        <h5 class="text-light">Links</h5>
-                        <ul class="list-unstyled lh-lg">
-                            <li>Home</li>
-                            <li>Rent</li>
-                            <li>Buy</li>
-                            <li>Furniture</li>
-                            <li>Our Agents</li>
-                            <li>Sign In</li>
-                        </ul>
-                    </div>
-                </div>
+                </div> -->
                 <div class="col-md-6 col-lg-4">
                     <div class="contactUs">
                         <h5 class="text-light">Contact Us</h5>

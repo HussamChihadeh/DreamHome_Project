@@ -137,7 +137,7 @@ class PropertyController extends Controller
 
     public function getPropertiesCount()
     {
-        $count = Property::count();
+        $count = Property::where('status', 'listed')->count();
         return response()->json(['count' => $count]);
     }
 
@@ -148,6 +148,13 @@ class PropertyController extends Controller
     {
         //
         $property = Property::find($property->id);
+        $folderPath = public_path('images/properties/' . $property->id);
+        $imageNames = collect(scandir($folderPath))
+            ->reject(function ($name) {
+                return in_array($name, ['.', '..']);
+            });
+
+        $property->image_names = $imageNames;
         return response()->json($property);
     }
 

@@ -166,28 +166,31 @@ use Illuminate\Support\Str;
     var Message_Hint = document.getElementById("Message_Hint");
 
 
+    
+        setTimeout(function() {
+            var textarea_111 = document.getElementById("textarea_111");
+            var message_form = document.getElementById("message-form");
+            var submit_button = document.getElementById("send_message");
 
-    setTimeout(function() {
-        var textarea_111 = document.getElementById("textarea_111");
-        var message_form = document.getElementById("message-form");
-        var submit_button = document.getElementById("send_message");
+            if ("{{ auth()->check() && Str::endsWith(auth()->user()->email, '@Designer.org') }}") {
+                textarea_111.value = "Hello, I am " + "{{ auth()->user()->name }}" + ", how can I help you?";
+            } else {
+                if (houseId !== "null") {
+                textarea_111.value = "Please enter the below link to view the Property's Information.\nLocalhost:8000/rent/Property_details?id=" + value;
+                }
+            }
 
-        if ("{{ auth()->check() && Str::endsWith(auth()->user()->email, '@Designer.org') }}") {
-            textarea_111.value = "Hello, I am " + "{{ auth()->user()->name }}" + ", how can I help you?";
-        } else {
-            textarea_111.value = "Please enter the below link to view the Property's Information.\nLocalhost:8000/rent/Property_details?id=" + value;
-        }
+            // Submit the form programmatically
+            function submitForm() {
+                submit_button.click();
+            }
 
-        // Submit the form programmatically
-        function submitForm() {
-            submit_button.click();
-        }
-
-        // Call the function after a slight delay
-        setTimeout(submitForm, 00);
+            // Call the function after a slight delay
+            setTimeout(submitForm, 00);
 
 
-    }, 5000);
+        }, 5000);
+    
 
 
     // const observerOptions = {
