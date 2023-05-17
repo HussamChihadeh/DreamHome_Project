@@ -30,7 +30,7 @@
 @section("content")
 
 <div class="mt-5 pt-4">
-  <div class=""  >
+  <div class="">
     <div class="row p-4" style="width:100%!important;">
       <!-- <div class="col-md-5 col-10">
         <img class="Furniture_Image" id="Selected_Image">
@@ -42,16 +42,16 @@
 
 
       <!-- <div class="col-lg-6 text-center"> -->
-        <div class="col-md-5 col-10" >
-          <img class="Furniture_Image" id="Selected_Image">
-        </div>
-        <div class="col-md-1 col-2">
-            <div class="vertical-line p-0"></div>
-            <div class="Vertical_Images p-0" id="showed_images"></div>
-        </div>
+      <div class="col-md-5 col-10">
+        <img class="Furniture_Image" id="Selected_Image">
+      </div>
+      <div class="col-md-1 col-2">
+        <div class="vertical-line p-0"></div>
+        <div class="Vertical_Images p-0" id="showed_images"></div>
+      </div>
       <!-- </div> -->
-          
-    
+
+
 
       <div class="col-md-6 p-5 col-12 mb-4 text-center text-md-start">
         <div class="text1">
@@ -142,9 +142,9 @@
 
   $(document).ready(function() {
     var Selected_Image = document.getElementById("Selected_Image");
-        var details_image_1 = document.getElementById("details_image_1");
-        var details_image_2 = document.getElementById("details_image_2");
-        var showed_images = document.getElementById("showed_images");
+    var details_image_1 = document.getElementById("details_image_1");
+    var details_image_2 = document.getElementById("details_image_2");
+    var showed_images = document.getElementById("showed_images");
     var propertyId = new URLSearchParams(window.location.search).get('id');
     var longitude, latitude;
 
@@ -187,20 +187,20 @@
         var images = property.image_names;
         console.log(property.image_names);
         Object.values(images).forEach((image, index) => {
-                    console.log(image);
-                    var img = document.createElement('img');
-                    img.classList.add('Furniture_Image_Vertical');
-                   
-                    img.src = "../images/properties/"+property.id+"/"+image;
-                    if (index === 0) {
-                        img.classList.add('Furniture_Image_Vertical_Clicked');
-                        img.style.marginTop="0";
-                    }
+          console.log(image);
+          var img = document.createElement('img');
+          img.classList.add('Furniture_Image_Vertical');
 
-                    
-                    showed_images.append(img);
-                });
-                clickController();
+          img.src = "../images/properties/" + property.id + "/" + image;
+          if (index === 0) {
+            img.classList.add('Furniture_Image_Vertical_Clicked');
+            img.style.marginTop = "0";
+          }
+
+
+          showed_images.append(img);
+        });
+        clickController();
 
         // var Selected_Image = document.getElementById("Selected_Image");
         // var showed_images = document.getElementById("showed_images");
@@ -223,10 +223,15 @@
 
         var map = L.map('map').setView([latitude, longitude], 15);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-        }).addTo(map);
+        // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        //   attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+        // }).addTo(map);
 
+
+        L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
+          attribution: '© Google Maps',
+          maxZoom: 18,
+        }).addTo(map);
         var marker = L.marker([latitude, longitude]);
         marker.bindTooltip("Home location", {
           permanent: true,
@@ -254,33 +259,32 @@
     });
   });
 
-  function clickController(){
+  function clickController() {
 
 
-var Selected_Image = document.getElementById("Selected_Image");
-const Image1 = document.querySelector('.Furniture_Image_Vertical_Clicked');
-Selected_Image.src = Image1.src;
-const Images = document.querySelectorAll('.Furniture_Image_Vertical');
+    var Selected_Image = document.getElementById("Selected_Image");
+    const Image1 = document.querySelector('.Furniture_Image_Vertical_Clicked');
+    Selected_Image.src = Image1.src;
+    const Images = document.querySelectorAll('.Furniture_Image_Vertical');
 
-for (var i = 0; i < Images.length; i++) {
-    Images[i].onclick = function() {
+    for (var i = 0; i < Images.length; i++) {
+      Images[i].onclick = function() {
         if (this.classList.item(this.classList.length - 1) != "Furniture_Image_Vertical_Clicked") {
-            for (var j = 0; j < Images.length; j++) {
-                if (Images[j].classList.item(Images[j].classList.length - 1) == "Furniture_Image_Vertical_Clicked")
-                    Images[j].classList.remove("Furniture_Image_Vertical_Clicked");
+          for (var j = 0; j < Images.length; j++) {
+            if (Images[j].classList.item(Images[j].classList.length - 1) == "Furniture_Image_Vertical_Clicked")
+              Images[j].classList.remove("Furniture_Image_Vertical_Clicked");
 
 
-            }
-            this.classList.add("Furniture_Image_Vertical_Clicked");
-            Selected_Image.src = this.src;
+          }
+          this.classList.add("Furniture_Image_Vertical_Clicked");
+          Selected_Image.src = this.src;
         }
 
 
 
+      }
     }
-}
-};
-
+  };
 </script>
 
 
